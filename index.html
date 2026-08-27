@@ -353,7 +353,11 @@
         </div>
       </div>
 
-      <form class="contato-form reveal" id="contato-form" novalidate>
+      <!-- action/method servem como reforço: se por algum motivo o JavaScript
+           não rodar, o formulário ainda funciona como um envio HTML comum
+           direto para o Formspree. O comportamento normal (com a mensagem
+           de sucesso/erro na tela) é feito via JavaScript, em script.js -->
+      <form class="contato-form reveal" id="contato-form" action="https://formspree.io/f/mqpkzdjw" method="POST" novalidate>
         <div class="form-group">
           <label for="nome">Nome</label>
           <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
@@ -372,7 +376,7 @@
           <span class="form-error" id="erro-mensagem"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
+        <button type="submit" class="btn btn-primary btn-full" id="botao-enviar">Enviar Mensagem</button>
         <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
       </form>
 
