@@ -365,22 +365,44 @@ document.addEventListener("DOMContentLoaded", () => {
   formularioFeedback.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
+    const nome = document.getElementById("feedback-nome").value.trim();
+    const email = document.getElementById("feedback-email").value.trim();
+    const tipo = document.getElementById("feedback-tipo").value;
     const mensagem = document.getElementById("feedback-mensagem").value.trim();
-    const campoMensagem = document.getElementById("feedback-mensagem");
-    const erroMensagem = document.getElementById("erro-feedback-mensagem");
+
+    // Mesma expressão regular usada no formulário de Contato, para
+    // manter a validação de e-mail consistente em todo o site.
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let formularioValido = true;
+
+    ["feedback-nome", "feedback-email", "feedback-tipo", "feedback-mensagem"].forEach(limparErro);
+
+    if (nome.length < 3) {
+      mostrarErro("feedback-nome", "Digite seu nome.");
+      formularioValido = false;
+    }
+
+    if (!regexEmail.test(email)) {
+      mostrarErro("feedback-email", "Digite um e-mail válido.");
+      formularioValido = false;
+    }
+
+    if (!tipo) {
+      mostrarErro("feedback-tipo", "Selecione o tipo de feedback.");
+      formularioValido = false;
+    }
 
     if (mensagem.length < 5) {
-      campoMensagem.classList.add("input-invalido");
-      campoMensagem.setAttribute("aria-invalid", "true");
-      erroMensagem.textContent = "Escreva uma mensagem antes de enviar.";
-      feedbackDoFeedback.textContent = "";
+      mostrarErro("feedback-mensagem", "Escreva uma mensagem antes de enviar.");
+      formularioValido = false;
+    }
+
+    if (!formularioValido) {
+      feedbackDoFeedback.textContent = "Por favor, corrija os campos destacados.";
       feedbackDoFeedback.className = "form-feedback";
       return;
     }
-
-    campoMensagem.classList.remove("input-invalido");
-    campoMensagem.removeAttribute("aria-invalid");
-    erroMensagem.textContent = "";
 
     const dadosFeedback = new FormData(formularioFeedback);
 
