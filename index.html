@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body data-theme="light">
+<body data-theme="dark">
 
   <!-- ===================== HEADER / NAVEGAÇÃO ===================== -->
   <header class="header" id="header">
@@ -25,6 +25,13 @@
       <a href="#hero" class="logo">José<span>.dev</span></a>
 
       <ul class="nav-links" id="nav-links">
+        <!-- Botão de fechar (X): fica invisível no menu de computador (definido no style.css)
+             e só aparece dentro do painel deslizante no celular (definido no responsive.css) -->
+        <li class="nav-close-item">
+          <button id="menu-close" class="icon-btn" aria-label="Fechar menu de navegação">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </li>
         <li><a href="#sobre" class="nav-link">Sobre</a></li>
         <li><a href="#experiencia" class="nav-link">Experiência</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -34,7 +41,7 @@
 
       <div class="nav-actions">
         <button id="theme-toggle" class="icon-btn" aria-label="Alternar modo escuro">
-          <i class="fa-solid fa-moon"></i>
+          <i class="fa-solid fa-sun"></i>
         </button>
 
         <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false">
@@ -266,7 +273,7 @@
         <!-- ============ INÍCIO DE UM CARD DE PROJETO (modelo reutilizável) ============ -->
         <article class="project-card reveal">
           <div class="project-image">
-            <img src="assets/img/portfolio.png" alt="Captura de tela do projeto Este Portfólio">
+            <img src="assets/img/projeto-placeholder.jpg" alt="Captura de tela do projeto Este Portfólio">
           </div>
           <div class="project-content">
             <h3>Este Portfólio</h3>
@@ -280,8 +287,8 @@
                  no seu GitHub (https://github.com/JoseAroldoMacielNeto) assim que criá-lo,
                  e pelo link do site publicado ("Demo"), quando estiver no ar -->
             <div class="project-links">
-              <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+              <a href="https://github.com/JoseAroldoMacielNeto/Portfolio" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
+              <a href="https://portfolio-weld-gamma-d70fup08v0.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
             </div>
           </div>
         </article>
@@ -297,9 +304,9 @@
             <div class="project-tags">
               <span>Em breve</span>
             </div>
-            <div class="project-links">
-              <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+            <div class="project-links project-links-disabled">
+              <span class="link-disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> Código em breve</span>
+              <span class="link-disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo em breve</span>
             </div>
           </div>
         </article>
@@ -314,9 +321,9 @@
             <div class="project-tags">
               <span>Em breve</span>
             </div>
-            <div class="project-links">
-              <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
-              <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+            <div class="project-links project-links-disabled">
+              <span class="link-disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> Código em breve</span>
+              <span class="link-disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo em breve</span>
             </div>
           </div>
         </article>
