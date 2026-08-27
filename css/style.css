@@ -641,6 +641,11 @@ h1, h2, h3 {
   color: var(--color-accent);
 }
 
+/* Mensagem de erro quando o envio ao Formspree falha (rede, servidor etc.) */
+.form-feedback.erro {
+  color: #E5484D;
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */
