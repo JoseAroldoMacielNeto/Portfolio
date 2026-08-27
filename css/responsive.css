@@ -60,12 +60,18 @@
   }
 
   /* Botão de fechar (X): reaparece aqui, posicionado no canto
-     superior direito do painel deslizante do menu mobile */
+     superior direito do painel deslizante do menu mobile.
+     A borda garante que ele fique claramente visível sobre o
+     fundo do painel, mesmo sem passar o mouse/dedo por cima. */
   .nav-close-item {
     display: block;
     position: absolute;
     top: 20px;
     right: 20px;
+  }
+
+  .nav-close-item .icon-btn {
+    border: 1px solid var(--color-border);
   }
 
   /* Hero passa de duas colunas para uma coluna, imagem primeiro */
