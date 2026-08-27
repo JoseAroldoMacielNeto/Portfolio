@@ -6,6 +6,35 @@
   <title>José Arôldo Maciel Neto | Portfólio</title>
   <meta name="description" content="Portfólio de José Arôldo Maciel Neto, estudante de Análise e Desenvolvimento de Sistemas na Unifor, em transição de carreira para Tecnologia.">
 
+  <!-- SEO técnico: autoriza mecanismos de busca a indexar e seguir os
+       links da página, e define a URL "oficial" do site (canonical) —
+       importante quando o mesmo conteúdo pode ser acessado por mais
+       de um endereço (ex.: domínio antigo redirecionando para o novo). -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://josearoldodev.vercel.app/">
+
+  <!-- Open Graph: controla como o link aparece quando compartilhado no
+       WhatsApp, LinkedIn, Facebook etc. Sem essas tags, essas plataformas
+       tentam "adivinhar" o título/imagem, com resultado imprevisível. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="José Arôldo Maciel Neto | Portfólio">
+  <meta property="og:description" content="Portfólio de José Arôldo Maciel Neto, estudante de Análise e Desenvolvimento de Sistemas na Unifor, em transição de carreira para Tecnologia.">
+  <meta property="og:url" content="https://josearoldodev.vercel.app/">
+  <meta property="og:image" content="https://josearoldodev.vercel.app/assets/img/og-image.png">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter/X Card: mesmo princípio do Open Graph, mas para o X (Twitter) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="José Arôldo Maciel Neto | Portfólio">
+  <meta name="twitter:description" content="Portfólio de José Arôldo Maciel Neto, estudante de Análise e Desenvolvimento de Sistemas na Unifor, em transição de carreira para Tecnologia.">
+  <meta name="twitter:image" content="https://josearoldodev.vercel.app/assets/img/og-image.png">
+
+  <!-- Favicon: ícone que aparece na aba do navegador, substituindo o
+       "planeta" padrão. Vários tamanhos para diferentes dispositivos. -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+
   <!-- Ícones (via CDN, sem instalação) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -16,8 +45,26 @@
   <!-- Nossos arquivos CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Google tag (gtag.js) — Google Analytics 4
+       Mede visitantes, visualizações de página e origem dos acessos.
+       O Measurement ID (G-...) é público por definição — não é uma
+       informação secreta, é o identificador da propriedade do GA4. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H4T45TEC2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1H4T45TEC2');
+  </script>
 </head>
 <body data-theme="dark">
+
+  <!-- "Skip link": fica invisível até o usuário pressionar Tab.
+       Permite que quem navega só pelo teclado (ou usa leitor de tela)
+       pule o menu e vá direto para o conteúdo principal, sem precisar
+       passar por todos os links do cabeçalho toda vez. -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
 
   <!-- ===================== HEADER / NAVEGAÇÃO ===================== -->
   <header class="header" id="header">
@@ -29,7 +76,7 @@
              e só aparece dentro do painel deslizante no celular (definido no responsive.css) -->
         <li class="nav-close-item">
           <button id="menu-close" class="icon-btn" aria-label="Fechar menu de navegação">
-            <i class="fa-solid fa-xmark"></i>
+            <i aria-hidden="true" class="fa-solid fa-xmark"></i>
           </button>
         </li>
         <li><a href="#sobre" class="nav-link">Sobre</a></li>
@@ -41,15 +88,21 @@
 
       <div class="nav-actions">
         <button id="theme-toggle" class="icon-btn" aria-label="Alternar modo escuro">
-          <i class="fa-solid fa-sun"></i>
+          <i aria-hidden="true" class="fa-solid fa-sun"></i>
         </button>
 
-        <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false">
-          <i class="fa-solid fa-bars"></i>
+        <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
+          <i aria-hidden="true" class="fa-solid fa-bars"></i>
         </button>
       </div>
     </nav>
   </header>
+
+  <!-- <main> identifica, para leitores de tela e para o skip link,
+       onde começa o conteúdo principal da página (diferente do
+       cabeçalho e do rodapé, que se repetem em todo lugar).
+       tabindex="-1" permite que o skip link mova o foco para cá. -->
+  <main id="conteudo-principal" tabindex="-1">
 
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero">
@@ -73,15 +126,16 @@
         <!-- O arquivo do currículo deve se chamar exatamente "curriculo.pdf"
              e ficar dentro da pasta assets/docs/ -->
         <a href="assets/docs/curriculo.pdf" class="btn btn-secondary" download>
-          <i class="fa-solid fa-download"></i> Baixar Currículo
+          <i aria-hidden="true" class="fa-solid fa-download"></i> Baixar Currículo
         </a>
       </div>
 
       <div class="hero-socials">
-        <a href="https://www.linkedin.com/in/joséarôldomacielneto" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="https://github.com/JoseAroldoMacielNeto" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="mailto:josearoldomacielneto.19@gmail.com" aria-label="E-mail"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/joséarôldomacielneto" target="_blank" rel="noopener" aria-label="LinkedIn"><i aria-hidden="true" class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/JoseAroldoMacielNeto" target="_blank" rel="noopener" aria-label="GitHub"><i aria-hidden="true" class="fa-brands fa-github"></i></a>
+        <a href="mailto:josearoldomacielneto.19@gmail.com" aria-label="E-mail"><i aria-hidden="true" class="fa-solid fa-envelope"></i></a>
       </div>
+      <p class="icons-hint" aria-hidden="true">Clique nos ícones para acessar</p>
     </div>
 
     <!-- Coloque aqui a sua foto de perfil: o arquivo deve se chamar
@@ -211,48 +265,48 @@
 
       <h3 class="skills-subtitle">Organização &amp; Administração</h3>
       <div class="skills-grid">
-        <div class="skill-card reveal"><i class="fa-solid fa-folder-tree"></i><span>Organização Administrativa</span></div>
-        <div class="skill-card reveal"><i class="fa-solid fa-list-check"></i><span>Organização de Documentos e Informações</span></div>
-        <div class="skill-card reveal"><i class="fa-solid fa-building-columns"></i><span>Introdução à Administração</span></div>
-        <div class="skill-card reveal"><i class="fa-solid fa-chart-line"></i><span>Estratégia de Negócios</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-folder-tree"></i><span>Organização Administrativa</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-list-check"></i><span>Organização de Documentos e Informações</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-building-columns"></i><span>Introdução à Administração</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-chart-line"></i><span>Estratégia de Negócios</span></div>
       </div>
 
       <h3 class="skills-subtitle">Comunicação &amp; Atendimento</h3>
       <div class="skills-grid">
-        <div class="skill-card reveal"><i class="fa-solid fa-comments"></i><span>Comunicação Interpessoal</span></div>
-        <div class="skill-card reveal"><i class="fa-solid fa-briefcase"></i><span>Comunicação Empresarial</span></div>
-        <div class="skill-card reveal"><i class="fa-solid fa-headset"></i><span>Atendimento ao Cliente</span></div>
-        <div class="skill-card reveal"><i class="fa-solid fa-user-tie"></i><span>Gestão de Atendimento</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-comments"></i><span>Comunicação Interpessoal</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-briefcase"></i><span>Comunicação Empresarial</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-headset"></i><span>Atendimento ao Cliente</span></div>
+        <div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-user-tie"></i><span>Gestão de Atendimento</span></div>
       </div>
 
       <h3 class="skills-subtitle">Ferramentas</h3>
       <!-- Lista de "pills" (chips): mais compacta que os cards, ideal para muitos itens curtos -->
       <div class="pill-list reveal">
-        <span><i class="fa-solid fa-file-word"></i> Word</span>
-        <span><i class="fa-solid fa-file-excel"></i> Excel</span>
-        <span><i class="fa-solid fa-envelope-open-text"></i> Outlook</span>
-        <span><i class="fa-solid fa-users-rectangle"></i> Teams</span>
-        <span><i class="fa-solid fa-share-nodes"></i> SharePoint</span>
-        <span><i class="fa-solid fa-note-sticky"></i> OneNote</span>
-        <span><i class="fa-solid fa-cloud"></i> OneDrive</span>
-        <span><i class="fa-solid fa-list-ul"></i> Planner</span>
-        <span><i class="fa-brands fa-google-drive"></i> Google Drive</span>
+        <span><i aria-hidden="true" class="fa-solid fa-file-word"></i> Word</span>
+        <span><i aria-hidden="true" class="fa-solid fa-file-excel"></i> Excel</span>
+        <span><i aria-hidden="true" class="fa-solid fa-envelope-open-text"></i> Outlook</span>
+        <span><i aria-hidden="true" class="fa-solid fa-users-rectangle"></i> Teams</span>
+        <span><i aria-hidden="true" class="fa-solid fa-share-nodes"></i> SharePoint</span>
+        <span><i aria-hidden="true" class="fa-solid fa-note-sticky"></i> OneNote</span>
+        <span><i aria-hidden="true" class="fa-solid fa-cloud"></i> OneDrive</span>
+        <span><i aria-hidden="true" class="fa-solid fa-list-ul"></i> Planner</span>
+        <span><i aria-hidden="true" class="fa-brands fa-google-drive"></i> Google Drive</span>
       </div>
 
       <h3 class="skills-subtitle">Idiomas</h3>
       <div class="pill-list reveal">
-        <span><i class="fa-solid fa-language"></i> Português — Nativo</span>
-        <span><i class="fa-solid fa-language"></i> Inglês — Básico</span>
+        <span><i aria-hidden="true" class="fa-solid fa-language"></i> Português — Nativo</span>
+        <span><i aria-hidden="true" class="fa-solid fa-language"></i> Inglês — Básico</span>
       </div>
 
       <h3 class="skills-subtitle">Em aprendizado — Tecnologia</h3>
       <div class="skills-grid">
-        <div class="skill-card skill-learning reveal"><i class="fa-solid fa-diagram-project"></i><span>Lógica de Programação</span></div>
-        <div class="skill-card skill-learning reveal"><i class="fa-solid fa-code-branch"></i><span>Algoritmos</span></div>
-        <div class="skill-card skill-learning reveal"><i class="fa-brands fa-html5"></i><span>HTML (iniciando)</span></div>
-        <div class="skill-card skill-learning reveal"><i class="fa-brands fa-css3-alt"></i><span>CSS (básico)</span></div>
-        <div class="skill-card skill-learning reveal"><i class="fa-brands fa-js"></i><span>JavaScript (em breve)</span></div>
-        <div class="skill-card skill-learning reveal"><i class="fa-solid fa-robot"></i><span>IA como Ferramenta de Produtividade</span></div>
+        <div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-solid fa-diagram-project"></i><span>Lógica de Programação</span></div>
+        <div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-solid fa-code-branch"></i><span>Algoritmos</span></div>
+        <div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-brands fa-html5"></i><span>HTML (iniciando)</span></div>
+        <div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-brands fa-css3-alt"></i><span>CSS (básico)</span></div>
+        <div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-brands fa-js"></i><span>JavaScript (em breve)</span></div>
+        <div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-solid fa-robot"></i><span>IA como Ferramenta de Produtividade</span></div>
       </div>
     </div>
   </section>
@@ -287,8 +341,8 @@
                  no seu GitHub (https://github.com/JoseAroldoMacielNeto) assim que criá-lo,
                  e pelo link do site publicado ("Demo"), quando estiver no ar -->
             <div class="project-links">
-              <a href="https://github.com/JoseAroldoMacielNeto/Portfolio" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
-              <a href="https://portfolio-weld-gamma-d70fup08v0.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+              <a href="https://github.com/JoseAroldoMacielNeto/Portfolio" target="_blank" rel="noopener"><i aria-hidden="true" class="fa-brands fa-github"></i> Código</a>
+              <a href="https://portfolio-weld-gamma-d70fup08v0.vercel.app/" target="_blank" rel="noopener"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
             </div>
           </div>
         </article>
@@ -296,7 +350,7 @@
 
         <article class="project-card reveal">
           <div class="project-image">
-            <img src="assets/img/projeto-placeholder.jpg" alt="Captura de tela de um projeto futuro">
+            <img src="assets/img/projeto-placeholder.jpg" alt="">
           </div>
           <div class="project-content">
             <h3>Próximo Projeto</h3>
@@ -305,15 +359,15 @@
               <span>Em breve</span>
             </div>
             <div class="project-links project-links-disabled">
-              <span class="link-disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> Código em breve</span>
-              <span class="link-disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo em breve</span>
+              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-brands fa-github"></i> Código em breve</span>
+              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> Demo em breve</span>
             </div>
           </div>
         </article>
 
         <article class="project-card reveal">
           <div class="project-image">
-            <img src="assets/img/projeto-placeholder.jpg" alt="Captura de tela de um projeto futuro">
+            <img src="assets/img/projeto-placeholder.jpg" alt="">
           </div>
           <div class="project-content">
             <h3>Próximo Projeto</h3>
@@ -322,8 +376,8 @@
               <span>Em breve</span>
             </div>
             <div class="project-links project-links-disabled">
-              <span class="link-disabled" aria-disabled="true"><i class="fa-brands fa-github"></i> Código em breve</span>
-              <span class="link-disabled" aria-disabled="true"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo em breve</span>
+              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-brands fa-github"></i> Código em breve</span>
+              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> Demo em breve</span>
             </div>
           </div>
         </article>
@@ -344,13 +398,14 @@
           ou me encontre nas redes abaixo.
         </p>
         <ul class="contato-lista">
-          <li><i class="fa-solid fa-envelope"></i> josearoldomacielneto.19@gmail.com</li>
-          <li><i class="fa-solid fa-location-dot"></i> Itapajé, Ceará, Brasil</li>
+          <li><i aria-hidden="true" class="fa-solid fa-envelope"></i> josearoldomacielneto.19@gmail.com</li>
+          <li><i aria-hidden="true" class="fa-solid fa-location-dot"></i> Itapajé, Ceará, Brasil</li>
         </ul>
         <div class="hero-socials">
-          <a href="https://www.linkedin.com/in/joséarôldomacielneto" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://github.com/JoseAroldoMacielNeto" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/joséarôldomacielneto" target="_blank" rel="noopener" aria-label="LinkedIn"><i aria-hidden="true" class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/JoseAroldoMacielNeto" target="_blank" rel="noopener" aria-label="GitHub"><i aria-hidden="true" class="fa-brands fa-github"></i></a>
         </div>
+        <p class="icons-hint" aria-hidden="true">Clique nos ícones para acessar</p>
       </div>
 
       <!-- action/method servem como reforço: se por algum motivo o JavaScript
@@ -360,19 +415,19 @@
       <form class="contato-form reveal" id="contato-form" action="https://formspree.io/f/mqpkzdjw" method="POST" novalidate>
         <div class="form-group">
           <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required aria-describedby="erro-nome">
           <span class="form-error" id="erro-nome"></span>
         </div>
 
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required aria-describedby="erro-email">
           <span class="form-error" id="erro-email"></span>
         </div>
 
         <div class="form-group">
           <label for="mensagem">Mensagem</label>
-          <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required></textarea>
+          <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required aria-describedby="erro-mensagem"></textarea>
           <span class="form-error" id="erro-mensagem"></span>
         </div>
 
@@ -383,13 +438,69 @@
     </div>
   </section>
 
+  <!-- ===================== FEEDBACK SOBRE O PORTFÓLIO ===================== -->
+  <!-- Reaproveita o MESMO endpoint do Formspree usado no formulário de
+       contato (https://formspree.io/f/mqpkzdjw). O campo oculto "_subject"
+       é um recurso do próprio Formspree para diferenciar o assunto do
+       e-mail recebido, então os feedbacks chegam identificados, sem
+       precisar de uma segunda conta ou de um novo endpoint. -->
+  <section class="section feedback" id="feedback">
+    <div class="container">
+      <div class="feedback-intro">
+        <p class="section-eyebrow">// feedback</p>
+        <h2 class="section-title">Seu feedback é importante</h2>
+        <p>
+          Sugestões, elogios, críticas construtivas ou observações sobre a usabilidade e a
+          acessibilidade deste portfólio são muito bem-vindas — ajudam a melhorar o projeto.
+        </p>
+      </div>
+
+      <form class="contato-form feedback-form reveal" id="feedback-form" action="https://formspree.io/f/mqpkzdjw" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Novo feedback sobre o portfólio">
+
+        <div class="form-group">
+          <label for="feedback-nome">Nome (opcional)</label>
+          <input type="text" id="feedback-nome" name="nome">
+        </div>
+
+        <div class="form-group">
+          <label for="feedback-email">E-mail (opcional)</label>
+          <input type="email" id="feedback-email" name="email">
+        </div>
+
+        <div class="form-group">
+          <label for="feedback-tipo">Tipo de feedback</label>
+          <select id="feedback-tipo" name="tipo">
+            <option value="Elogio">Elogio</option>
+            <option value="Sugestão de melhoria">Sugestão de melhoria</option>
+            <option value="Crítica construtiva">Crítica construtiva</option>
+            <option value="Observação sobre acessibilidade">Observação sobre acessibilidade</option>
+            <option value="Dificuldade na navegação">Dificuldade na navegação</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="feedback-mensagem">Mensagem</label>
+          <textarea id="feedback-mensagem" name="mensagem" rows="4" placeholder="Conte o que achou do portfólio..." required aria-describedby="erro-feedback-mensagem"></textarea>
+          <span class="form-error" id="erro-feedback-mensagem"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="botao-enviar-feedback">Enviar Feedback</button>
+        <p class="form-feedback" id="feedback-form-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  </main>
+
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container footer-content">
       <a href="#hero" class="logo">José<span>.dev</span></a>
       <p>&copy; <span id="ano-atual"></span> José Arôldo Maciel Neto. Todos os direitos reservados.</p>
       <a href="#hero" class="back-to-top" aria-label="Voltar ao topo">
-        <i class="fa-solid fa-arrow-up"></i>
+        <i aria-hidden="true" class="fa-solid fa-arrow-up"></i>
       </a>
     </div>
   </footer>
