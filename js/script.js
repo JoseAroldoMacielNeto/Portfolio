@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("portfolio-tema", tema);
   }
 
-  // Ao carregar a página: usa o tema salvo, ou a preferência do sistema operacional
   // O modo escuro é o padrão do portfólio. Se o usuário já escolheu um
   // tema antes (guardado no localStorage), respeitamos essa escolha.
   // Caso contrário, mantemos o escuro (já definido no <body> do HTML),
@@ -92,33 +91,94 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ==========================================================
      2) MENU MOBILE (hambúrguer + botão de fechar)
+
+     Melhorias de acessibilidade adicionadas aqui:
+     - aria-hidden no painel do menu quando ele está fechado E a
+       tela está em modo mobile (evita que o teclado "entre" em
+       links que estão visualmente fora da tela);
+     - tecla Esc fecha o menu;
+     - o foco é movido para dentro do menu ao abrir, e de volta
+       para o botão hambúrguer ao fechar (comportamento esperado
+       por quem navega só pelo teclado).
      ========================================================== */
   const botaoMenu = document.getElementById("menu-toggle");
   const botaoFecharMenu = document.getElementById("menu-close");
   const linksNav = document.getElementById("nav-links");
 
-  // Função reutilizada para fechar o menu, seja pelo botão X,
-  // por um clique em um link, ou futuramente por qualquer outra ação.
+  // Detecta se estamos no layout mobile (mesmo breakpoint usado no CSS,
+  // em responsive.css). Usamos isso para saber quando o menu deve
+  // ficar "escondido de verdade" (aria-hidden) quando fechado.
+  const consultaTelaMobile = window.matchMedia("(max-width: 860px)");
+
+  function sincronizarAcessibilidadeMenu() {
+    const emTelaMobile = consultaTelaMobile.matches;
+    const menuAberto = linksNav.classList.contains("aberto");
+
+    if (emTelaMobile && !menuAberto) {
+      // No mobile, com o menu fechado, o painel fica fora da tela
+      // visualmente — aria-hidden garante que leitores de tela também
+      // o ignorem enquanto ele estiver assim.
+      linksNav.setAttribute("aria-hidden", "true");
+    } else {
+      // No desktop (ou com o menu aberto no mobile), o menu deve
+      // estar sempre acessível normalmente.
+      linksNav.removeAttribute("aria-hidden");
+    }
+  }
+
+  function abrirMenuMobile() {
+    linksNav.classList.add("aberto");
+    botaoMenu.setAttribute("aria-expanded", "true");
+    botaoMenu.querySelector("i").className = "fa-solid fa-xmark";
+    sincronizarAcessibilidadeMenu();
+    botaoFecharMenu.focus(); // leva o foco para dentro do menu recém-aberto
+  }
+
+  // Função reutilizada para fechar o menu, seja pelo botão X, pela
+  // tecla Esc, por um clique em um link, ou por qualquer outra ação.
   function fecharMenuMobile() {
+    const estavaAberto = linksNav.classList.contains("aberto");
     linksNav.classList.remove("aberto");
     botaoMenu.setAttribute("aria-expanded", "false");
     botaoMenu.querySelector("i").className = "fa-solid fa-bars";
+    sincronizarAcessibilidadeMenu();
+
+    // Só devolve o foco ao botão hambúrguer se o menu realmente
+    // estava aberto (evita "roubar" o foco em outras situações).
+    if (estavaAberto) {
+      botaoMenu.focus();
+    }
   }
 
   botaoMenu.addEventListener("click", () => {
-    const estaAberto = linksNav.classList.toggle("aberto");
-    // aria-expanded avisa leitores de tela se o menu está aberto ou fechado
-    botaoMenu.setAttribute("aria-expanded", estaAberto);
-    botaoMenu.querySelector("i").className = estaAberto ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    const estaFechado = !linksNav.classList.contains("aberto");
+    if (estaFechado) {
+      abrirMenuMobile();
+    } else {
+      fecharMenuMobile();
+    }
   });
 
   // Botão de fechar (X) dentro do próprio painel do menu mobile
   botaoFecharMenu.addEventListener("click", fecharMenuMobile);
 
+  // Tecla Esc fecha o menu mobile quando ele estiver aberto
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && linksNav.classList.contains("aberto")) {
+      fecharMenuMobile();
+    }
+  });
+
   // Fecha o menu automaticamente ao clicar em algum link (útil no celular)
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", fecharMenuMobile);
   });
+
+  // Mantém o aria-hidden correto: no carregamento da página e
+  // sempre que a tela cruzar o breakpoint mobile/desktop (ex.:
+  // girar o celular, ou redimensionar a janela no computador).
+  sincronizarAcessibilidadeMenu();
+  consultaTelaMobile.addEventListener("change", sincronizarAcessibilidadeMenu);
 
 
   /* ==========================================================
@@ -195,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const campo = document.getElementById(campoId);
     const erro = document.getElementById(`erro-${campoId}`);
     campo.classList.add("input-invalido");
+    campo.setAttribute("aria-invalid", "true"); // avisa leitores de tela que o campo está inválido
     erro.textContent = mensagem;
   }
 
@@ -202,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const campo = document.getElementById(campoId);
     const erro = document.getElementById(`erro-${campoId}`);
     campo.classList.remove("input-invalido");
+    campo.removeAttribute("aria-invalid");
     erro.textContent = "";
   }
 
@@ -248,7 +310,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Desabilita o botão e avisa que o envio está em andamento,
     // evitando que a pessoa clique duas vezes por engano.
+    // aria-busy comunica esse estado de "carregando" para leitores de tela.
     botaoEnviar.disabled = true;
+    botaoEnviar.setAttribute("aria-busy", "true");
     botaoEnviar.textContent = "Enviando...";
     feedback.textContent = "";
     feedback.className = "form-feedback";
@@ -280,13 +344,81 @@ document.addEventListener("DOMContentLoaded", () => {
       .finally(() => {
         // Reabilita o botão de envio, com sucesso ou com erro
         botaoEnviar.disabled = false;
+        botaoEnviar.removeAttribute("aria-busy");
         botaoEnviar.textContent = "Enviar Mensagem";
       });
   });
 
 
   /* ==========================================================
-     7) ANO ATUAL NO RODAPÉ
+     7) FORMULÁRIO DE FEEDBACK SOBRE O PORTFÓLIO
+     Reaproveita o MESMO endpoint do Formspree do formulário de
+     contato — só o campo oculto "_subject" (já definido no HTML)
+     muda o assunto do e-mail recebido, para diferenciar um
+     feedback de uma mensagem de contato comum. Nome e e-mail são
+     opcionais aqui, por isso só validamos a mensagem.
+     ========================================================== */
+  const formularioFeedback = document.getElementById("feedback-form");
+  const feedbackDoFeedback = document.getElementById("feedback-form-feedback");
+  const botaoEnviarFeedback = document.getElementById("botao-enviar-feedback");
+
+  formularioFeedback.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const mensagem = document.getElementById("feedback-mensagem").value.trim();
+    const campoMensagem = document.getElementById("feedback-mensagem");
+    const erroMensagem = document.getElementById("erro-feedback-mensagem");
+
+    if (mensagem.length < 5) {
+      campoMensagem.classList.add("input-invalido");
+      campoMensagem.setAttribute("aria-invalid", "true");
+      erroMensagem.textContent = "Escreva uma mensagem antes de enviar.";
+      feedbackDoFeedback.textContent = "";
+      feedbackDoFeedback.className = "form-feedback";
+      return;
+    }
+
+    campoMensagem.classList.remove("input-invalido");
+    campoMensagem.removeAttribute("aria-invalid");
+    erroMensagem.textContent = "";
+
+    const dadosFeedback = new FormData(formularioFeedback);
+
+    botaoEnviarFeedback.disabled = true;
+    botaoEnviarFeedback.setAttribute("aria-busy", "true");
+    botaoEnviarFeedback.textContent = "Enviando...";
+    feedbackDoFeedback.textContent = "";
+    feedbackDoFeedback.className = "form-feedback";
+
+    fetch("https://formspree.io/f/mqpkzdjw", {
+      method: "POST",
+      body: dadosFeedback,
+      headers: { "Accept": "application/json" }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          feedbackDoFeedback.textContent = "Obrigado pelo seu feedback! Ele foi enviado com sucesso.";
+          feedbackDoFeedback.className = "form-feedback sucesso";
+          formularioFeedback.reset();
+        } else {
+          feedbackDoFeedback.textContent = "Não foi possível enviar seu feedback agora. Tente novamente em instantes.";
+          feedbackDoFeedback.className = "form-feedback erro";
+        }
+      })
+      .catch(() => {
+        feedbackDoFeedback.textContent = "Não foi possível enviar seu feedback agora. Verifique sua conexão e tente novamente.";
+        feedbackDoFeedback.className = "form-feedback erro";
+      })
+      .finally(() => {
+        botaoEnviarFeedback.disabled = false;
+        botaoEnviarFeedback.removeAttribute("aria-busy");
+        botaoEnviarFeedback.textContent = "Enviar Feedback";
+      });
+  });
+
+
+  /* ==========================================================
+     8) ANO ATUAL NO RODAPÉ
      Evita ter que atualizar o ano manualmente todo ano.
      ========================================================== */
   document.getElementById("ano-atual").textContent = new Date().getFullYear();
