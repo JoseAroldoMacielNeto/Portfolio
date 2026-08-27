@@ -59,6 +59,15 @@
     display: flex; /* aparece apenas em telas pequenas */
   }
 
+  /* Botão de fechar (X): reaparece aqui, posicionado no canto
+     superior direito do painel deslizante do menu mobile */
+  .nav-close-item {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
   /* Hero passa de duas colunas para uma coluna, imagem primeiro */
   .hero {
     flex-direction: column-reverse;
