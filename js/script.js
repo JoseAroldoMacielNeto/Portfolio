@@ -5,24 +5,53 @@
    o estudo e a manutenção.
    ============================================================ */
 
-/* Alguns navegadores (principalmente em celulares) tentam "lembrar"
-   a posição de rolagem da última visita e reabrem a página nesse
-   ponto, em vez de sempre no topo. Como nosso site é de página
-   única com links de âncora (#sobre, #skills...), isso confundia
-   o comportamento esperado. Esta linha desativa essa restauração
-   automática, garantindo que o site sempre abra do zero. */
+/* ------------------------------------------------------------
+   CORREÇÃO: SITE ABRINDO EM "#CONTATO" (OU OUTRA SEÇÃO) NO CELULAR
+   ------------------------------------------------------------
+   Causa real: quando a URL do site é aberta já contendo uma âncora
+   (ex.: .../index.html#contato — isso acontece quando o celular
+   reabre uma aba antiga, um atalho salvo na tela inicial, ou um
+   link compartilhado que ficou registrado com a última seção
+   visitada), o PRÓPRIO NAVEGADOR pula automaticamente para aquela
+   seção. Isso acontece antes (ou depois) do nosso JavaScript
+   rodar, então apenas "forçar o topo uma vez" não era suficiente.
+
+   A correção tem duas partes:
+   1) Remover o fragmento (#algo) da URL assim que a página carrega,
+      sem recarregar a página (history.replaceState). Isso impede
+      que o navegador tente pular para essa seção de novo.
+   2) Forçar a rolagem para o topo em MAIS DE UM momento do
+      carregamento — porque em alguns celulares o navegador refaz
+      o salto para a âncora depois que as imagens terminam de
+      carregar e a altura da página muda. */
+
+// Desliga a "memória de posição" automática do navegador.
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
-/* Só executamos o código depois que o HTML inteiro foi carregado,
-   para garantir que os elementos que buscamos (getElementById etc.)
-   já existam na página. */
+// Remove qualquer #âncora que já esteja na URL no momento em que a
+// página é aberta. Isso NÃO afeta cliques nos links do menu depois
+// que a página já carregou — eles continuam navegando normalmente.
+if (window.location.hash) {
+  history.replaceState(null, "", window.location.pathname + window.location.search);
+}
+
+// Função reaproveitada nos três momentos do carregamento abaixo.
+function forcarTopoDaPagina() {
+  window.scrollTo(0, 0);
+}
+
+// 1ª chamada: imediatamente, assim que este script é lido pelo navegador.
+forcarTopoDaPagina();
+
+/* Só executamos o restante do código depois que o HTML inteiro foi
+   carregado, para garantir que os elementos que buscamos
+   (getElementById etc.) já existam na página. */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* Garante que a página comece exatamente no topo ao carregar,
-     sem rolagem suave (para não gerar uma animação estranha
-     visível no primeiro instante em que a página abre). */
+  // 2ª chamada: quando a estrutura HTML termina de carregar.
+  forcarTopoDaPagina();
   window.scrollTo(0, 0);
 
   /* ==========================================================
@@ -151,15 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================================
-     6) VALIDAÇÃO DO FORMULÁRIO DE CONTATO
-     Validação simples no navegador (client-side). Como este é um
-     site estático (sem back-end), aqui simulamos o envio.
-     Quando o formulário for conectado a um serviço real (ex:
-     Formspree, EmailJS, ou um back-end próprio), substitua o
-     bloco "SIMULAÇÃO DE ENVIO" pela chamada real.
+     6) VALIDAÇÃO + ENVIO DO FORMULÁRIO DE CONTATO (via Formspree)
+     Primeiro validamos os campos no navegador (client-side).
+     Se estiverem válidos, enviamos os dados para o Formspree usando
+     fetch(): uma forma do JavaScript fazer uma requisição para um
+     servidor sem recarregar a página. O Formspree recebe os dados
+     e encaminha para o e-mail cadastrado na conta do Formspree.
      ========================================================== */
   const formulario = document.getElementById("contato-form");
   const feedback = document.getElementById("form-feedback");
+  const botaoEnviar = document.getElementById("botao-enviar");
 
   function mostrarErro(campoId, mensagem) {
     const campo = document.getElementById(campoId);
@@ -210,12 +240,48 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    /* --- SIMULAÇÃO DE ENVIO ---
-       Aqui, futuramente, entraria uma chamada real (fetch) para
-       um serviço de envio de e-mail ou back-end. */
-    feedback.textContent = `Obrigado, ${nome}! Sua mensagem foi enviada com sucesso.`;
-    feedback.className = "form-feedback sucesso";
-    formulario.reset();
+    /* --- ENVIO REAL VIA FORMSPREE ---
+       FormData(formulario) reúne automaticamente todos os campos
+       do <form> (nome, email, mensagem) no formato que o Formspree
+       espera receber. */
+    const dadosFormulario = new FormData(formulario);
+
+    // Desabilita o botão e avisa que o envio está em andamento,
+    // evitando que a pessoa clique duas vezes por engano.
+    botaoEnviar.disabled = true;
+    botaoEnviar.textContent = "Enviando...";
+    feedback.textContent = "";
+    feedback.className = "form-feedback";
+
+    fetch("https://formspree.io/f/mqpkzdjw", {
+      method: "POST",
+      body: dadosFormulario,
+      headers: {
+        "Accept": "application/json" // pede ao Formspree uma resposta em JSON, sem redirecionar de página
+      }
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          feedback.textContent = `Obrigado, ${nome}! Sua mensagem foi enviada com sucesso.`;
+          feedback.className = "form-feedback sucesso";
+          formulario.reset();
+        } else {
+          // O Formspree respondeu, mas indicando que algo deu errado
+          // (ex.: limite de envios, formulário mal configurado etc.)
+          feedback.textContent = "Não foi possível enviar sua mensagem agora. Tente novamente em instantes.";
+          feedback.className = "form-feedback erro";
+        }
+      })
+      .catch(() => {
+        // Erro de rede: sem internet, servidor fora do ar, etc.
+        feedback.textContent = "Não foi possível enviar sua mensagem agora. Verifique sua conexão e tente novamente.";
+        feedback.className = "form-feedback erro";
+      })
+      .finally(() => {
+        // Reabilita o botão de envio, com sucesso ou com erro
+        botaoEnviar.disabled = false;
+        botaoEnviar.textContent = "Enviar Mensagem";
+      });
   });
 
 
@@ -226,3 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("ano-atual").textContent = new Date().getFullYear();
 
 });
+
+// 3ª chamada: quando a página termina de carregar por completo,
+// incluindo imagens e fontes. É o momento em que alguns celulares
+// "recalculam" a rolagem por causa da mudança de altura da página —
+// por isso forçamos o topo mais uma vez aqui, como rede de segurança.
+window.addEventListener("load", forcarTopoDaPagina);
