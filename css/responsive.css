@@ -1,0 +1,151 @@
+/* ============================================================
+   RESPONSIVIDADE
+   Este arquivo é carregado DEPOIS do style.css, então as regras
+   aqui têm prioridade e "sobrescrevem" o layout padrão (desktop)
+   para telas menores. Vamos do maior para o menor breakpoint.
+   ============================================================ */
+
+/* --------------------------------------------
+   TABLET (telas até 1024px — ex: iPad)
+   -------------------------------------------- */
+@media (max-width: 1024px) {
+
+  .hero {
+    padding-top: 120px;
+  }
+
+  .hero-image {
+    width: 260px;
+    height: 260px;
+  }
+
+  .sobre-grid {
+    gap: 40px;
+  }
+
+  .contato-grid {
+    gap: 40px;
+  }
+}
+
+/* --------------------------------------------
+   MENU MOBILE + LAYOUT EM COLUNA ÚNICA
+   (telas até 860px — tablets pequenos e celulares)
+   -------------------------------------------- */
+@media (max-width: 860px) {
+
+  /* Menu de navegação vira um painel que desliza a partir da direita */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; /* começa fora da tela */
+    width: min(75%, 320px);
+    height: 100vh;
+    background-color: var(--color-surface);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    box-shadow: var(--shadow-lg);
+    transition: right var(--transition);
+  }
+
+  /* Classe adicionada via JavaScript quando o usuário clica no botão hambúrguer */
+  .nav-links.aberto {
+    right: 0;
+  }
+
+  .menu-btn {
+    display: flex; /* aparece apenas em telas pequenas */
+  }
+
+  /* Hero passa de duas colunas para uma coluna, imagem primeiro */
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-top: 130px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-buttons,
+  .hero-socials {
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: 220px;
+    height: 220px;
+  }
+
+  /* Sobre e Contato passam de 2 colunas para 1 coluna empilhada */
+  .sobre-grid,
+  .contato-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sobre-texto {
+    order: 1;
+  }
+
+  .code-card {
+    order: 2;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+}
+
+/* --------------------------------------------
+   CELULAR (telas até 480px)
+   -------------------------------------------- */
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 14px 16px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .code-card-body {
+    font-size: 0.75rem;
+  }
+
+  .contato-form {
+    padding: 24px 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* --------------------------------------------
+   AJUSTE DA TIMELINE (Experiência) EM TELAS MENORES
+   Reduz o recuo da linha do tempo para não "espremer" o conteúdo.
+   -------------------------------------------- */
+@media (max-width: 860px) {
+  .timeline {
+    padding-left: 24px;
+  }
+
+  .timeline-marker {
+    left: -32px;
+  }
+}

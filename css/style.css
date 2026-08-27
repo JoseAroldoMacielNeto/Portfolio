@@ -1,0 +1,767 @@
+/* ============================================================
+   VARIÁVEIS DE TEMA (CSS Custom Properties)
+   Aqui centralizamos todas as cores e fontes do site.
+   Trocar um valor aqui reflete em TODO o site automaticamente.
+   ============================================================ */
+:root {
+  /* --- Tema claro (padrão) --- */
+  --color-bg: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-text: #0B1220;
+  --color-text-muted: #5B6472;
+  --color-border: #E4E7EC;
+
+  --color-primary: #2F6FED;   /* azul-sinal: cor principal de ação (botões, links) */
+  --color-primary-dark: #1E4FC0;
+  --color-accent: #17A398;    /* verde-azulado: cor de destaque (tags, ícones) */
+
+  --shadow-sm: 0 1px 2px rgba(11, 18, 32, 0.06);
+  --shadow-md: 0 8px 24px rgba(11, 18, 32, 0.08);
+  --shadow-lg: 0 16px 40px rgba(11, 18, 32, 0.12);
+
+  --font-display: 'Sora', sans-serif;   /* títulos */
+  --font-body: 'Inter', sans-serif;     /* textos */
+  --font-mono: 'JetBrains Mono', monospace; /* trechos "de código" */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --container-width: 1120px;
+  --transition: 0.25s ease;
+}
+
+/* --- Tema escuro: ativado quando <body data-theme="dark"> --- */
+[data-theme="dark"] {
+  --color-bg: #0B1220;
+  --color-surface: #121B2E;
+  --color-text: #E7ECF5;
+  --color-text-muted: #8C97AC;
+  --color-border: #1F2A3D;
+
+  --color-primary: #5B8DFF;
+  --color-primary-dark: #7FA3FF;
+  --color-accent: #2DD4C4;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* ============================================================
+   RESET BÁSICO
+   Remove espaçamentos padrão do navegador para termos controle total.
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding/border não somam à largura definida */
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave ao clicar em links de âncora (#id) */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: background-color var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+/* Classe utilitária: centraliza o conteúdo e limita a largura máxima */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Espaçamento vertical padrão de cada seção */
+.section {
+  padding: 96px 0;
+}
+
+/* "Rótulo" em estilo de comentário de código, usado no topo de cada seção */
+.section-eyebrow {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ============================================================
+   HEADER / NAVEGAÇÃO
+   ============================================================ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(247, 248, 250, 0.75);
+  backdrop-filter: blur(10px); /* efeito "vidro fosco" */
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+[data-theme="dark"] .header {
+  background-color: rgba(11, 18, 32, 0.75);
+}
+
+/* Classe adicionada via JavaScript quando a página é rolada (ver script.js) */
+.header.scrolled {
+  border-bottom-color: var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.logo span {
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Sublinhado animado ao passar o mouse */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-text);
+  transition: background-color var(--transition);
+}
+
+.icon-btn:hover {
+  background-color: var(--color-border);
+}
+
+.menu-btn {
+  display: none; /* só aparece em telas pequenas — ver responsive.css */
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 140px 24px 80px;
+}
+
+.hero-content {
+  max-width: 560px;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 20px;
+  font-size: 1.3rem;
+}
+
+.hero-socials a {
+  color: var(--color-text-muted);
+  transition: color var(--transition), transform var(--transition);
+}
+
+.hero-socials a:hover {
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.hero-image {
+  width: 320px;
+  height: 320px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   SOBRE MIM
+   ============================================================ */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.sobre-texto p {
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+/* "Cartão de código" — elemento de assinatura visual do site */
+.code-card {
+  background-color: #0B1220;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-mono);
+}
+
+.code-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background-color: #16213A;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.dot-red { background-color: #FF5F56; }
+.dot-yellow { background-color: #FFBD2E; }
+.dot-green { background-color: #27C93F; }
+
+.code-card-title {
+  margin-left: 8px;
+  color: #8C97AC;
+  font-size: 0.8rem;
+}
+
+.code-card-body {
+  padding: 24px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  color: #E7ECF5;
+}
+
+.tk-key { color: #C792EA; }   /* palavras-chave: const, let... */
+.tk-var { color: #82AAFF; }   /* nomes de variáveis */
+.tk-prop { color: #7FDBCA; }  /* propriedades do objeto */
+.tk-str { color: #ECC48D; }   /* strings (textos entre aspas) */
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills-subtitle {
+  font-size: 1.1rem;
+  margin: 32px 0 20px;
+  color: var(--color-text-muted);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.skill-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 500;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.skill-card i {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.skill-learning {
+  border-style: dashed; /* diferencia visualmente o que ainda está em aprendizado */
+}
+
+/* ============================================================
+   PROJETOS
+   ============================================================ */
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.project-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.project-image {
+  aspect-ratio: 16 / 10;
+  background-color: var(--color-border);
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 24px;
+}
+
+.project-content h3 {
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+}
+
+.project-content p {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.project-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.project-links {
+  display: flex;
+  gap: 20px;
+}
+
+.project-links a {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--transition);
+}
+
+.project-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   CONTATO
+   ============================================================ */
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+
+.contato-info p {
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.contato-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.contato-lista i {
+  color: var(--color-primary);
+  width: 20px;
+}
+
+.contato-form {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: inherit;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  resize: vertical;
+  transition: border-color var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Estado de erro: classe "input-invalido" adicionada via JavaScript */
+.form-group input.input-invalido,
+.form-group textarea.input-invalido {
+  border-color: #E5484D;
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color: #E5484D;
+  min-height: 16px;
+}
+
+.form-feedback {
+  font-size: 0.9rem;
+  text-align: center;
+  min-height: 20px;
+}
+
+.form-feedback.sucesso {
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: 32px 0;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.back-to-top {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.back-to-top:hover {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   ANIMAÇÃO DE ENTRADA (scroll reveal)
+   O JavaScript adiciona a classe "ativo" quando o elemento entra na tela.
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.ativo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respeita usuários que preferem menos animações (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================
+   EXPERIÊNCIA PROFISSIONAL (linha do tempo)
+   ============================================================ */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+  padding-left: 32px;
+  border-left: 2px solid var(--color-border); /* a "linha" vertical da timeline */
+}
+
+.timeline-item {
+  position: relative;
+}
+
+/* Bolinha marcadora de cada item, posicionada sobre a linha vertical */
+.timeline-marker {
+  position: absolute;
+  left: -40px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-bg); /* cria um "respiro" ao redor da bolinha */
+}
+
+.timeline-period {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}
+
+.timeline-content h3 {
+  margin: 6px 0 4px;
+  font-size: 1.05rem;
+}
+
+.timeline-empresa {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.timeline-content ul {
+  padding-left: 18px;
+  list-style: disc; /* aqui queremos os marcadores da lista, diferente do menu */
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ============================================================
+   LISTA DE "PILLS" (usada em Ferramentas e Idiomas)
+   Mais compacta que os skill-cards, ideal para muitos itens curtos.
+   ============================================================ */
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.pill-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+
+.pill-list i {
+  color: var(--color-primary);
+}

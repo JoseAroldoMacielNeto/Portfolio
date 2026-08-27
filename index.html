@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>José Arôldo Maciel Neto | Portfólio</title>
+  <meta name="description" content="Portfólio de José Arôldo Maciel Neto, estudante de Análise e Desenvolvimento de Sistemas na Unifor, em transição de carreira para Tecnologia.">
+
+  <!-- Ícones (via CDN, sem instalação) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Fontes do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Nossos arquivos CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-theme="light">
+
+  <!-- ===================== HEADER / NAVEGAÇÃO ===================== -->
+  <header class="header" id="header">
+    <nav class="navbar">
+      <a href="#hero" class="logo">José<span>.dev</span></a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#sobre" class="nav-link">Sobre</a></li>
+        <li><a href="#experiencia" class="nav-link">Experiência</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projetos" class="nav-link">Projetos</a></li>
+        <li><a href="#contato" class="nav-link">Contato</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Alternar modo escuro">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-content reveal">
+      <p class="section-eyebrow">&gt; Olá, seja bem-vindo(a)</p>
+
+      <h1 class="hero-title">José Arôldo Maciel Neto</h1>
+
+      <p class="hero-subtitle">
+        Estudante de Análise e Desenvolvimento de Sistemas | Em formação na área de Tecnologia
+      </p>
+
+      <p class="hero-description">
+        Em transição de carreira da área administrativa e de atendimento para a Tecnologia.
+        Estou construindo minha base em programação na Unifor e, por fora, em um curso de
+        Algoritmos e Lógica de Programação — em busca da minha primeira oportunidade de estágio em TI.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+        <!-- O arquivo do currículo deve se chamar exatamente "curriculo.pdf"
+             e ficar dentro da pasta assets/docs/ -->
+        <a href="assets/docs/curriculo.pdf" class="btn btn-secondary" download>
+          <i class="fa-solid fa-download"></i> Baixar Currículo
+        </a>
+      </div>
+
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/joséarôldomacielneto" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/JoseAroldoMacielNeto" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:josearoldomacielneto.19@gmail.com" aria-label="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <!-- Coloque aqui a sua foto de perfil: o arquivo deve se chamar
+         exatamente "foto-perfil.jpg" e ficar dentro da pasta assets/img/ -->
+    <div class="hero-image reveal">
+      <img src="assets/img/foto-perfil.jpg" alt="Foto de perfil de José Arôldo Maciel Neto">
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE MIM ===================== -->
+  <section class="section sobre" id="sobre">
+    <div class="container sobre-grid">
+
+      <div class="sobre-texto reveal">
+        <p class="section-eyebrow">// sobre-mim</p>
+        <h2 class="section-title">Quem eu sou</h2>
+        <p>
+          Sou José Arôldo Maciel Neto, cursando Tecnólogo em Análise e Desenvolvimento de Sistemas
+          na Universidade de Fortaleza (Unifor), com previsão de conclusão em fevereiro de 2029.
+          Antes de ingressar em ADS, construí experiência profissional nas áreas administrativa,
+          comercial e de atendimento — e hoje estou em transição de carreira para a Tecnologia.
+        </p>
+        <p>
+          Estou no início da minha jornada em programação: por fora da faculdade, faço um curso de
+          Algoritmos e Lógica de Programação para fortalecer minha base antes de avançar em linguagens
+          e frameworks. Este portfólio também é meu principal projeto de estudo — estou aprendendo a
+          entender e evoluir o código à medida que ele é construído.
+        </p>
+        <p>
+          No médio/longo prazo, tenho interesse em direcionar minha carreira para Dados, Inteligência
+          Artificial e Ciência de Dados — mas meu foco agora é construir uma base sólida em programação
+          e conquistar minha primeira oportunidade de estágio em TI.
+        </p>
+      </div>
+
+      <!-- "Cartão de código": elemento visual de assinatura do site,
+           simulando um editor de código para reforçar a identidade de dev -->
+      <div class="code-card reveal">
+        <div class="code-card-header">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="code-card-title">sobre-mim.js</span>
+        </div>
+        <pre class="code-card-body"><code><span class="tk-key">const</span> <span class="tk-var">estudante</span> = {
+  <span class="tk-prop">nome</span>: <span class="tk-str">"José Arôldo Maciel Neto"</span>,
+  <span class="tk-prop">curso</span>: <span class="tk-str">"Tecnólogo em ADS"</span>,
+  <span class="tk-prop">instituicao</span>: <span class="tk-str">"Unifor"</span>,
+  <span class="tk-prop">periodo</span>: <span class="tk-str">"ago/2026 - fev/2029"</span>,
+  <span class="tk-prop">vindoDe</span>: <span class="tk-str">"Administrativo &amp; Atendimento"</span>,
+  <span class="tk-prop">objetivoAtual</span>: <span class="tk-str">"Estágio em TI"</span>,
+  <span class="tk-prop">objetivoFuturo</span>: <span class="tk-str">"Dados / IA"</span>
+};</code></pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIÊNCIA PROFISSIONAL ===================== -->
+  <section class="section experiencia" id="experiencia">
+    <div class="container">
+      <p class="section-eyebrow">// experiência</p>
+      <h2 class="section-title">Experiência Profissional</h2>
+      <p class="section-subtitle">
+        Antes de migrar para Tecnologia, construí experiência nas áreas administrativa, comercial e de atendimento —
+        uma base que hoje aplico também em projetos de tecnologia.
+      </p>
+
+      <!-- Linha do tempo: cada "timeline-item" representa uma experiência profissional -->
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <span class="timeline-marker"></span>
+          <div class="timeline-content">
+            <span class="timeline-period">Dez/2025 – Jan/2026</span>
+            <h3>Organização Administrativa</h3>
+            <p class="timeline-empresa">Escritório Fulgêncio Cruz Advocacia — Freelance</p>
+            <ul>
+              <li>Organização administrativa e documental</li>
+              <li>Planilhas para controle de atendimentos, contratos e demandas</li>
+              <li>Organização do Google Drive e estruturação de links de acesso aos documentos dos clientes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <span class="timeline-marker"></span>
+          <div class="timeline-content">
+            <span class="timeline-period">Jun/2025 – Out/2025</span>
+            <h3>Bolsista (Bolsa Trabalho) &rarr; Assessor Especial de Gestão</h3>
+            <p class="timeline-empresa">Secretaria de Desenvolvimento Econômico</p>
+            <ul>
+              <li>Atividades administrativas e apoio às atividades da Secretaria</li>
+              <li>Organização de informações e de demandas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <span class="timeline-marker"></span>
+          <div class="timeline-content">
+            <span class="timeline-period">Jul/2024 – Dez/2024</span>
+            <h3>Atendimento Comercial Online</h3>
+            <p class="timeline-empresa">Escritório de Advocacia Cid Lira Braga — Estágio</p>
+            <ul>
+              <li>Atendimento de leads pelo WhatsApp e atendimento comercial</li>
+              <li>Análise inicial das necessidades dos clientes e negociação</li>
+              <li>Fechamento de contratos e organização de documentos e informações</li>
+              <li>Inserção de dados em sistema e entrada de solicitações relacionadas a benefícios</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section class="section skills" id="skills">
+    <div class="container">
+      <p class="section-eyebrow">// habilidades</p>
+      <h2 class="section-title">O que eu sei (e o que estou aprendendo)</h2>
+      <p class="section-subtitle">
+        Venho de uma base administrativa e de atendimento, e agora estou construindo, do zero,
+        minha base em tecnologia — por isso separei o que já domino do que ainda estou aprendendo.
+      </p>
+
+      <h3 class="skills-subtitle">Organização &amp; Administração</h3>
+      <div class="skills-grid">
+        <div class="skill-card reveal"><i class="fa-solid fa-folder-tree"></i><span>Organização Administrativa</span></div>
+        <div class="skill-card reveal"><i class="fa-solid fa-list-check"></i><span>Organização de Documentos e Informações</span></div>
+        <div class="skill-card reveal"><i class="fa-solid fa-building-columns"></i><span>Introdução à Administração</span></div>
+        <div class="skill-card reveal"><i class="fa-solid fa-chart-line"></i><span>Estratégia de Negócios</span></div>
+      </div>
+
+      <h3 class="skills-subtitle">Comunicação &amp; Atendimento</h3>
+      <div class="skills-grid">
+        <div class="skill-card reveal"><i class="fa-solid fa-comments"></i><span>Comunicação Interpessoal</span></div>
+        <div class="skill-card reveal"><i class="fa-solid fa-briefcase"></i><span>Comunicação Empresarial</span></div>
+        <div class="skill-card reveal"><i class="fa-solid fa-headset"></i><span>Atendimento ao Cliente</span></div>
+        <div class="skill-card reveal"><i class="fa-solid fa-user-tie"></i><span>Gestão de Atendimento</span></div>
+      </div>
+
+      <h3 class="skills-subtitle">Ferramentas</h3>
+      <!-- Lista de "pills" (chips): mais compacta que os cards, ideal para muitos itens curtos -->
+      <div class="pill-list reveal">
+        <span><i class="fa-solid fa-file-word"></i> Word</span>
+        <span><i class="fa-solid fa-file-excel"></i> Excel</span>
+        <span><i class="fa-solid fa-envelope-open-text"></i> Outlook</span>
+        <span><i class="fa-solid fa-users-rectangle"></i> Teams</span>
+        <span><i class="fa-solid fa-share-nodes"></i> SharePoint</span>
+        <span><i class="fa-solid fa-note-sticky"></i> OneNote</span>
+        <span><i class="fa-solid fa-cloud"></i> OneDrive</span>
+        <span><i class="fa-solid fa-list-ul"></i> Planner</span>
+        <span><i class="fa-brands fa-google-drive"></i> Google Drive</span>
+      </div>
+
+      <h3 class="skills-subtitle">Idiomas</h3>
+      <div class="pill-list reveal">
+        <span><i class="fa-solid fa-language"></i> Português — Nativo</span>
+        <span><i class="fa-solid fa-language"></i> Inglês — Básico</span>
+      </div>
+
+      <h3 class="skills-subtitle">Em aprendizado — Tecnologia</h3>
+      <div class="skills-grid">
+        <div class="skill-card skill-learning reveal"><i class="fa-solid fa-diagram-project"></i><span>Lógica de Programação</span></div>
+        <div class="skill-card skill-learning reveal"><i class="fa-solid fa-code-branch"></i><span>Algoritmos</span></div>
+        <div class="skill-card skill-learning reveal"><i class="fa-brands fa-html5"></i><span>HTML (iniciando)</span></div>
+        <div class="skill-card skill-learning reveal"><i class="fa-brands fa-css3-alt"></i><span>CSS (básico)</span></div>
+        <div class="skill-card skill-learning reveal"><i class="fa-brands fa-js"></i><span>JavaScript (em breve)</span></div>
+        <div class="skill-card skill-learning reveal"><i class="fa-solid fa-robot"></i><span>IA como Ferramenta de Produtividade</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJETOS ===================== -->
+  <!-- TODO: substituir os cards abaixo pelos projetos reais assim que você me enviar as informações -->
+  <section class="section projetos" id="projetos">
+    <div class="container">
+      <p class="section-eyebrow">// projetos</p>
+      <h2 class="section-title">Projetos</h2>
+      <p class="section-subtitle">
+        Esta seção vai crescer ao longo da minha graduação. Cada card abaixo segue o mesmo padrão —
+        para adicionar um novo projeto no futuro, basta copiar um bloco "project-card" e trocar o conteúdo.
+      </p>
+
+      <div class="projetos-grid">
+
+        <!-- ============ INÍCIO DE UM CARD DE PROJETO (modelo reutilizável) ============ -->
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="assets/img/projeto-placeholder.jpg" alt="Captura de tela do projeto Este Portfólio">
+          </div>
+          <div class="project-content">
+            <h3>Este Portfólio</h3>
+            <p>Site pessoal construído com HTML, CSS e JavaScript, com apoio de IA para acelerar o aprendizado, com modo escuro e design responsivo.</p>
+            <div class="project-tags">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+            </div>
+            <!-- TODO: substituir "#" pelo link do repositório específico deste portfólio
+                 no seu GitHub (https://github.com/JoseAroldoMacielNeto) assim que criá-lo,
+                 e pelo link do site publicado ("Demo"), quando estiver no ar -->
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
+              <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+            </div>
+          </div>
+        </article>
+        <!-- ============ FIM DO CARD DE PROJETO ============ -->
+
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="assets/img/projeto-placeholder.jpg" alt="Captura de tela de um projeto futuro">
+          </div>
+          <div class="project-content">
+            <h3>Próximo Projeto</h3>
+            <p>Espaço reservado para o próximo projeto da graduação. Substitua por um projeto real assim que concluído.</p>
+            <div class="project-tags">
+              <span>Em breve</span>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
+              <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="assets/img/projeto-placeholder.jpg" alt="Captura de tela de um projeto futuro">
+          </div>
+          <div class="project-content">
+            <h3>Próximo Projeto</h3>
+            <p>Espaço reservado para o próximo projeto da graduação. Substitua por um projeto real assim que concluído.</p>
+            <div class="project-tags">
+              <span>Em breve</span>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Código</a>
+              <a href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="section contato" id="contato">
+    <div class="container contato-grid">
+
+      <div class="contato-info reveal">
+        <p class="section-eyebrow">// contato</p>
+        <h2 class="section-title">Vamos conversar?</h2>
+        <p>
+          Estou disponível para oportunidades de estágio em TI. Envie uma mensagem pelo formulário
+          ou me encontre nas redes abaixo.
+        </p>
+        <ul class="contato-lista">
+          <li><i class="fa-solid fa-envelope"></i> josearoldomacielneto.19@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Itapajé, Ceará, Brasil</li>
+        </ul>
+        <div class="hero-socials">
+          <a href="https://www.linkedin.com/in/joséarôldomacielneto" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/JoseAroldoMacielNeto" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <form class="contato-form reveal" id="contato-form" novalidate>
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+          <span class="form-error" id="erro-nome"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+          <span class="form-error" id="erro-email"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required></textarea>
+          <span class="form-error" id="erro-mensagem"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Enviar Mensagem</button>
+        <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <a href="#hero" class="logo">José<span>.dev</span></a>
+      <p>&copy; <span id="ano-atual"></span> José Arôldo Maciel Neto. Todos os direitos reservados.</p>
+      <a href="#hero" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fa-solid fa-arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
