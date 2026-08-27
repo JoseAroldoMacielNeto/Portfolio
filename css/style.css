@@ -863,3 +863,39 @@ textarea:focus-visible {
   outline: none;
   border-color: var(--color-primary);
 }
+
+/* ============================================================
+   TOOLTIP DISCRETO DO BOTÃO DE TEMA
+   Só aparece ao passar o mouse ou focar com Tab — não ocupa
+   espaço no layout em nenhum outro momento, e usa a mesma
+   linguagem visual dos cards do site (fundo, borda, sombra).
+   ============================================================ */
+#theme-toggle[data-tooltip] {
+  position: relative;
+}
+
+#theme-toggle[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+  z-index: 1500;
+}
+
+#theme-toggle[data-tooltip]:hover::after,
+#theme-toggle[data-tooltip]:focus-visible::after {
+  opacity: 1;
+}
