@@ -271,6 +271,12 @@ h1, h2, h3 {
   display: none; /* só aparece em telas pequenas — ver responsive.css */
 }
 
+/* Botão de fechar (X) do menu mobile: fica escondido no desktop,
+   pois nesse layout o menu não é um painel deslizante */
+.nav-close-item {
+  display: none;
+}
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -532,6 +538,20 @@ h1, h2, h3 {
 
 .project-links a:hover {
   color: var(--color-primary);
+}
+
+/* Links "desabilitados": usados nos cards de projeto que ainda não têm
+   repositório ou demo reais. São <span>, não <a>, então não são clicáveis
+   nem navegáveis por teclado — o aria-disabled reforça isso para leitores de tela. */
+.link-disabled {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  opacity: 0.55;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
 }
 
 /* ============================================================
