@@ -5,10 +5,25 @@
    o estudo e a manutenção.
    ============================================================ */
 
+/* Alguns navegadores (principalmente em celulares) tentam "lembrar"
+   a posição de rolagem da última visita e reabrem a página nesse
+   ponto, em vez de sempre no topo. Como nosso site é de página
+   única com links de âncora (#sobre, #skills...), isso confundia
+   o comportamento esperado. Esta linha desativa essa restauração
+   automática, garantindo que o site sempre abra do zero. */
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 /* Só executamos o código depois que o HTML inteiro foi carregado,
    para garantir que os elementos que buscamos (getElementById etc.)
    já existam na página. */
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* Garante que a página comece exatamente no topo ao carregar,
+     sem rolagem suave (para não gerar uma animação estranha
+     visível no primeiro instante em que a página abre). */
+  window.scrollTo(0, 0);
 
   /* ==========================================================
      1) MODO ESCURO / MODO CLARO
@@ -27,12 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Ao carregar a página: usa o tema salvo, ou a preferência do sistema operacional
+  // O modo escuro é o padrão do portfólio. Se o usuário já escolheu um
+  // tema antes (guardado no localStorage), respeitamos essa escolha.
+  // Caso contrário, mantemos o escuro (já definido no <body> do HTML),
+  // independentemente da preferência de tema do sistema operacional.
   const temaSalvo = localStorage.getItem("portfolio-tema");
-  const prefereEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   if (temaSalvo) {
     aplicarTema(temaSalvo);
-  } else if (prefereEscuro) {
+  } else {
     aplicarTema("dark");
   }
 
@@ -44,10 +62,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================================
-     2) MENU MOBILE (hambúrguer)
+     2) MENU MOBILE (hambúrguer + botão de fechar)
      ========================================================== */
   const botaoMenu = document.getElementById("menu-toggle");
+  const botaoFecharMenu = document.getElementById("menu-close");
   const linksNav = document.getElementById("nav-links");
+
+  // Função reutilizada para fechar o menu, seja pelo botão X,
+  // por um clique em um link, ou futuramente por qualquer outra ação.
+  function fecharMenuMobile() {
+    linksNav.classList.remove("aberto");
+    botaoMenu.setAttribute("aria-expanded", "false");
+    botaoMenu.querySelector("i").className = "fa-solid fa-bars";
+  }
 
   botaoMenu.addEventListener("click", () => {
     const estaAberto = linksNav.classList.toggle("aberto");
@@ -56,13 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
     botaoMenu.querySelector("i").className = estaAberto ? "fa-solid fa-xmark" : "fa-solid fa-bars";
   });
 
+  // Botão de fechar (X) dentro do próprio painel do menu mobile
+  botaoFecharMenu.addEventListener("click", fecharMenuMobile);
+
   // Fecha o menu automaticamente ao clicar em algum link (útil no celular)
   document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      linksNav.classList.remove("aberto");
-      botaoMenu.setAttribute("aria-expanded", "false");
-      botaoMenu.querySelector("i").className = "fa-solid fa-bars";
-    });
+    link.addEventListener("click", fecharMenuMobile);
   });
 
 
