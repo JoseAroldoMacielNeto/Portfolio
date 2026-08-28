@@ -90,6 +90,13 @@
     justify-content: center;
   }
 
+  /* A frase abaixo dos ícones (Contato) precisa acompanhar o
+     centralização dos ícones, que já acontece na regra acima —
+     sem isso, os ícones ficavam centralizados mas a frase, não. */
+  .icons-hint {
+    text-align: center;
+  }
+
   .hero-image {
     width: 220px;
     height: 220px;
