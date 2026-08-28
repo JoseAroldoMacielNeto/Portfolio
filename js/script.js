@@ -442,7 +442,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================================
-     8) ANO ATUAL NO RODAPÉ
+     8) SINCRONIZAÇÃO DE NOME/E-MAIL ENTRE OS DOIS FORMULÁRIOS
+     Quando a pessoa digita o Nome ou o E-mail em um formulário
+     (Contato ou Feedback), o mesmo valor é copiado automaticamente
+     para o campo equivalente no outro — assim ela não precisa
+     redigitar. Funciona nos dois sentidos, só enquanto a página
+     está aberta: nada é salvo (sem localStorage/sessionStorage) e
+     nada é enviado para fora até o envio real do formulário.
+     ========================================================== */
+  const campoNomeContato = document.getElementById("nome");
+  const campoEmailContato = document.getElementById("email");
+  const campoNomeFeedback = document.getElementById("feedback-nome");
+  const campoEmailFeedback = document.getElementById("feedback-email");
+
+  function sincronizarCampo(origem, destino) {
+    origem.addEventListener("input", () => {
+      destino.value = origem.value;
+    });
+  }
+
+  sincronizarCampo(campoNomeContato, campoNomeFeedback);
+  sincronizarCampo(campoNomeFeedback, campoNomeContato);
+  sincronizarCampo(campoEmailContato, campoEmailFeedback);
+  sincronizarCampo(campoEmailFeedback, campoEmailContato);
+
+
+  /* ==========================================================
+     9) ANO ATUAL NO RODAPÉ
      Evita ter que atualizar o ano manualmente todo ano.
      ========================================================== */
   document.getElementById("ano-atual").textContent = new Date().getFullYear();
