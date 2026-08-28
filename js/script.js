@@ -330,7 +330,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resposta.ok) {
           feedback.textContent = `Obrigado, ${nome}! Sua mensagem foi enviada com sucesso.`;
           feedback.className = "form-feedback sucesso";
-          formulario.reset();
+          // Limpa só a Mensagem — Nome e E-mail permanecem preenchidos,
+          // para o caso da pessoa querer enviar outra mensagem depois.
+          document.getElementById("mensagem").value = "";
         } else {
           // O Formspree respondeu, mas indicando que algo deu errado
           // (ex.: limite de envios, formulário mal configurado etc.)
@@ -381,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ["feedback-nome", "feedback-email", "feedback-tipo", "feedback-mensagem"].forEach(limparErro);
 
     if (nome.length < 3) {
-      mostrarErro("feedback-nome", "Digite seu nome.");
+      mostrarErro("feedback-nome", "Digite seu nome completo.");
       formularioValido = false;
     }
 
@@ -391,12 +393,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!tipo) {
-      mostrarErro("feedback-tipo", "Selecione o tipo de feedback.");
+      mostrarErro("feedback-tipo", "Selecione um tipo de feedback.");
       formularioValido = false;
     }
 
-    if (mensagem.length < 5) {
-      mostrarErro("feedback-mensagem", "Escreva uma mensagem antes de enviar.");
+    if (mensagem.length < 10) {
+      mostrarErro("feedback-mensagem", "Escreva uma mensagem com pelo menos 10 caracteres.");
       formularioValido = false;
     }
 
@@ -423,7 +425,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resposta.ok) {
           feedbackDoFeedback.textContent = "Obrigado pelo seu feedback! Ele foi enviado com sucesso.";
           feedbackDoFeedback.className = "form-feedback sucesso";
-          formularioFeedback.reset();
+          // Nome e E-mail permanecem preenchidos. Só o Tipo volta para a
+          // opção inicial ("Selecione uma opção") e a Mensagem é limpa.
+          document.getElementById("feedback-tipo").value = "";
+          document.getElementById("feedback-mensagem").value = "";
         } else {
           feedbackDoFeedback.textContent = "Não foi possível enviar seu feedback agora. Tente novamente em instantes.";
           feedbackDoFeedback.className = "form-feedback erro";
