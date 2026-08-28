@@ -195,7 +195,10 @@ h1, h2, h3 {
   z-index: 1000;
   background-color: rgba(247, 248, 250, 0.75);
   backdrop-filter: blur(10px); /* efeito "vidro fosco" */
-  border-bottom: 1px solid transparent;
+  /* Border e sombra já presentes desde o carregamento (antes ficavam
+     só na classe .scrolled, aplicada via JS ao rolar a página) */
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
   transition: background-color var(--transition), border-color var(--transition);
 }
 
@@ -203,7 +206,9 @@ h1, h2, h3 {
   background-color: rgba(11, 18, 32, 0.75);
 }
 
-/* Classe adicionada via JavaScript quando a página é rolada (ver script.js) */
+/* A classe .scrolled continua sendo adicionada via JavaScript ao rolar
+   (script.js) — mantida por compatibilidade, mas agora é redundante
+   visualmente, já que o header sempre mostra este estado. */
 .header.scrolled {
   border-bottom-color: var(--color-border);
   box-shadow: var(--shadow-sm);
