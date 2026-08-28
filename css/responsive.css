@@ -6,6 +6,28 @@
    ============================================================ */
 
 /* --------------------------------------------
+   DESKTOP (acima de 1024px — telas maiores que o breakpoint de tablet)
+   Único bloco "min-width" deste arquivo: com os 3 botões do Hero
+   ("Ver Projetos", "Visualizar Currículo", "Baixar Currículo"), o
+   espaçamento/padding padrão dos botões fazia o terceiro quebrar
+   para uma segunda linha dentro da coluna de texto do Hero. Aqui
+   só compactamos um pouco o respiro entre eles para caberem lado
+   a lado numa única linha — nada além disso muda, e tablet/celular
+   não são afetados (ficam fora desta media query).
+   -------------------------------------------- */
+@media (min-width: 1025px) {
+  .hero-buttons {
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .hero-buttons .btn {
+    padding: 14px 18px;
+    white-space: nowrap;
+  }
+}
+
+/* --------------------------------------------
    TABLET (telas até 1024px — ex: iPad)
    -------------------------------------------- */
 @media (max-width: 1024px) {
