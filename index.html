@@ -141,14 +141,22 @@
 
         <!-- Abre o mesmo PDF em nova aba, para leitura online (sem
              baixar). Mesmo arquivo do botão abaixo, só sem o atributo
-             "download" e com target="_blank" -->
-        <a href="assets/docs/curriculo.pdf" class="btn btn-secondary" target="_blank" rel="noopener">
+             "download" e com target="_blank".
+             O nome do arquivo tem espaços e acentos, por isso o link
+             usa "percent-encoding" (%20, %C3%A9 etc.) — é a forma
+             correta de representar esses caracteres numa URL. O
+             navegador exibe/baixa o arquivo com o nome normal mesmo
+             assim. -->
+        <a href="assets/docs/Curr%C3%ADculo%20-%20Jos%C3%A9%20Ar%C3%B4ldo%20Maciel%20Neto.pdf" class="btn btn-secondary" target="_blank" rel="noopener">
           <i aria-hidden="true" class="fa-solid fa-file-lines"></i> Visualizar Currículo
         </a>
 
-        <!-- O arquivo do currículo deve se chamar exatamente "curriculo.pdf"
-             e ficar dentro da pasta docs/ (na raiz do repositório) -->
-        <a href="assets/docs/curriculo.pdf" class="btn btn-secondary" download="Currículo - José Arôldo Maciel Neto.pdf">
+        <!-- O arquivo do currículo deve se chamar exatamente
+             "Currículo - José Arôldo Maciel Neto.pdf" e ficar dentro
+             da pasta assets/docs/. O atributo download="..." define o
+             nome sugerido ao salvar, e pode ser escrito normalmente
+             (sem percent-encoding), diferente do href acima. -->
+        <a href="assets/docs/Curr%C3%ADculo%20-%20Jos%C3%A9%20Ar%C3%B4ldo%20Maciel%20Neto.pdf" class="btn btn-secondary" download="Currículo - José Arôldo Maciel Neto.pdf">
           <i aria-hidden="true" class="fa-solid fa-download"></i> Baixar Currículo
         </a>
       </div>
