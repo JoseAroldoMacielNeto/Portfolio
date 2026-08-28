@@ -269,6 +269,34 @@ document.addEventListener("DOMContentLoaded", () => {
     erro.textContent = "";
   }
 
+  // Mesma expressão usada nas duas validações de envio (Contato e
+  // Feedback) — reaproveitada aqui para a checagem "ao vivo".
+  const regexEmailAoVivo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  /* Liga um campo a uma função de "está válido?": assim que o valor
+     do campo atender à regra, o erro daquele campo some imediatamente
+     — sem esperar um novo envio do formulário. Funciona com o evento
+     "input" (campos de texto) ou "change" (o <select> do Feedback). */
+  function limparErroAoDigitar(campoId, evento, estaValido) {
+    const campo = document.getElementById(campoId);
+    campo.addEventListener(evento, () => {
+      if (estaValido(campo.value.trim())) {
+        limparErro(campoId);
+      }
+    });
+  }
+
+  // Vamos conversar
+  limparErroAoDigitar("nome", "input", (valor) => valor.length >= 3);
+  limparErroAoDigitar("email", "input", (valor) => regexEmailAoVivo.test(valor));
+  limparErroAoDigitar("mensagem", "input", (valor) => valor.length >= 10);
+
+  // Feedback
+  limparErroAoDigitar("feedback-nome", "input", (valor) => valor.length >= 3);
+  limparErroAoDigitar("feedback-email", "input", (valor) => regexEmailAoVivo.test(valor));
+  limparErroAoDigitar("feedback-tipo", "change", (valor) => valor !== "");
+  limparErroAoDigitar("feedback-mensagem", "input", (valor) => valor.length >= 10);
+
   formulario.addEventListener("submit", (evento) => {
     evento.preventDefault(); // impede o recarregamento padrão da página
 
@@ -423,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((resposta) => {
         if (resposta.ok) {
-          feedbackDoFeedback.textContent = "Obrigado pelo seu feedback! Ele foi enviado com sucesso.";
+          feedbackDoFeedback.textContent = `Obrigado, ${nome}. Seu feedback foi enviado com sucesso.`;
           feedbackDoFeedback.className = "form-feedback sucesso";
           // Nome e E-mail permanecem preenchidos. Só o Tipo volta para a
           // opção inicial ("Selecione uma opção") e a Mensagem é limpa.
