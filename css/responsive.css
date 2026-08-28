@@ -80,20 +80,25 @@
   .menu-btn {
     display: flex; /* aparece apenas em telas pequenas */
     /* Empilha o ícone e o texto "Menu" verticalmente. O botão cresce
-       um pouco (de 40x40 para 44x44) e o border-radius diminui, só
-       o necessário para caber o rótulo abaixo do ícone — o ícone em
-       si, sua cor e a posição no cabeçalho continuam os mesmos. */
+       um pouco (de 44x44 para 50x50) e o border-radius acompanha,
+       só o suficiente para dar mais presença visual ao conjunto,
+       equilibrando com o logo e a chave de tema ao lado — o ícone
+       em si, sua cor e a posição no cabeçalho continuam os mesmos. */
     flex-direction: column;
     justify-content: center;
-    gap: 1px;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    gap: 2px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
+
+  .menu-btn i {
+    font-size: 1.05rem;
   }
 
   .menu-btn-label {
     font-family: var(--font-mono);
-    font-size: 0.55rem;
+    font-size: 0.62rem;
     line-height: 1;
     color: var(--color-text-muted);
   }
