@@ -185,6 +185,34 @@ h1, h2, h3 {
 }
 
 /* ============================================================
+   SKIP LINK ("Pular para o conteúdo principal")
+   Fica posicionado fora da área visível da tela por padrão — não
+   ocupa espaço no layout (position: absolute) e não aparece como
+   "mancha" durante o carregamento. Ao receber foco via teclado
+   (Tab), desliza para dentro da tela, acima do header (z-index
+   maior), ficando claramente visível e utilizável. Ao perder o
+   foco, volta a ficar oculto.
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 2000;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: top var(--transition);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ============================================================
    HEADER / NAVEGAÇÃO
    ============================================================ */
 .header {
