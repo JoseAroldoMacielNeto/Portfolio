@@ -61,12 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
      ========================================================== */
   const body = document.body;
   const botaoTema = document.getElementById("theme-toggle");
-  const iconeTema = botaoTema.querySelector("i");
 
   function aplicarTema(tema) {
     body.setAttribute("data-theme", tema);
-    // Troca o ícone: lua (modo claro, para ativar o escuro) <-> sol (modo escuro)
-    iconeTema.className = tema === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    // A posição da bolinha (esquerda/direita) é resolvida via CSS, a
+    // partir do data-theme do <body>. Aqui só atualizamos o estado
+    // para leitores de tela: aria-checked="true" significa "modo
+    // escuro ativado" (convenção do papel ARIA "switch").
+    botaoTema.setAttribute("aria-checked", tema === "dark" ? "true" : "false");
     localStorage.setItem("portfolio-tema", tema);
   }
 
