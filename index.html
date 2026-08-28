@@ -57,6 +57,18 @@
     gtag('js', new Date());
     gtag('config', 'G-1H4T45TEC2');
   </script>
+
+  <!-- Microsoft Clarity: mapas de calor e gravações de sessão,
+       complementando o Google Analytics com dados de comportamento
+       visual dos visitantes. Código oficial fornecido pela Microsoft,
+       inserido sem modificações. -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "y93l747wbi");
+  </script>
 </head>
 <body data-theme="dark">
 
@@ -88,8 +100,10 @@
       </ul>
 
       <div class="nav-actions">
-        <button id="theme-toggle" class="icon-btn" aria-label="Alternar modo escuro" data-tooltip="Alternar tema claro/escuro">
-          <i aria-hidden="true" class="fa-solid fa-sun"></i>
+        <button id="theme-toggle" class="theme-switch" type="button" role="switch" aria-checked="true" aria-label="Alternar entre tema claro e escuro">
+          <i aria-hidden="true" class="fa-solid fa-sun theme-switch-icon"></i>
+          <span class="theme-switch-thumb" aria-hidden="true"></span>
+          <i aria-hidden="true" class="fa-solid fa-moon theme-switch-icon"></i>
         </button>
 
         <button id="menu-toggle" class="icon-btn menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
@@ -494,6 +508,20 @@
         <button type="submit" class="btn btn-primary btn-full" id="botao-enviar-feedback">Enviar Feedback</button>
         <p class="form-feedback" id="feedback-form-feedback" role="status" aria-live="polite"></p>
       </form>
+    </div>
+  </section>
+
+  <!-- ===================== AGRADECIMENTO ===================== -->
+  <section class="section agradecimento" id="agradecimento">
+    <div class="container agradecimento-content reveal">
+      <p class="section-eyebrow">// até já</p>
+      <h2 class="section-title">Obrigado por chegar até aqui</h2>
+      <p>
+        Se este portfólio despertou alguma dúvida, sugestão ou interesse em conversar,
+        ficarei feliz em receber sua mensagem pelo formulário de
+        <a href="#contato" class="link-inline">contato</a> ou de
+        <a href="#feedback" class="link-inline">feedback</a> acima.
+      </p>
     </div>
   </section>
 
