@@ -329,6 +329,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!formularioValido) {
       feedback.textContent = "Por favor, corrija os campos destacados.";
       feedback.className = "form-feedback";
+      // Move o foco para o primeiro campo com erro, na mesma ordem em
+      // que aparecem no formulário — essencial para quem usa teclado
+      // ou leitor de tela encontrar rapidamente o que precisa corrigir.
+      const primeiroCampoInvalido = formulario.querySelector(".input-invalido");
+      if (primeiroCampoInvalido) {
+        primeiroCampoInvalido.focus();
+      }
       return;
     }
 
@@ -433,6 +440,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!formularioValido) {
       feedbackDoFeedback.textContent = "Por favor, corrija os campos destacados.";
       feedbackDoFeedback.className = "form-feedback";
+      // Mesmo comportamento do formulário de Contato: foco vai para o
+      // primeiro campo com erro (funciona também para o <select> do
+      // Tipo de feedback, já que ele recebe a mesma classe de erro).
+      const primeiroCampoInvalidoFeedback = formularioFeedback.querySelector(".input-invalido");
+      if (primeiroCampoInvalidoFeedback) {
+        primeiroCampoInvalidoFeedback.focus();
+      }
       return;
     }
 
@@ -501,7 +515,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================================
-     9) ANO ATUAL NO RODAPÉ
+     9) COPIAR E-MAIL (seção Contato)
+     Botão discreto ao lado do e-mail: copia o endereço para a área
+     de transferência usando a Clipboard API nativa do navegador —
+     sem nenhuma biblioteca externa. O link mailto: continua
+     funcionando normalmente ao lado, sem nenhuma alteração.
+     ========================================================== */
+  const botaoCopiarEmail = document.getElementById("copiar-email");
+  const feedbackCopiarEmail = document.getElementById("copiar-email-feedback");
+
+  if (botaoCopiarEmail) {
+    botaoCopiarEmail.addEventListener("click", () => {
+      const email = botaoCopiarEmail.getAttribute("data-email");
+
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          feedbackCopiarEmail.textContent = "E-mail copiado!";
+        })
+        .catch(() => {
+          // Alguns navegadores/contextos (ex.: sem HTTPS) podem bloquear
+          // a Clipboard API — avisa a pessoa para copiar manualmente.
+          feedbackCopiarEmail.textContent = "Não foi possível copiar. Copie manualmente.";
+        })
+        .finally(() => {
+          // A confirmação some sozinha depois de alguns segundos.
+          setTimeout(() => {
+            feedbackCopiarEmail.textContent = "";
+          }, 2500);
+        });
+    });
+  }
+
+
+  /* ==========================================================
+     10) ANO ATUAL NO RODAPÉ
      Evita ter que atualizar o ano manualmente todo ano.
      ========================================================== */
   document.getElementById("ano-atual").textContent = new Date().getFullYear();
