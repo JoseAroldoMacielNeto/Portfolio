@@ -979,6 +979,10 @@ textarea:focus-visible {
   height: 18px;
   border-radius: 50%;
   background-color: var(--color-primary);
+  /* Opacidade reduzida: deixa o ícone (sol ou lua) por baixo da
+     bolinha visível através dela, sem alterar cor, tamanho, posição
+     ou funcionamento do componente — só essa transparência. */
+  opacity: 0.6;
   box-shadow: var(--shadow-sm);
   transition: left var(--transition);
   z-index: 2;
@@ -990,6 +994,70 @@ textarea:focus-visible {
 
 [data-theme="dark"] .theme-switch-thumb {
   left: 31px; /* lado da lua */
+}
+
+/* ============================================================
+   CONTROLE DE IDIOMA (PT / EN)
+   Mesma linguagem visual da chave de tema: pílula compacta com
+   uma bolinha que desliza — só troca os ícones de sol/lua pelos
+   textos "PT"/"EN". Fica ao lado da chave de tema no header,
+   controlado pelo atributo data-lang do <body> (mesmo padrão do
+   data-theme já usado na chave de tema).
+   ============================================================ */
+.lang-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 52px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.lang-switch-option {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  position: relative;
+  z-index: 1;
+  transition: color var(--transition);
+}
+
+.lang-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  opacity: 0.6;
+  box-shadow: var(--shadow-sm);
+  transition: left var(--transition);
+  z-index: 2;
+}
+
+/* PT ativo (padrão): bolinha à esquerda, texto "PT" em destaque */
+[data-lang="pt"] .lang-switch-thumb {
+  left: 3px;
+}
+
+[data-lang="pt"] .lang-switch-option:first-child {
+  color: var(--color-text);
+}
+
+/* EN ativo: bolinha à direita, texto "EN" em destaque */
+[data-lang="en"] .lang-switch-thumb {
+  left: 31px;
+}
+
+[data-lang="en"] .lang-switch-option:last-child {
+  color: var(--color-text);
 }
 
 /* ============================================================
