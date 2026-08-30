@@ -340,9 +340,16 @@ h1, h2, h3 {
 }
 
 .hero-title {
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 700;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 500;
   margin-bottom: 12px;
+}
+
+/* O nome próprio fica com mais peso que a saudação ao redor, criando
+   uma hierarquia sutil dentro da mesma linha, sem precisar de um
+   tamanho de fonte gigante como antes. */
+.hero-name {
+  font-weight: 700;
 }
 
 .hero-subtitle {
@@ -948,29 +955,46 @@ textarea:focus-visible {
    ============================================================ */
 .theme-switch {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 52px;
   height: 26px;
-  padding: 0 6px;
   border-radius: 999px;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   flex-shrink: 0; /* garante que a chave não seja espremida ao lado do logo/hambúrguer no celular */
 }
 
+/* Ícones e bolinha agora usam exatamente as mesmas coordenadas (left/top
+   3px ou 31px, caixa de 18x18px) — assim o ícone fica sempre perfeitamente
+   centralizado dentro da bolinha, em vez de depender do alinhamento do
+   flexbox (que podia ficar levemente descentralizado). */
 .theme-switch-icon {
+  position: absolute;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.65rem;
   color: var(--color-text-muted);
-  position: relative;
   z-index: 1;
 }
 
-/* A bolinha que desliza: usa a cor primária do site, e sua posição
-   (esquerda/direita) é controlada só por CSS, a partir do atributo
-   data-theme já existente no <body> — sem precisar de mais JavaScript
-   além de trocar esse atributo (que já acontecia antes). */
+.theme-switch-icon:first-of-type {
+  left: 3px; /* sol */
+}
+
+.theme-switch-icon:last-of-type {
+  left: 31px; /* lua */
+}
+
+/* A bolinha que desliza: efeito "glass" discreto (fundo semitransparente
+   + leve desfoque + brilho sutil na borda), em vez de uma simples cor
+   com opacidade — deixa o ícone por baixo visível e centralizado, com
+   uma aparência mais elegante e translúcida. Cor, tamanho e posição
+   (esquerda/direita, controlada pelo data-theme) continuam os mesmos. */
 .theme-switch-thumb {
   position: absolute;
   top: 3px;
@@ -978,14 +1002,27 @@ textarea:focus-visible {
   width: 18px;
   height: 18px;
   border-radius: 50%;
+  /* Fallback para navegadores sem suporte a backdrop-filter/color-mix:
+     opacidade simples, que já deixa o ícone visível por baixo. */
   background-color: var(--color-primary);
-  /* Opacidade reduzida: deixa o ícone (sol ou lua) por baixo da
-     bolinha visível através dela, sem alterar cor, tamanho, posição
-     ou funcionamento do componente — só essa transparência. */
   opacity: 0.6;
   box-shadow: var(--shadow-sm);
   transition: left var(--transition);
   z-index: 2;
+}
+
+/* Efeito "glass" completo, aplicado só onde o navegador suporta
+   backdrop-filter — fundo semitransparente + leve desfoque + brilho
+   sutil na borda, mais elegante que a opacidade simples do fallback. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .theme-switch-thumb {
+    background-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+    opacity: 1;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: var(--shadow-sm), inset 0 0 4px rgba(255, 255, 255, 0.25);
+  }
 }
 
 [data-theme="light"] .theme-switch-thumb {
@@ -998,66 +1035,15 @@ textarea:focus-visible {
 
 /* ============================================================
    CONTROLE DE IDIOMA (PT / EN)
-   Mesma linguagem visual da chave de tema: pílula compacta com
-   uma bolinha que desliza — só troca os ícones de sol/lua pelos
-   textos "PT"/"EN". Fica ao lado da chave de tema no header,
-   controlado pelo atributo data-lang do <body> (mesmo padrão do
-   data-theme já usado na chave de tema).
+   Botão circular único (reaproveita a base .icon-btn), mostrando
+   o idioma ativo — "PT" ou "EN" — centralizado. Fica ao lado da
+   chave de tema no header.
    ============================================================ */
-.lang-switch {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 52px;
-  height: 26px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  flex-shrink: 0;
-}
-
-.lang-switch-option {
+.lang-toggle-btn span {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  position: relative;
-  z-index: 1;
-  transition: color var(--transition);
-}
-
-.lang-switch-thumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-  opacity: 0.6;
-  box-shadow: var(--shadow-sm);
-  transition: left var(--transition);
-  z-index: 2;
-}
-
-/* PT ativo (padrão): bolinha à esquerda, texto "PT" em destaque */
-[data-lang="pt"] .lang-switch-thumb {
-  left: 3px;
-}
-
-[data-lang="pt"] .lang-switch-option:first-child {
-  color: var(--color-text);
-}
-
-/* EN ativo: bolinha à direita, texto "EN" em destaque */
-[data-lang="en"] .lang-switch-thumb {
-  left: 31px;
-}
-
-[data-lang="en"] .lang-switch-option:last-child {
-  color: var(--color-text);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
 }
 
 /* ============================================================
