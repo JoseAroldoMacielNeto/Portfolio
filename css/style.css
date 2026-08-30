@@ -990,7 +990,10 @@ textarea:focus-visible {
   align-items: center;
   justify-content: center;
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  /* Mesma cor "forte" que o botão PT/EN já usa (var(--color-text)) —
+     branco no tema escuro, quase preto no tema claro — em vez da cor
+     mais apagada de antes, para dar mais presença/vivacidade ao ícone. */
+  color: var(--color-text);
   z-index: 3;
   /* Pequeno reforço de presença visual: engrossa levemente o traço do
      ícone (sem mudar tamanho, cor ou estilo). Como "fa-solid" já é o
