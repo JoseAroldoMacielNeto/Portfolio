@@ -174,6 +174,14 @@
     padding: 14px 16px;
   }
 
+  /* Com a chave de tema + o novo controle de idioma + o botão de menu,
+     o espaço fica mais disputado em telas bem pequenas — reduzir o gap
+     aqui é suficiente para os três caberem numa linha só, sem alterar
+     o tamanho de nenhum dos controles. */
+  .nav-actions {
+    gap: 8px;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
