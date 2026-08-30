@@ -37,6 +37,7 @@ const traducoes = {
 
     // Hero
     hero_eyebrow: "&gt; Olá, seja bem-vindo(a)",
+    hero_greeting: "Prazer, eu me chamo",
     hero_subtitle: "Estudante de Análise e Desenvolvimento de Sistemas | Em formação na área de Tecnologia",
     hero_description: "Em transição de carreira da área administrativa e de atendimento para a Tecnologia. Estou construindo minha base em programação na Unifor e, por fora, em um curso de Algoritmos e Lógica de Programação — em busca da minha primeira oportunidade de estágio em TI.",
     hero_btn_projetos: "Ver Projetos",
@@ -201,6 +202,7 @@ const traducoes = {
 
     // Hero
     hero_eyebrow: "&gt; Hi, welcome",
+    hero_greeting: "I'm",
     hero_subtitle: "Computer Science Student | Building a Career in Technology",
     hero_description: "Transitioning from an administrative and customer service background into Technology. I'm building my programming foundation at Unifor and, alongside it, taking a Programming Logic and Algorithms course — looking for my first IT internship opportunity.",
     hero_btn_projetos: "View Projects",
@@ -413,12 +415,17 @@ function aplicarIdioma(idioma) {
   const twitterDescricao = document.getElementById("twitter-description");
   if (twitterDescricao) twitterDescricao.setAttribute("content", traducoes[idioma].meta_description);
 
-  // Estado visual/acessível do próprio controle PT/EN
+  // Estado visual/acessível do próprio controle PT/EN: agora é um botão
+  // circular único que mostra o idioma ativo no centro (em vez de uma
+  // chave com bolinha deslizante) — atualiza o texto e o aria-pressed.
   const botaoIdioma = document.getElementById("lang-toggle");
+  const rotuloIdioma = document.getElementById("lang-toggle-label");
   if (botaoIdioma) {
-    botaoIdioma.setAttribute("aria-checked", idioma === "en" ? "true" : "false");
+    botaoIdioma.setAttribute("aria-pressed", idioma === "en" ? "true" : "false");
   }
-  document.body.setAttribute("data-lang", idioma);
+  if (rotuloIdioma) {
+    rotuloIdioma.textContent = idioma === "en" ? "EN" : "PT";
+  }
 }
 
 /* Liga o botão de idioma assim que o HTML estiver pronto. Fica em um
