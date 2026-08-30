@@ -72,6 +72,16 @@
     transition: right var(--transition);
   }
 
+  /* Garante que a chave de tema, o botão PT/EN e o botão de menu
+     fiquem sempre visíveis, numa camada acima do painel do menu —
+     sem essa regra, o painel (que usa position: fixed) podia acabar
+     cobrindo parte dessa área, dependendo da largura da tela. Não
+     move nem redimensiona nada, só resolve a ordem de sobreposição. */
+  .nav-actions {
+    position: relative;
+    z-index: 1600;
+  }
+
   /* Classe adicionada via JavaScript quando o usuário clica no botão hambúrguer */
   .nav-links.aberto {
     right: 0;
