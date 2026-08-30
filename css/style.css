@@ -340,15 +340,26 @@ h1, h2, h3 {
 }
 
 .hero-title {
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   margin-bottom: 12px;
 }
 
-/* O nome próprio fica com mais peso que a saudação ao redor, criando
-   uma hierarquia sutil dentro da mesma linha, sem precisar de um
-   tamanho de fonte gigante como antes. */
+.hero-greeting {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* Nome próprio: elegante e proporcional ao Hero, claramente menor que o
+   título gigante que existia antes. Fica em sua própria linha (não
+   divide espaço horizontal com "Prazer, eu me chamo"), o que já ajuda
+   a caber inteiro numa linha só em telas médias/grandes. No mobile,
+   sem white-space:nowrap, a quebra acontece naturalmente se precisar
+   — sem overflow forçado. */
 .hero-name {
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
   font-weight: 700;
 }
 
@@ -965,10 +976,11 @@ textarea:focus-visible {
   flex-shrink: 0; /* garante que a chave não seja espremida ao lado do logo/hambúrguer no celular */
 }
 
-/* Ícones e bolinha agora usam exatamente as mesmas coordenadas (left/top
+/* Ícones e bolinha usam exatamente as mesmas coordenadas (left/top
    3px ou 31px, caixa de 18x18px) — assim o ícone fica sempre perfeitamente
-   centralizado dentro da bolinha, em vez de depender do alinhamento do
-   flexbox (que podia ficar levemente descentralizado). */
+   centralizado dentro da bolinha. O ícone fica numa camada ACIMA da
+   bolinha (z-index maior) — assim ele nunca é borrado/escurecido pelo
+   efeito de vidro da bolinha, que fica só como um destaque atrás dele. */
 .theme-switch-icon {
   position: absolute;
   top: 3px;
@@ -979,7 +991,7 @@ textarea:focus-visible {
   justify-content: center;
   font-size: 0.65rem;
   color: var(--color-text-muted);
-  z-index: 1;
+  z-index: 3;
 }
 
 .theme-switch-icon:first-of-type {
@@ -990,11 +1002,10 @@ textarea:focus-visible {
   left: 31px; /* lua */
 }
 
-/* A bolinha que desliza: efeito "glass" discreto (fundo semitransparente
-   + leve desfoque + brilho sutil na borda), em vez de uma simples cor
-   com opacidade — deixa o ícone por baixo visível e centralizado, com
-   uma aparência mais elegante e translúcida. Cor, tamanho e posição
-   (esquerda/direita, controlada pelo data-theme) continuam os mesmos. */
+/* A bolinha: fica numa camada ABAIXO do ícone (z-index menor), como um
+   destaque translúcido/glass atrás do símbolo ativo — nunca por cima
+   dele. Assim o efeito de vidro (blur) nunca borra o ícone: o blur só
+   afeta o que está atrás da PRÓPRIA bolinha (o fundo liso da chave). */
 .theme-switch-thumb {
   position: absolute;
   top: 3px;
@@ -1008,12 +1019,15 @@ textarea:focus-visible {
   opacity: 0.6;
   box-shadow: var(--shadow-sm);
   transition: left var(--transition);
-  z-index: 2;
+  z-index: 1;
 }
 
 /* Efeito "glass" completo, aplicado só onde o navegador suporta
    backdrop-filter — fundo semitransparente + leve desfoque + brilho
-   sutil na borda, mais elegante que a opacidade simples do fallback. */
+   sutil na borda, mais elegante que a opacidade simples do fallback.
+   Como a bolinha está numa camada abaixo do ícone, esse desfoque nunca
+   chega a afetar o símbolo (que está sempre na camada de cima), em
+   nenhum navegador — inclusive no celular. */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .theme-switch-thumb {
     background-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
