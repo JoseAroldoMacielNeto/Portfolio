@@ -992,6 +992,13 @@ textarea:focus-visible {
   font-size: 0.65rem;
   color: var(--color-text-muted);
   z-index: 3;
+  /* Pequeno reforço de presença visual: engrossa levemente o traço do
+     ícone (sem mudar tamanho, cor ou estilo). Como "fa-solid" já é o
+     estilo mais grosso do Font Awesome, um font-weight maior sozinho
+     não muda nada — text-stroke é a forma correta de dar esse "tchan"
+     extra num ícone de fonte. */
+  -webkit-text-stroke: 0.4px currentColor;
+  text-stroke: 0.4px currentColor;
 }
 
 .theme-switch-icon:first-of-type {
