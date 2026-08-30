@@ -312,22 +312,22 @@ document.addEventListener("DOMContentLoaded", () => {
     ["nome", "email", "mensagem"].forEach(limparErro);
 
     if (nome.length < 3) {
-      mostrarErro("nome", "Digite seu nome completo.");
+      mostrarErro("nome", window.t("erro_nome"));
       formularioValido = false;
     }
 
     if (!regexEmail.test(email)) {
-      mostrarErro("email", "Digite um e-mail válido.");
+      mostrarErro("email", window.t("erro_email"));
       formularioValido = false;
     }
 
     if (mensagem.length < 10) {
-      mostrarErro("mensagem", "Escreva uma mensagem com pelo menos 10 caracteres.");
+      mostrarErro("mensagem", window.t("erro_mensagem"));
       formularioValido = false;
     }
 
     if (!formularioValido) {
-      feedback.textContent = "Por favor, corrija os campos destacados.";
+      feedback.textContent = window.t("erro_generico");
       feedback.className = "form-feedback";
       // Move o foco para o primeiro campo com erro, na mesma ordem em
       // que aparecem no formulário — essencial para quem usa teclado
@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // aria-busy comunica esse estado de "carregando" para leitores de tela.
     botaoEnviar.disabled = true;
     botaoEnviar.setAttribute("aria-busy", "true");
-    botaoEnviar.textContent = "Enviando...";
+    botaoEnviar.textContent = window.t("btn_enviando");
     feedback.textContent = "";
     feedback.className = "form-feedback";
 
@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((resposta) => {
         if (resposta.ok) {
-          feedback.textContent = `Obrigado, ${nome}! Sua mensagem foi enviada com sucesso.`;
+          feedback.textContent = window.t("sucesso_contato").replace("{nome}", nome);
           feedback.className = "form-feedback sucesso";
           // Limpa só a Mensagem — Nome e E-mail permanecem preenchidos,
           // para o caso da pessoa querer enviar outra mensagem depois.
@@ -371,20 +371,20 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           // O Formspree respondeu, mas indicando que algo deu errado
           // (ex.: limite de envios, formulário mal configurado etc.)
-          feedback.textContent = "Não foi possível enviar sua mensagem agora. Tente novamente em instantes.";
+          feedback.textContent = window.t("erro_envio_contato");
           feedback.className = "form-feedback erro";
         }
       })
       .catch(() => {
         // Erro de rede: sem internet, servidor fora do ar, etc.
-        feedback.textContent = "Não foi possível enviar sua mensagem agora. Verifique sua conexão e tente novamente.";
+        feedback.textContent = window.t("erro_conexao_contato");
         feedback.className = "form-feedback erro";
       })
       .finally(() => {
         // Reabilita o botão de envio, com sucesso ou com erro
         botaoEnviar.disabled = false;
         botaoEnviar.removeAttribute("aria-busy");
-        botaoEnviar.textContent = "Enviar Mensagem";
+        botaoEnviar.textContent = window.t("btn_enviar_mensagem");
       });
   });
 
@@ -418,27 +418,27 @@ document.addEventListener("DOMContentLoaded", () => {
     ["feedback-nome", "feedback-email", "feedback-tipo", "feedback-mensagem"].forEach(limparErro);
 
     if (nome.length < 3) {
-      mostrarErro("feedback-nome", "Digite seu nome completo.");
+      mostrarErro("feedback-nome", window.t("erro_nome"));
       formularioValido = false;
     }
 
     if (!regexEmail.test(email)) {
-      mostrarErro("feedback-email", "Digite um e-mail válido.");
+      mostrarErro("feedback-email", window.t("erro_email"));
       formularioValido = false;
     }
 
     if (!tipo) {
-      mostrarErro("feedback-tipo", "Selecione um tipo de feedback.");
+      mostrarErro("feedback-tipo", window.t("erro_tipo"));
       formularioValido = false;
     }
 
     if (mensagem.length < 10) {
-      mostrarErro("feedback-mensagem", "Escreva uma mensagem com pelo menos 10 caracteres.");
+      mostrarErro("feedback-mensagem", window.t("erro_mensagem"));
       formularioValido = false;
     }
 
     if (!formularioValido) {
-      feedbackDoFeedback.textContent = "Por favor, corrija os campos destacados.";
+      feedbackDoFeedback.textContent = window.t("erro_generico");
       feedbackDoFeedback.className = "form-feedback";
       // Mesmo comportamento do formulário de Contato: foco vai para o
       // primeiro campo com erro (funciona também para o <select> do
@@ -454,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     botaoEnviarFeedback.disabled = true;
     botaoEnviarFeedback.setAttribute("aria-busy", "true");
-    botaoEnviarFeedback.textContent = "Enviando...";
+    botaoEnviarFeedback.textContent = window.t("btn_enviando");
     feedbackDoFeedback.textContent = "";
     feedbackDoFeedback.className = "form-feedback";
 
@@ -465,25 +465,25 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((resposta) => {
         if (resposta.ok) {
-          feedbackDoFeedback.textContent = `Obrigado, ${nome}. Seu feedback foi enviado com sucesso.`;
+          feedbackDoFeedback.textContent = window.t("sucesso_feedback").replace("{nome}", nome);
           feedbackDoFeedback.className = "form-feedback sucesso";
           // Nome e E-mail permanecem preenchidos. Só o Tipo volta para a
           // opção inicial ("Selecione uma opção") e a Mensagem é limpa.
           document.getElementById("feedback-tipo").value = "";
           document.getElementById("feedback-mensagem").value = "";
         } else {
-          feedbackDoFeedback.textContent = "Não foi possível enviar seu feedback agora. Tente novamente em instantes.";
+          feedbackDoFeedback.textContent = window.t("erro_envio_feedback");
           feedbackDoFeedback.className = "form-feedback erro";
         }
       })
       .catch(() => {
-        feedbackDoFeedback.textContent = "Não foi possível enviar seu feedback agora. Verifique sua conexão e tente novamente.";
+        feedbackDoFeedback.textContent = window.t("erro_conexao_feedback");
         feedbackDoFeedback.className = "form-feedback erro";
       })
       .finally(() => {
         botaoEnviarFeedback.disabled = false;
         botaoEnviarFeedback.removeAttribute("aria-busy");
-        botaoEnviarFeedback.textContent = "Enviar Feedback";
+        botaoEnviarFeedback.textContent = window.t("btn_enviar_feedback");
       });
   });
 
@@ -530,12 +530,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       navigator.clipboard.writeText(email)
         .then(() => {
-          feedbackCopiarEmail.textContent = "E-mail copiado!";
+          feedbackCopiarEmail.textContent = window.t("copy_email_success");
         })
         .catch(() => {
           // Alguns navegadores/contextos (ex.: sem HTTPS) podem bloquear
           // a Clipboard API — avisa a pessoa para copiar manualmente.
-          feedbackCopiarEmail.textContent = "Não foi possível copiar. Copie manualmente.";
+          feedbackCopiarEmail.textContent = window.t("copy_email_error");
         })
         .finally(() => {
           // A confirmação some sozinha depois de alguns segundos.
