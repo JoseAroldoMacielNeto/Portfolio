@@ -88,29 +88,7 @@
   }
 
   .menu-btn {
-    display: flex; /* aparece apenas em telas pequenas */
-    /* Empilha o ícone e o texto "Menu" verticalmente. O botão cresce
-       um pouco (de 44x44 para 50x50) e o border-radius acompanha,
-       só o suficiente para dar mais presença visual ao conjunto,
-       equilibrando com o logo e a chave de tema ao lado — o ícone
-       em si, sua cor e a posição no cabeçalho continuam os mesmos. */
-    flex-direction: column;
-    justify-content: center;
-    gap: 2px;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-  }
-
-  .menu-btn i {
-    font-size: 1.05rem;
-  }
-
-  .menu-btn-label {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    line-height: 1;
-    color: var(--color-text-muted);
+    display: flex; /* aparece apenas em telas pequenas — herda o formato circular padrão de .icon-btn (40x40, mesmo padrão do PT/EN) */
   }
 
   /* Botão de fechar (X): reaparece aqui, posicionado no canto
