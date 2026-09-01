@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ==========================================================
-     2) MENU MOBILE (hambúrguer + botão de fechar)
+     2) MENU MOBILE (um único botão: ☰ Menu ↔ ✕)
 
      Melhorias de acessibilidade adicionadas aqui:
      - aria-hidden no painel do menu quando ele está fechado E a
@@ -100,11 +100,16 @@ document.addEventListener("DOMContentLoaded", () => {
        links que estão visualmente fora da tela);
      - tecla Esc fecha o menu;
      - o foco é movido para dentro do menu ao abrir, e de volta
-       para o botão hambúrguer ao fechar (comportamento esperado
-       por quem navega só pelo teclado).
+       para o botão ao fechar (comportamento esperado por quem
+       navega só pelo teclado).
+
+     O mesmo botão cuida de abrir E fechar (clique alterna entre os
+     dois estados) — ele nunca muda de tamanho/posição, só o ícone
+     (☰/✕) e o rótulo "Menu" (visível só quando fechado) mudam,
+     via a classe "aberto" adicionada/removida nele mesmo. Assim a
+     fileira de controles do cabeçalho nunca se move ao abrir/fechar.
      ========================================================== */
   const botaoMenu = document.getElementById("menu-toggle");
-  const botaoFecharMenu = document.getElementById("menu-close");
   const linksNav = document.getElementById("nav-links");
 
   // Detecta se estamos no layout mobile (mesmo breakpoint usado no CSS,
@@ -130,23 +135,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function abrirMenuMobile() {
     linksNav.classList.add("aberto");
+    botaoMenu.classList.add("aberto"); // troca ☰+"Menu" por ✕ via CSS, sem mudar o tamanho do botão
     botaoMenu.setAttribute("aria-expanded", "true");
     botaoMenu.querySelector("i").className = "fa-solid fa-xmark";
     sincronizarAcessibilidadeMenu();
-    botaoFecharMenu.focus(); // leva o foco para dentro do menu recém-aberto
+    // Leva o foco para o primeiro link do painel recém-aberto (não há
+    // mais um botão de fechar dedicado dentro do painel — o próprio
+    // botão do cabeçalho, sempre visível, cuida de fechar também).
+    const primeiroLink = linksNav.querySelector(".nav-link");
+    if (primeiroLink) primeiroLink.focus();
   }
 
-  // Função reutilizada para fechar o menu, seja pelo botão X, pela
+  // Função reutilizada para fechar o menu, seja pelo próprio botão, pela
   // tecla Esc, por um clique em um link, ou por qualquer outra ação.
   function fecharMenuMobile() {
     const estavaAberto = linksNav.classList.contains("aberto");
     linksNav.classList.remove("aberto");
+    botaoMenu.classList.remove("aberto");
     botaoMenu.setAttribute("aria-expanded", "false");
     botaoMenu.querySelector("i").className = "fa-solid fa-bars";
     sincronizarAcessibilidadeMenu();
 
-    // Só devolve o foco ao botão hambúrguer se o menu realmente
-    // estava aberto (evita "roubar" o foco em outras situações).
+    // Só devolve o foco ao botão se o menu realmente estava aberto
+    // (evita "roubar" o foco em outras situações).
     if (estavaAberto) {
       botaoMenu.focus();
     }
@@ -160,9 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
       fecharMenuMobile();
     }
   });
-
-  // Botão de fechar (X) dentro do próprio painel do menu mobile
-  botaoFecharMenu.addEventListener("click", fecharMenuMobile);
 
   // Tecla Esc fecha o menu mobile quando ele estiver aberto
   document.addEventListener("keydown", (evento) => {
