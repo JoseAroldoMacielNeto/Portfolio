@@ -90,7 +90,11 @@
   .menu-btn {
     display: flex; /* aparece apenas em telas pequenas */
     /* Empilha o ícone e o texto "Menu" verticalmente, num formato
-       arredondado-quadrado (não circular) — só no estado FECHADO. */
+       arredondado-quadrado. O tamanho (50x50) é FIXO nos dois estados
+       (fechado e aberto) — só o ícone e o rótulo mudam por dentro,
+       então o botão nunca muda de tamanho/posição, e a fileira de
+       controles ao lado (Tema, PT/EN) nunca se desloca ao abrir ou
+       fechar o menu. */
     flex-direction: column;
     justify-content: center;
     gap: 2px;
@@ -110,25 +114,12 @@
     color: var(--color-text-muted);
   }
 
-  /* Quando o menu está ABERTO, escondemos este botão do cabeçalho.
-     Sem essa regra, ele continuava visível (convertido em X pelo
-     JavaScript) ao mesmo tempo que o botão de fechar dedicado dentro
-     do painel — resultando em dois X sobrepostos na tela. Como o
-     painel já tem seu próprio botão de fechar, só ele precisa
-     aparecer enquanto o menu estiver aberto. */
-  .nav-links.aberto ~ .nav-actions .menu-btn {
+  /* Estado aberto (classe adicionada pelo JS no próprio botão, ao
+     mesmo tempo em que o painel do menu recebe a classe "aberto"):
+     o rótulo "Menu" desaparece — restando só o ícone (✕, trocado via
+     JS) — sem que o botão em si mude de largura/altura. */
+  .menu-btn.aberto .menu-btn-label {
     display: none;
-  }
-
-  /* Botão de fechar (X): some no lugar do hambúrguer quando o menu
-     está aberto, formando a fileira [Tema] [PT/EN] [X] dentro de
-     .nav-actions. A borda garante que fique claramente visível. */
-  .menu-close-btn {
-    border: 1px solid var(--color-border);
-  }
-
-  .nav-links.aberto ~ .nav-actions .menu-close-btn {
-    display: flex;
   }
 
   /* Hero passa de duas colunas para uma coluna, imagem primeiro */
