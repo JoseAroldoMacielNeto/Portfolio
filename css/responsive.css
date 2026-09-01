@@ -88,7 +88,36 @@
   }
 
   .menu-btn {
-    display: flex; /* aparece apenas em telas pequenas — herda o formato circular padrão de .icon-btn (40x40, mesmo padrão do PT/EN) */
+    display: flex; /* aparece apenas em telas pequenas */
+    /* Empilha o ícone e o texto "Menu" verticalmente, num formato
+       arredondado-quadrado (não circular) — só no estado FECHADO. */
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
+
+  .menu-btn i {
+    font-size: 1.05rem;
+  }
+
+  .menu-btn-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    line-height: 1;
+    color: var(--color-text-muted);
+  }
+
+  /* Quando o menu está ABERTO, escondemos este botão do cabeçalho.
+     Sem essa regra, ele continuava visível (convertido em X pelo
+     JavaScript) ao mesmo tempo que o botão de fechar dedicado dentro
+     do painel — resultando em dois X sobrepostos na tela. Como o
+     painel já tem seu próprio botão de fechar, só ele precisa
+     aparecer enquanto o menu estiver aberto. */
+  .nav-links.aberto ~ .nav-actions .menu-btn {
+    display: none;
   }
 
   /* Botão de fechar (X): reaparece aqui, posicionado no canto
