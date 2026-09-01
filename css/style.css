@@ -317,7 +317,7 @@ h1, h2, h3 {
 
 /* Botão de fechar (X) do menu mobile: fica escondido no desktop,
    pois nesse layout o menu não é um painel deslizante */
-.nav-close-item {
+.menu-close-btn {
   display: none;
 }
 
