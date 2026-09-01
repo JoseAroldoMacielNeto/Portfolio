@@ -315,12 +315,6 @@ h1, h2, h3 {
   display: none; /* só aparece em telas pequenas — ver responsive.css */
 }
 
-/* Botão de fechar (X) do menu mobile: fica escondido no desktop,
-   pois nesse layout o menu não é um painel deslizante */
-.menu-close-btn {
-  display: none;
-}
-
 /* ============================================================
    HERO
    ============================================================ */
