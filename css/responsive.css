@@ -120,19 +120,15 @@
     display: none;
   }
 
-  /* Botão de fechar (X): reaparece aqui, posicionado no canto
-     superior direito do painel deslizante do menu mobile.
-     A borda garante que ele fique claramente visível sobre o
-     fundo do painel, mesmo sem passar o mouse/dedo por cima. */
-  .nav-close-item {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+  /* Botão de fechar (X): some no lugar do hambúrguer quando o menu
+     está aberto, formando a fileira [Tema] [PT/EN] [X] dentro de
+     .nav-actions. A borda garante que fique claramente visível. */
+  .menu-close-btn {
+    border: 1px solid var(--color-border);
   }
 
-  .nav-close-item .icon-btn {
-    border: 1px solid var(--color-border);
+  .nav-links.aberto ~ .nav-actions .menu-close-btn {
+    display: flex;
   }
 
   /* Hero passa de duas colunas para uma coluna, imagem primeiro */
