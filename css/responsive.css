@@ -82,6 +82,17 @@
     z-index: 1600;
   }
 
+  /* Deixa permanentemente visível, no mobile, o mesmo preenchimento que
+     já aparece ao tocar nos 3 controles (Menu, PT/EN, tema) — reaproveita
+     exatamente a mesma cor já usada em .icon-btn:hover (var(--color-border)),
+     sem criar nenhum estilo novo. Não altera tamanho, posição, espaçamento
+     ou qualquer outra propriedade — só o preenchimento de fundo. */
+  .menu-btn,
+  .lang-toggle-btn,
+  .theme-switch {
+    background-color: var(--color-border);
+  }
+
   /* Classe adicionada via JavaScript quando o usuário clica no botão hambúrguer */
   .nav-links.aberto {
     right: 0;
