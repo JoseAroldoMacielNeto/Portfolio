@@ -85,13 +85,6 @@
       <a href="#hero" class="logo">José<span>.dev</span></a>
 
       <ul class="nav-links" id="nav-links">
-        <!-- Botão de fechar (X): fica invisível no menu de computador (definido no style.css)
-             e só aparece dentro do painel deslizante no celular (definido no responsive.css) -->
-        <li class="nav-close-item">
-          <button id="menu-close" class="icon-btn" data-i18n-aria-label="menu_close_label" aria-label="Fechar menu de navegação">
-            <i aria-hidden="true" class="fa-solid fa-xmark"></i>
-          </button>
-        </li>
         <li><a href="#hero" class="nav-link" data-i18n="nav_inicio">Início</a></li>
         <li><a href="#sobre" class="nav-link" data-i18n="nav_sobre">Sobre</a></li>
         <li><a href="#experiencia" class="nav-link" data-i18n="nav_experiencia">Experiência</a></li>
@@ -116,6 +109,14 @@
              idioma ativo (PT ou EN) centralizado, e alterna ao clicar. -->
         <button id="lang-toggle" class="icon-btn lang-toggle-btn" type="button" aria-pressed="false" data-i18n-aria-label="lang_switch_label" aria-label="Alternar idioma do site">
           <span id="lang-toggle-label" aria-hidden="true">PT</span>
+        </button>
+
+        <!-- Botão de fechar (X): fica invisível no computador e também no
+             celular com o menu fechado — só aparece no lugar do botão de
+             menu quando o painel está aberto (ver responsive.css), formando
+             uma única fileira com Tema e PT/EN: [Tema] [PT/EN] [X] -->
+        <button id="menu-close" class="icon-btn menu-close-btn" data-i18n-aria-label="menu_close_label" aria-label="Fechar menu de navegação">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
         </button>
 
         <button id="menu-toggle" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
