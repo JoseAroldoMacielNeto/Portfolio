@@ -111,14 +111,10 @@
           <span id="lang-toggle-label" aria-hidden="true">PT</span>
         </button>
 
-        <!-- Botão de fechar (X): fica invisível no computador e também no
-             celular com o menu fechado — só aparece no lugar do botão de
-             menu quando o painel está aberto (ver responsive.css), formando
-             uma única fileira com Tema e PT/EN: [Tema] [PT/EN] [X] -->
-        <button id="menu-close" class="icon-btn menu-close-btn" data-i18n-aria-label="menu_close_label" aria-label="Fechar menu de navegação">
-          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
-        </button>
-
+        <!-- Um único botão cuida de abrir E fechar o menu — ao clicar,
+             o ícone e o rótulo mudam de estado (☰ Menu → ✕), mas o
+             botão em si nunca muda de tamanho ou posição, então a
+             fileira de controles (Tema/PT-EN/Menu) nunca se move. -->
         <button id="menu-toggle" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
           <i aria-hidden="true" class="fa-solid fa-bars"></i>
           <span class="menu-btn-label" aria-hidden="true" data-i18n="menu_label">Menu</span>
