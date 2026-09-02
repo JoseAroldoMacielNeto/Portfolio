@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title id="page-title">José Arôldo Maciel Neto | Portfolio</title>
+<meta content="Portfolio of José Arôldo Maciel Neto, Systems Analysis and Development student at Unifor, transitioning his career into Technology." id="meta-description" name="description"/>
+<!-- SEO técnico: autoriza mecanismos de busca a indexar e seguir os
+       links da página, e define a URL "oficial" do site (canonical) —
+       importante quando o mesmo conteúdo pode ser acessado por mais
+       de um endereço (ex.: domínio antigo redirecionando para o novo).
+       Não depende do idioma selecionado — é a mesma URL/página nos dois. -->
+<meta content="index, follow" name="robots"/>
+<link href="https://josearoldodev.vercel.app/en/" rel="canonical"/><link href="https://josearoldodev.vercel.app/" hreflang="pt-BR" rel="alternate"/><link href="https://josearoldodev.vercel.app/en/" hreflang="en" rel="alternate"/><link href="https://josearoldodev.vercel.app/" hreflang="x-default" rel="alternate"/>
+<!-- Open Graph: controla como o link aparece quando compartilhado no
+       WhatsApp, LinkedIn, Facebook etc. Título/descrição/locale mudam
+       de idioma via JS (js/i18n.js); URL e imagem continuam as mesmas. -->
+<meta content="website" property="og:type"/>
+<meta content="José Arôldo Maciel Neto | Portfolio" id="og-title" property="og:title"/>
+<meta content="Portfolio of José Arôldo Maciel Neto, Systems Analysis and Development student at Unifor, transitioning his career into Technology." id="og-description" property="og:description"/>
+<meta content="https://josearoldodev.vercel.app/en/" property="og:url"/>
+<meta content="https://josearoldodev.vercel.app/assets/img/og-image.png" property="og:image"/>
+<meta content="en_US" id="og-locale" property="og:locale"/>
+<!-- Twitter/X Card: mesmo princípio do Open Graph, mas para o X (Twitter) -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="José Arôldo Maciel Neto | Portfolio" id="twitter-title" name="twitter:title"/>
+<meta content="Portfolio of José Arôldo Maciel Neto, Systems Analysis and Development student at Unifor, transitioning his career into Technology." id="twitter-description" name="twitter:description"/>
+<meta content="https://josearoldodev.vercel.app/assets/img/og-image.png" name="twitter:image"/>
+<!-- Favicon: ícone que aparece na aba do navegador, substituindo o
+       "planeta" padrão. Vários tamanhos para diferentes dispositivos. -->
+<link href="/assets/img/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/assets/img/favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<!-- Ícones (via CDN, sem instalação) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<!-- Fontes do Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Nossos arquivos CSS -->
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/responsive.css" rel="stylesheet"/>
+<!-- Google tag (gtag.js) — Google Analytics 4
+       Mede visitantes, visualizações de página e origem dos acessos.
+       O Measurement ID (G-...) é público por definição — não é uma
+       informação secreta, é o identificador da propriedade do GA4. -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1H4T45TEC2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1H4T45TEC2');
+  </script>
+<!-- Microsoft Clarity: mapas de calor e gravações de sessão,
+       complementando o Google Analytics com dados de comportamento
+       visual dos visitantes. Código oficial fornecido pela Microsoft,
+       inserido sem modificações. -->
+<script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "y93l747wbi");
+  </script>
+</head>
+<body data-lang="pt" data-theme="dark">
+<!-- "Skip link": fica invisível até o usuário pressionar Tab.
+       Permite que quem navega só pelo teclado (ou usa leitor de tela)
+       pule o menu e vá direto para o conteúdo principal, sem precisar
+       passar por todos os links do cabeçalho toda vez. -->
+<a class="skip-link" data-i18n="skip_link" href="#conteudo-principal">Skip to main content</a>
+<!-- ===================== HEADER / NAVEGAÇÃO ===================== -->
+<header class="header" id="header">
+<nav class="navbar">
+<a class="logo" href="#hero">José<span>.dev</span></a>
+<ul class="nav-links" id="nav-links">
+<li><a class="nav-link" data-i18n="nav_inicio" href="#hero">Home</a></li>
+<li><a class="nav-link" data-i18n="nav_sobre" href="#sobre">About</a></li>
+<li><a class="nav-link" data-i18n="nav_experiencia" href="#experiencia">Experience</a></li>
+<li><a class="nav-link" data-i18n="nav_skills" href="#skills">Skills</a></li>
+<li><a class="nav-link" data-i18n="nav_projetos" href="#projetos">Projects</a></li>
+<li><a class="nav-link" data-i18n="nav_contato" href="#contato">Contact</a></li>
+<li><a class="nav-link" data-i18n="nav_feedback" href="#feedback">Feedback</a></li>
+</ul>
+<div class="nav-actions">
+<button aria-checked="true" aria-label="Toggle between light and dark theme" class="theme-switch" data-i18n-aria-label="theme_switch_label" id="theme-toggle" role="switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-sun theme-switch-icon"></i>
+<span aria-hidden="true" class="theme-switch-thumb"></span>
+<i aria-hidden="true" class="fa-solid fa-moon theme-switch-icon"></i>
+</button>
+<!-- Controle de idioma: mesma linguagem visual da chave de tema
+             (pílula compacta com uma bolinha que desliza), mas com os
+             textos "PT"/"EN" no lugar dos ícones de sol/lua. -->
+<!-- Controle de idioma: botão circular único, mesmo padrão visual
+             que o botão de tema já teve antes de virar chave — mostra o
+             idioma ativo (PT ou EN) centralizado, e alterna ao clicar. -->
+<button aria-label="Switch site language" aria-pressed="true" class="icon-btn lang-toggle-btn" data-i18n-aria-label="lang_switch_label" id="lang-toggle" type="button">
+<span aria-hidden="true" id="lang-toggle-label">EN</span>
+</button>
+<!-- Um único botão cuida de abrir E fechar o menu — ao clicar,
+             o ícone e o rótulo mudam de estado (☰ Menu → ✕), mas o
+             botão em si nunca muda de tamanho ou posição, então a
+             fileira de controles (Tema/PT-EN/Menu) nunca se move. -->
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation menu" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" id="menu-toggle">
+<i aria-hidden="true" class="fa-solid fa-bars"></i>
+<span aria-hidden="true" class="menu-btn-label" data-i18n="menu_label">Menu</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- <main> identifica, para leitores de tela e para o skip link,
+       onde começa o conteúdo principal da página (diferente do
+       cabeçalho e do rodapé, que se repetem em todo lugar).
+       tabindex="-1" permite que o skip link mova o foco para cá. -->
+<main id="conteudo-principal" tabindex="-1">
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+<div class="hero-content reveal">
+<p class="section-eyebrow" data-i18n="hero_eyebrow">&gt; Hi, welcome</p>
+<h1 class="hero-title">
+<span class="hero-greeting" data-i18n="hero_greeting">I'm</span>
+<span class="hero-name">José Arôldo Maciel Neto</span>
+</h1>
+<p class="hero-subtitle" data-i18n="hero_subtitle">Computer Science Student | Building a Career in Technology</p>
+<p class="hero-description" data-i18n="hero_description">Transitioning from an administrative and customer service background into Technology. I'm building my programming foundation at Unifor and, alongside it, taking a Programming Logic and Algorithms course — looking for my first IT internship opportunity.</p>
+<div class="hero-buttons">
+<a class="btn btn-primary" data-i18n="hero_btn_projetos" href="#projetos">View Projects</a>
+<!-- Abre o mesmo PDF em nova aba, para leitura online (sem
+             baixar). Mesmo arquivo do botão abaixo, só sem o atributo
+             "download" e com target="_blank".
+             O nome do arquivo tem espaços e acentos, por isso o link
+             usa "percent-encoding" (%20, %C3%A9 etc.) — é a forma
+             correta de representar esses caracteres numa URL. O
+             navegador exibe/baixa o arquivo com o nome normal mesmo
+             assim. O NOME/CAMINHO DO ARQUIVO NÃO MUDA com o idioma. -->
+<a class="btn btn-secondary" href="/assets/docs/Curr%C3%ADculo%20-%20Jos%C3%A9%20Ar%C3%B4ldo%20Maciel%20Neto.pdf" rel="noopener" target="_blank">
+<i aria-hidden="true" class="fa-solid fa-file-lines"></i> <span data-i18n="hero_btn_visualizar_curriculo">View Resume</span>
+</a>
+<!-- O arquivo do currículo deve se chamar exatamente
+             "Currículo - José Arôldo Maciel Neto.pdf" e ficar dentro
+             da pasta assets/docs/. O atributo download="..." define o
+             nome sugerido ao salvar, e pode ser escrito normalmente
+             (sem percent-encoding), diferente do href acima. -->
+<a class="btn btn-secondary" download="Currículo - José Arôldo Maciel Neto.pdf" href="/assets/docs/Curr%C3%ADculo%20-%20Jos%C3%A9%20Ar%C3%B4ldo%20Maciel%20Neto.pdf">
+<i aria-hidden="true" class="fa-solid fa-download"></i> <span data-i18n="hero_btn_baixar_curriculo">Download Resume</span>
+</a>
+</div>
+<div class="hero-socials">
+<a aria-label="LinkedIn" data-i18n-aria-label="linkedin_label" href="https://www.linkedin.com/in/joséarôldomacielneto" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-brands fa-linkedin"></i></a>
+<a aria-label="GitHub" data-i18n-aria-label="github_label" href="https://github.com/JoseAroldoMacielNeto" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-brands fa-github"></i></a>
+<a aria-label="Email" data-i18n-aria-label="email_label" href="mailto:josearoldomacielneto.19@gmail.com"><i aria-hidden="true" class="fa-solid fa-envelope"></i></a>
+</div>
+<p aria-hidden="true" class="icons-hint" data-i18n="hero_socials_hint">Click the icons to reach out</p>
+</div>
+<!-- Coloque aqui a sua foto de perfil: o arquivo deve se chamar
+         exatamente "foto-perfil.jpg" e ficar dentro da pasta assets/img/ -->
+<div class="hero-image reveal">
+<img alt="Profile photo of José Arôldo Maciel Neto" data-i18n-alt="foto_alt" height="600" src="/assets/img/foto-perfil.jpg" width="600"/>
+</div>
+</section>
+<!-- ===================== SOBRE MIM ===================== -->
+<section class="section sobre" id="sobre">
+<div class="container sobre-grid">
+<div class="sobre-texto reveal">
+<p class="section-eyebrow" data-i18n="sobre_eyebrow">// about-me</p>
+<h2 class="section-title" data-i18n="sobre_title">Who I Am</h2>
+<p data-i18n="sobre_p1">I'm José Arôldo Maciel Neto, currently pursuing an Associate Degree in Systems Analysis and Development at Universidade de Fortaleza (Unifor), expected to graduate in February 2029. Before starting my degree, I built professional experience in administrative, sales, and customer service roles — and I'm now transitioning my career into Technology.</p>
+<p data-i18n="sobre_p2">I'm at the beginning of my programming journey: outside of school, I'm taking a Programming Logic and Algorithms course to strengthen my foundation before moving on to languages and frameworks. This portfolio is also my main learning project — I'm studying and evolving the code as it's built.</p>
+<p data-i18n="sobre_p3">In the medium to long term, I'm interested in moving my career toward Data, AI, and Data Science — but my focus right now is building a solid programming foundation and landing my first IT internship.</p>
+</div>
+<!-- "Cartão de código": elemento visual de assinatura do site,
+           simulando um editor de código para reforçar a identidade de dev.
+           Em inglês, os "nomes de variáveis" também são traduzidos
+           (nome→name, curso→degree etc.), como um dev nativo escreveria. -->
+<div class="code-card reveal">
+<div class="code-card-header">
+<span class="dot dot-red"></span>
+<span class="dot dot-yellow"></span>
+<span class="dot dot-green"></span>
+<span class="code-card-title">sobre-mim.js</span>
+</div>
+<pre class="code-card-body"><code data-i18n="code_card_body"><span class="tk-key">const</span> <span class="tk-var">student</span> = {
+  <span class="tk-prop">name</span>: <span class="tk-str">"José Arôldo Maciel Neto"</span>,
+  <span class="tk-prop">degree</span>: <span class="tk-str">"Systems Analysis and Development"</span>,
+  <span class="tk-prop">institution</span>: <span class="tk-str">"Unifor"</span>,
+  <span class="tk-prop">period</span>: <span class="tk-str">"Aug/2026 - Feb/2029"</span>,
+  <span class="tk-prop">background</span>: <span class="tk-str">"Admin &amp; Customer Service"</span>,
+  <span class="tk-prop">currentGoal</span>: <span class="tk-str">"IT Internship"</span>,
+  <span class="tk-prop">futureGoal</span>: <span class="tk-str">"Data / AI"</span>
+};</code></pre>
+</div>
+</div>
+</section>
+<!-- ===================== EXPERIÊNCIA PROFISSIONAL ===================== -->
+<section class="section experiencia" id="experiencia">
+<div class="container">
+<p class="section-eyebrow" data-i18n="exp_eyebrow">// experience</p>
+<h2 class="section-title" data-i18n="exp_title">Professional Experience</h2>
+<p class="section-subtitle" data-i18n="exp_subtitle">Before moving into Technology, I built experience in administrative, sales, and customer service roles — a foundation I now apply to technology projects as well.</p>
+<!-- Linha do tempo: cada "timeline-item" representa uma experiência profissional -->
+<div class="timeline">
+<div class="timeline-item reveal">
+<span class="timeline-marker"></span>
+<div class="timeline-content">
+<span class="timeline-period" data-i18n="exp1_period">Dec/2025 – Jan/2026</span>
+<h3 data-i18n="exp1_title">Administrative Organization</h3>
+<p class="timeline-empresa" data-i18n="exp1_empresa">Fulgêncio Cruz Advocacia Law Office — Freelance</p>
+<ul>
+<li data-i18n="exp1_li1">Administrative and document organization</li>
+<li data-i18n="exp1_li2">Spreadsheets to track client interactions, contracts, and requests</li>
+<li data-i18n="exp1_li3">Google Drive organization and access-link structuring for client documents</li>
+</ul>
+</div>
+</div>
+<div class="timeline-item reveal">
+<span class="timeline-marker"></span>
+<div class="timeline-content">
+<span class="timeline-period" data-i18n="exp2_period">Jun/2025 – Oct/2025</span>
+<h3 data-i18n="exp2_title">Work-Study Intern → Special Management Advisor</h3>
+<p class="timeline-empresa" data-i18n="exp2_empresa">Secretariat of Economic Development</p>
+<ul>
+<li data-i18n="exp2_li1">Administrative tasks and support for the Secretariat's activities</li>
+<li data-i18n="exp2_li2">Organization of information and requests</li>
+</ul>
+</div>
+</div>
+<div class="timeline-item reveal">
+<span class="timeline-marker"></span>
+<div class="timeline-content">
+<span class="timeline-period" data-i18n="exp3_period">Jul/2024 – Dec/2024</span>
+<h3 data-i18n="exp3_title">Online Sales Support</h3>
+<p class="timeline-empresa" data-i18n="exp3_empresa">Cid Lira Braga Law Office — Internship</p>
+<ul>
+<li data-i18n="exp3_li1">Lead handling via WhatsApp and sales support</li>
+<li data-i18n="exp3_li2">Initial assessment of client needs and negotiation</li>
+<li data-i18n="exp3_li3">Contract closing and document organization</li>
+<li data-i18n="exp3_li4">System data entry and benefit-related requests processing</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ===================== SKILLS ===================== -->
+<section class="section skills" id="skills">
+<div class="container">
+<p class="section-eyebrow" data-i18n="skills_eyebrow">// skills</p>
+<h2 class="section-title" data-i18n="skills_title">What I Know (and What I'm Learning)</h2>
+<p class="section-subtitle" data-i18n="skills_subtitle">I come from an administrative and customer service background, and I'm now building my technology foundation from scratch — that's why I separate what I already have from what I'm still learning.</p>
+<h3 class="skills-subtitle" data-i18n="skills_g1_title">Organization &amp; Administration</h3>
+<div class="skills-grid">
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-folder-tree"></i><span data-i18n="skills_g1_i1">Administrative Organization</span></div>
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-list-check"></i><span data-i18n="skills_g1_i2">Document and Information Management</span></div>
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-building-columns"></i><span data-i18n="skills_g1_i3">Introduction to Business Administration</span></div>
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-chart-line"></i><span data-i18n="skills_g1_i4">Business Strategy</span></div>
+</div>
+<h3 class="skills-subtitle" data-i18n="skills_g2_title">Communication &amp; Customer Service</h3>
+<div class="skills-grid">
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-comments"></i><span data-i18n="skills_g2_i1">Interpersonal Communication</span></div>
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-briefcase"></i><span data-i18n="skills_g2_i2">Business Communication</span></div>
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-headset"></i><span data-i18n="skills_g2_i3">Customer Service</span></div>
+<div class="skill-card reveal"><i aria-hidden="true" class="fa-solid fa-user-tie"></i><span data-i18n="skills_g2_i4">Service Management</span></div>
+</div>
+<h3 class="skills-subtitle" data-i18n="skills_g3_title">Tools</h3>
+<!-- Lista de "pills" (chips): mais compacta que os cards, ideal para muitos itens curtos.
+           Nomes de ferramentas (Word, Excel, GitHub etc.) são nomes próprios e não mudam de idioma. -->
+<div class="pill-list reveal">
+<span><i aria-hidden="true" class="fa-solid fa-file-word"></i> Word</span>
+<span><i aria-hidden="true" class="fa-solid fa-file-excel"></i> Excel</span>
+<span><i aria-hidden="true" class="fa-solid fa-envelope-open-text"></i> Outlook</span>
+<span><i aria-hidden="true" class="fa-solid fa-users-rectangle"></i> Teams</span>
+<span><i aria-hidden="true" class="fa-solid fa-share-nodes"></i> SharePoint</span>
+<span><i aria-hidden="true" class="fa-solid fa-note-sticky"></i> OneNote</span>
+<span><i aria-hidden="true" class="fa-solid fa-cloud"></i> OneDrive</span>
+<span><i aria-hidden="true" class="fa-solid fa-list-ul"></i> Planner</span>
+<span><i aria-hidden="true" class="fa-brands fa-google-drive"></i> Google Drive</span>
+</div>
+<h3 class="skills-subtitle" data-i18n="skills_g4_title">Languages</h3>
+<div class="pill-list reveal">
+<span><i aria-hidden="true" class="fa-solid fa-language"></i> <span data-i18n="skills_g4_i1">Portuguese — Native</span></span>
+<span><i aria-hidden="true" class="fa-solid fa-language"></i> <span data-i18n="skills_g4_i2">English — Basic</span></span>
+</div>
+<h3 class="skills-subtitle" data-i18n="skills_g5_title">Currently Learning — Technology</h3>
+<div class="skills-grid">
+<div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-solid fa-diagram-project"></i><span data-i18n="skills_g5_i1">Programming Logic</span></div>
+<div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-solid fa-code-branch"></i><span data-i18n="skills_g5_i2">Algorithms</span></div>
+<div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-brands fa-html5"></i><span data-i18n="skills_g5_i3">HTML (getting started)</span></div>
+<div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-brands fa-css3-alt"></i><span data-i18n="skills_g5_i4">CSS (basic)</span></div>
+<div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-brands fa-js"></i><span data-i18n="skills_g5_i5">JavaScript (coming soon)</span></div>
+<div class="skill-card skill-learning reveal"><i aria-hidden="true" class="fa-solid fa-robot"></i><span data-i18n="skills_g5_i6">AI as a Productivity Tool</span></div>
+</div>
+</div>
+</section>
+<!-- ===================== PROJETOS ===================== -->
+<!-- TODO: substituir os cards abaixo pelos projetos reais assim que você me enviar as informações -->
+<section class="section projetos" id="projetos">
+<div class="container">
+<p class="section-eyebrow" data-i18n="projetos_eyebrow">// projects</p>
+<h2 class="section-title" data-i18n="projetos_title">Projects</h2>
+<p class="section-subtitle" data-i18n="projetos_subtitle">This section will grow throughout my degree. Each card below follows the same pattern — adding a new project in the future is as simple as copying a "project-card" block and swapping the content.</p>
+<div class="projetos-grid">
+<!-- ============ INÍCIO DE UM CARD DE PROJETO (modelo reutilizável) ============ -->
+<article class="project-card reveal">
+<div class="project-image">
+<img alt="Captura de tela do projeto Este Portfólio" height="500" loading="lazy" src="/assets/img/portfolio.png" width="800"/>
+</div>
+<div class="project-content">
+<h3 data-i18n="proj1_title">This Portfolio</h3>
+<p data-i18n="proj1_desc">Personal website built with HTML, CSS, and JavaScript, with AI support to speed up learning, featuring dark mode and a responsive design.</p>
+<div class="project-tags">
+<span>HTML5</span>
+<span>CSS3</span>
+<span>JavaScript</span>
+</div>
+<!-- TODO: substituir "#" pelo link do repositório específico deste portfólio
+                 no seu GitHub (https://github.com/JoseAroldoMacielNeto) assim que criá-lo,
+                 e pelo link do site publicado ("Demo"), quando estiver no ar -->
+<div class="project-links">
+<a href="https://github.com/JoseAroldoMacielNeto/Portfolio" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_link_codigo">Code</span></a>
+<a href="https://portfolio-weld-gamma-d70fup08v0.vercel.app/" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="proj_link_demo">Demo</span></a>
+</div>
+</div>
+</article>
+<!-- ============ FIM DO CARD DE PROJETO ============ -->
+<article class="project-card reveal">
+<div class="project-image">
+<img alt="" height="500" loading="lazy" src="/assets/img/projeto-placeholder.jpg" width="800"/>
+</div>
+<div class="project-content">
+<h3 data-i18n="proj_placeholder_title">Next Project</h3>
+<p data-i18n="proj_placeholder_desc">Placeholder for my next project during the degree. Will be replaced with a real project once completed.</p>
+<div class="project-tags">
+<span data-i18n="proj_placeholder_tag">Coming soon</span>
+</div>
+<div class="project-links project-links-disabled">
+<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_placeholder_codigo">Code coming soon</span></span>
+<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="proj_placeholder_demo">Demo coming soon</span></span>
+</div>
+</div>
+</article>
+<article class="project-card reveal">
+<div class="project-image">
+<img alt="" height="500" loading="lazy" src="/assets/img/projeto-placeholder.jpg" width="800"/>
+</div>
+<div class="project-content">
+<h3 data-i18n="proj_placeholder_title">Next Project</h3>
+<p data-i18n="proj_placeholder_desc">Placeholder for my next project during the degree. Will be replaced with a real project once completed.</p>
+<div class="project-tags">
+<span data-i18n="proj_placeholder_tag">Coming soon</span>
+</div>
+<div class="project-links project-links-disabled">
+<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_placeholder_codigo">Code coming soon</span></span>
+<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="proj_placeholder_demo">Demo coming soon</span></span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- ===================== CONTATO ===================== -->
+<section class="section contato" id="contato">
+<div class="container contato-grid">
+<div class="contato-info reveal">
+<p class="section-eyebrow" data-i18n="contato_eyebrow">// contact</p>
+<h2 class="section-title" data-i18n="contato_title">Let's Talk?</h2>
+<p data-i18n="contato_desc">I'm available for IT internship opportunities. Send a message through the form or find me on the networks below.</p>
+<ul class="contato-lista">
+<li>
+<i aria-hidden="true" class="fa-solid fa-envelope"></i>
+<a class="contato-email-link" href="mailto:josearoldomacielneto.19@gmail.com">josearoldomacielneto.19@gmail.com</a>
+<button aria-label="Copy email address" class="copiar-email-btn" data-email="josearoldomacielneto.19@gmail.com" data-i18n-aria-label="copy_email_label" id="copiar-email" type="button">
+<i aria-hidden="true" class="fa-regular fa-copy"></i>
+</button>
+<span aria-live="polite" class="copiar-email-feedback" id="copiar-email-feedback" role="status"></span>
+</li>
+<li><i aria-hidden="true" class="fa-solid fa-location-dot"></i> <span data-i18n="contato_location">Itapajé, Ceará, Brazil</span></li>
+</ul>
+<div class="hero-socials">
+<a aria-label="LinkedIn" data-i18n-aria-label="linkedin_label" href="https://www.linkedin.com/in/joséarôldomacielneto" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-brands fa-linkedin"></i></a>
+<a aria-label="GitHub" data-i18n-aria-label="github_label" href="https://github.com/JoseAroldoMacielNeto" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-brands fa-github"></i></a>
+</div>
+<p aria-hidden="true" class="icons-hint" data-i18n="contato_icons_hint">Click the icons to reach out</p>
+</div>
+<!-- action/method servem como reforço: se por algum motivo o JavaScript
+           não rodar, o formulário ainda funciona como um envio HTML comum
+           direto para o Formspree. O comportamento normal (com a mensagem
+           de sucesso/erro na tela) é feito via JavaScript, em script.js -->
+<form action="https://formspree.io/f/mqpkzdjw" class="contato-form reveal" id="contato-form" method="POST" novalidate="">
+<div class="form-group">
+<label data-i18n="label_nome" for="nome">Name</label>
+<input aria-describedby="erro-nome" data-i18n-placeholder="placeholder_nome" id="nome" name="nome" placeholder="Your full name" required="" type="text"/>
+<span class="form-error" id="erro-nome"></span>
+</div>
+<div class="form-group">
+<label data-i18n="label_email" for="email">Email</label>
+<input aria-describedby="erro-email" data-i18n-placeholder="placeholder_email" id="email" name="email" placeholder="you@email.com" required="" type="email"/>
+<span class="form-error" id="erro-email"></span>
+</div>
+<div class="form-group">
+<label data-i18n="label_mensagem" for="mensagem">Message</label>
+<textarea aria-describedby="erro-mensagem" data-i18n-placeholder="placeholder_mensagem_contato" id="mensagem" name="mensagem" placeholder="Write your message..." required="" rows="5"></textarea>
+<span class="form-error" id="erro-mensagem"></span>
+</div>
+<button class="btn btn-primary btn-full" data-i18n="btn_enviar_mensagem" id="botao-enviar" type="submit">Send Message</button>
+<p aria-live="polite" class="form-feedback" id="form-feedback" role="status"></p>
+</form>
+</div>
+</section>
+<!-- ===================== FEEDBACK SOBRE O PORTFÓLIO ===================== -->
+<!-- Reaproveita o MESMO endpoint do Formspree usado no formulário de
+       contato (https://formspree.io/f/mqpkzdjw). O campo oculto "_subject"
+       é um recurso do próprio Formspree para diferenciar o assunto do
+       e-mail recebido, então os feedbacks chegam identificados, sem
+       precisar de uma segunda conta ou de um novo endpoint. -->
+<section class="section feedback" id="feedback">
+<div class="container">
+<div class="feedback-intro">
+<p class="section-eyebrow" data-i18n="feedback_eyebrow">// feedback</p>
+<h2 class="section-title" data-i18n="feedback_title">Your Feedback Matters</h2>
+<p data-i18n="feedback_desc">Suggestions, compliments, constructive criticism, or notes on this portfolio's usability and accessibility are very welcome — they help improve the project.</p>
+</div>
+<form action="https://formspree.io/f/mqpkzdjw" class="contato-form feedback-form reveal" id="feedback-form" method="POST" novalidate="">
+<input name="_subject" type="hidden" value="Novo feedback sobre o portfólio"/>
+<div class="form-group">
+<label data-i18n="label_nome" for="feedback-nome">Name</label>
+<input aria-describedby="erro-feedback-nome" data-i18n-placeholder="placeholder_nome" id="feedback-nome" name="nome" placeholder="Your full name" required="" type="text"/>
+<span class="form-error" id="erro-feedback-nome"></span>
+</div>
+<div class="form-group">
+<label data-i18n="label_email" for="feedback-email">Email</label>
+<input aria-describedby="erro-feedback-email" data-i18n-placeholder="placeholder_email" id="feedback-email" name="email" placeholder="you@email.com" required="" type="email"/>
+<span class="form-error" id="erro-feedback-email"></span>
+</div>
+<div class="form-group">
+<label data-i18n="label_tipo" for="feedback-tipo">Feedback type</label>
+<!-- O atributo "value" de cada opção continua sempre em português —
+               é o dado que chega no seu e-mail via Formspree. Só o TEXTO
+               visível (o que a pessoa vê e escolhe) muda de idioma. -->
+<select aria-describedby="erro-feedback-tipo" id="feedback-tipo" name="tipo" required="">
+<option data-i18n="opt_select" value="">Select an option</option>
+<option data-i18n="opt_elogio" value="Elogio">Compliment</option>
+<option data-i18n="opt_sugestao" value="Sugestão de melhoria">Suggestion for improvement</option>
+<option data-i18n="opt_critica" value="Crítica construtiva">Constructive criticism</option>
+<option data-i18n="opt_acessibilidade" value="Observação sobre acessibilidade">Accessibility note</option>
+<option data-i18n="opt_navegacao" value="Dificuldade na navegação">Navigation issue</option>
+<option data-i18n="opt_outro" value="Outro">Other</option>
+</select>
+<span class="form-error" id="erro-feedback-tipo"></span>
+</div>
+<div class="form-group">
+<label data-i18n="label_mensagem" for="feedback-mensagem">Message</label>
+<textarea aria-describedby="erro-feedback-mensagem" data-i18n-placeholder="placeholder_mensagem_feedback" id="feedback-mensagem" name="mensagem" placeholder="Tell me what you thought of the portfolio..." required="" rows="4"></textarea>
+<span class="form-error" id="erro-feedback-mensagem"></span>
+</div>
+<button class="btn btn-primary btn-full" data-i18n="btn_enviar_feedback" id="botao-enviar-feedback" type="submit">Send Feedback</button>
+<p aria-live="polite" class="form-feedback" id="feedback-form-feedback" role="status"></p>
+</form>
+</div>
+</section>
+<!-- ===================== AGRADECIMENTO ===================== -->
+<section class="section agradecimento" id="agradecimento">
+<div class="container agradecimento-content reveal">
+<p class="section-eyebrow" data-i18n="agradecimento_eyebrow">// see you soon</p>
+<h2 class="section-title" data-i18n="agradecimento_title">Thanks for Making It This Far</h2>
+<p data-i18n="agradecimento_text">If this portfolio raised any questions, suggestions, or interest in getting in touch, I'd be glad to hear from you through the <a class="link-inline" href="#contato">contact</a> or <a class="link-inline" href="#feedback">feedback</a> form above.</p>
+</div>
+</section>
+</main>
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+<div class="container footer-content">
+<a class="logo" href="#hero">José<span>.dev</span></a>
+<p>© <span id="ano-atual"></span> José Arôldo Maciel Neto. <span data-i18n="footer_rights">All rights reserved.</span></p>
+<a aria-label="Back to top" class="back-to-top" data-i18n-aria-label="back_to_top_label" href="#hero">
+<i aria-hidden="true" class="fa-solid fa-arrow-up"></i>
+</a>
+</div>
+</footer>
+<script src="/js/i18n.js"></script>
+<script src="/js/script.js"></script><script>
+  /* Esta página já carrega com o conteúdo em inglês (para ser indexada
+     corretamente pelos mecanismos de busca nesse idioma, com URL própria).
+     Aqui só sincronizamos a variável de estado do seletor de idioma
+     (declarada em i18n.js) para que, ao clicar em PT/EN a partir desta
+     página, a alternância continue funcionando corretamente. */
+  idiomaAtual = "en";
+</script>
+</body>
+</html>
