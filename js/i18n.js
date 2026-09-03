@@ -435,7 +435,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const botaoIdioma = document.getElementById("lang-toggle");
   if (botaoIdioma) {
     botaoIdioma.addEventListener("click", () => {
-      aplicarIdioma(idiomaAtual === "pt" ? "en" : "pt");
+      // A partir de agora, PT vive em "/" e EN vive em "/en/" (URLs
+      // próprias, para indexação separada pelos mecanismos de busca).
+      // O clique navega para a página correspondente, em vez de só
+      // trocar o conteúdo na mesma URL via JavaScript.
+      const estaNaVersaoIngles = window.location.pathname.startsWith("/en");
+      window.location.href = estaNaVersaoIngles ? "/" : "/en/";
     });
   }
 });
