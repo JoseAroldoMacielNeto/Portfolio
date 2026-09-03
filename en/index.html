@@ -32,6 +32,8 @@
 <link href="/assets/img/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/assets/img/favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<meta name="theme-color" content="#0B1220"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
 <!-- Ícones (via CDN, sem instalação) -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 <!-- Fontes do Google Fonts -->
@@ -134,7 +136,7 @@
              o ícone e o rótulo mudam de estado (☰ Menu → ✕), mas o
              botão em si nunca muda de tamanho ou posição, então a
              fileira de controles (Tema/PT-EN/Menu) nunca se move. -->
-<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation menu" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" id="menu-toggle">
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation menu" type="button" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" id="menu-toggle">
 <i aria-hidden="true" class="fa-solid fa-bars"></i>
 <span aria-hidden="true" class="menu-btn-label" data-i18n="menu_label">Menu</span>
 </button>
@@ -419,6 +421,7 @@
            direto para o Formspree. O comportamento normal (com a mensagem
            de sucesso/erro na tela) é feito via JavaScript, em script.js -->
 <form action="https://formspree.io/f/mqpkzdjw" class="contato-form reveal" id="contato-form" method="POST" novalidate="">
+<input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 <div class="form-group">
 <label data-i18n="label_nome" for="nome">Name</label>
 <input aria-describedby="erro-nome" data-i18n-placeholder="placeholder_nome" id="nome" name="nome" placeholder="Your full name" required="" type="text"/>
