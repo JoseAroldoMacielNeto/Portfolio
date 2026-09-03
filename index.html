@@ -44,6 +44,13 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
 
+  <!-- theme-color: colore a barra do navegador/status no mobile com a
+       mesma cor de fundo já usada no tema escuro (padrão do site).
+       manifest: metadados básicos para o navegador (ex.: ao "adicionar
+       à tela inicial"), sem service worker e sem modo de app completo. -->
+  <meta name="theme-color" content="#0B1220">
+  <link rel="manifest" href="manifest.webmanifest">
+
   <!-- Ícones (via CDN, sem instalação) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -155,7 +162,7 @@
              o ícone e o rótulo mudam de estado (☰ Menu → ✕), mas o
              botão em si nunca muda de tamanho ou posição, então a
              fileira de controles (Tema/PT-EN/Menu) nunca se move. -->
-        <button id="menu-toggle" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
+        <button id="menu-toggle" type="button" class="icon-btn menu-btn" data-i18n-aria-label="menu_open_label" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
           <i aria-hidden="true" class="fa-solid fa-bars"></i>
           <span class="menu-btn-label" aria-hidden="true" data-i18n="menu_label">Menu</span>
         </button>
@@ -507,6 +514,12 @@
            direto para o Formspree. O comportamento normal (com a mensagem
            de sucesso/erro na tela) é feito via JavaScript, em script.js -->
       <form class="contato-form reveal" id="contato-form" action="https://formspree.io/f/mqpkzdjw" method="POST" novalidate>
+        <!-- Honeypot anti-spam: campo invisível que usuários reais nunca
+             veem nem preenchem (bots costumam preencher todos os campos
+             automaticamente). O Formspree reconhece nativamente o nome
+             "_gotcha" e descarta sozinho qualquer envio com esse campo
+             preenchido, sem precisar de nenhuma lógica adicional aqui. -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-group">
           <label for="nome" data-i18n="label_nome">Nome</label>
           <input type="text" id="nome" name="nome" placeholder="Seu nome completo" data-i18n-placeholder="placeholder_nome" required aria-describedby="erro-nome">
