@@ -1,0 +1,27 @@
+{
+  "name": "José Arôldo Maciel Neto | Portfólio",
+  "short_name": "José.dev",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/assets/img/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
