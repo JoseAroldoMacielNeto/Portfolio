@@ -1,4 +1,89 @@
 <!DOCTYPE html>
+<!--
+  ============================================================
+  index.html — PÁGINA EM PORTUGUÊS DO PORTFÓLIO
+  ============================================================
+  Este é o HTML da versão em português do site (a URL "/", a raiz).
+  A versão em inglês é o arquivo en/index.html — mesma estrutura,
+  textos diferentes (ver explicação sobre js/i18n.js mais abaixo).
+
+  ------------------------------------------------------------
+  MAPA GERAL DO PROJETO
+  ------------------------------------------------------------
+  index.html          → ESTE arquivo (conteúdo em português)
+  en/index.html        → versão em inglês (mesma estrutura de HTML)
+  css/style.css        → cores, tipografia e layout "base" (desktop)
+  css/responsive.css   → ajustes de layout para tablet/celular
+  js/script.js          → toda a interatividade (menu, formulários,
+                           tema, animações etc.)
+  js/i18n.js           → dicionário de textos e lógica do botão PT/EN
+  assets/img/          → imagens, ícones e favicons
+  assets/docs/         → o PDF do currículo
+  manifest.webmanifest → metadados básicos para "adicionar à tela
+                           inicial" no celular
+  robots.txt / sitemap.xml → arquivos de SEO técnico (fora da pasta
+                           deste HTML, ficam na raiz do site)
+
+  ------------------------------------------------------------
+  CONCEITOS BÁSICOS DE HTML USADOS NESTE ARQUIVO
+  ------------------------------------------------------------
+  <!DOCTYPE html>  → a primeiríssima linha de qualquer página HTML
+  moderna; avisa o navegador para usar as regras "modernas" de
+  interpretação do HTML5 (sem isso, navegadores antigos podem
+  renderizar a página de forma inconsistente).
+
+  <html lang="pt-BR">  → o atributo `lang` diz aos leitores de tela e
+  aos mecanismos de busca em que idioma o CONTEÚDO da página está
+  escrito (diferente do idioma da interface do navegador). Repare
+  que este mesmo atributo é o que muda a versão em inglês para
+  `lang="en"` — é uma das poucas coisas que DIFERE de fato entre os
+  dois arquivos HTML.
+
+  <head> vs <body>  → tudo dentro de `<head>` é METADADO: informação
+  SOBRE a página (título, descrição, links para CSS/fontes, scripts
+  de terceiros) que não aparece diretamente na tela. Tudo dentro de
+  `<body>`, mais abaixo neste arquivo, é o CONTEÚDO visível de
+  verdade (o que a pessoa vê e interage).
+
+  <meta>  → tag que declara um metadado (não tem conteúdo/texto
+  próprio, só atributos). Ex.: `<meta charset="UTF-8">` diz ao
+  navegador qual codificação de caracteres usar (para acentos e
+  "ç" aparecerem certos); `<meta name="description" ...>` é o texto
+  que aparece embaixo do link nos resultados do Google.
+
+  <link>  → conecta um recurso EXTERNO à página, sem inserir
+  conteúdo visível diretamente. `rel="stylesheet"` carrega um CSS;
+  `rel="icon"` define o favicon; `rel="canonical"`/`rel="alternate"`
+  são sinais de SEO (explicados nos comentários ao lado de cada um,
+  logo abaixo).
+
+  <script>  → insere ou carrega JavaScript. Pode ter um `src="..."`
+  (carrega um arquivo .js externo, como js/script.js) ou conter
+  código diretamente entre as tags (como o do Google Analytics
+  logo abaixo).
+
+  id="..." vs class="..."  → um `id` é ÚNICO na página inteira (só
+  um elemento pode ter aquele id) — usado quando o JavaScript
+  precisa "achar" um elemento específico (`getElementById`) ou
+  quando um link interno aponta para ele (`href="#hero"`). Uma
+  `class` pode se repetir em vários elementos — usada para aplicar
+  o MESMO estilo CSS (ou comportamento JS) a vários elementos
+  parecidos (ex.: todos os `.nav-link`, todos os `.btn`).
+
+  data-*  → atributos "personalizados", que não têm significado
+  padrão em HTML — servem para guardar informação que só o CSS ou o
+  JavaScript deste projeto usam (ex.: `data-theme`, `data-i18n`,
+  `data-email`). Documentados em detalhe onde aparecem.
+
+  aria-*  → atributos de ACESSIBILIDADE (Accessible Rich Internet
+  Applications). Não mudam a aparência visual — são lidos por
+  leitores de tela (softwares usados por pessoas com deficiência
+  visual) para descrever elementos e seus estados. Ex.: `aria-label`
+  dá um nome a um botão que só tem ícone; `aria-expanded` diz se um
+  menu está aberto ou fechado; `aria-hidden` esconde algo puramente
+  decorativo desses softwares.
+  ============================================================
+-->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -636,5 +721,32 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
+
+  <!--
+    ============================================================
+    GLOSSÁRIO — TERMOS E CONCEITOS USADOS NESTE ARQUIVO
+    ============================================================
+    (Comentário HTML — não aparece na página, só para consulta.
+    Termos de <head> já foram explicados no comentário do topo.)
+
+    TERMO         | O QUE É                                                | ONDE APARECE / PARA QUE SERVE AQUI
+    ---------------|----------------------------------------------------------|--------------------------------------------------------------
+    header         | Tag semântica para o cabeçalho da página (ou de uma seção) | <header id="header">, no topo, com o menu
+    nav            | Tag semântica para um bloco de navegação/links            | <nav class="navbar">, dentro do header
+    main           | Tag semântica para o CONTEÚDO PRINCIPAL da página          | Envolve Hero até Agradecimento — importante para acessibilidade e para o "skip link"
+    section        | Agrupa um bloco de conteúdo relacionado, com identidade própria | Hero, Sobre, Experiência, Skills, Projetos, Contato, Feedback, Agradecimento
+    article        | Tag semântica para um conteúdo "independente", que faria sentido sozinho | Cada card de projeto (<article class="project-card">)
+    footer         | Tag semântica para o rodapé da página                      | <footer class="footer">, no final
+    h1, h2, h3      | Títulos, em ordem de importância (h1 = mais importante)    | h1 só no nome (Hero); h2 em cada título de seção; h3 em subtítulos
+    button          | Elemento clicável para AÇÕES (não navegação)               | Tema, PT/EN, menu, copiar e-mail, enviar formulário
+    a (link)        | Elemento clicável para NAVEGAÇÃO (para outra seção, página ou site) | Menu, botões "Ver Projetos"/"Currículo", redes sociais
+    href            | Atributo do <a> que diz PARA ONDE o link leva              | "#hero" (mesma página), URLs externas (LinkedIn, GitHub), caminho de arquivos (currículo)
+    src             | Atributo de <img>/<script> que diz DE ONDE carregar o recurso | Caminho das imagens, dos arquivos .js
+    alt             | Texto alternativo de uma imagem, lido por leitores de tela | Foto de perfil, imagens dos projetos
+    label + for/id  | `<label for="X">` associa um texto a um campo com `id="X"`  | Todos os campos dos formulários de Contato e Feedback
+    novalidate      | Desliga a validação automática do navegador no <form>      | Usado porque a validação é feita "na mão" em js/script.js, com mensagens customizadas
+    tabindex="-1"   | Remove um elemento da ordem normal de Tab, mas permite focar nele via JavaScript | <main id="conteudo-principal">, para o skip link poder levar o foco até lá
+    ============================================================
+  -->
 </body>
 </html>
