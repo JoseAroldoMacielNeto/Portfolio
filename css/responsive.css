@@ -1,8 +1,39 @@
 /* ============================================================
-   RESPONSIVIDADE
-   Este arquivo é carregado DEPOIS do style.css, então as regras
-   aqui têm prioridade e "sobrescrevem" o layout padrão (desktop)
-   para telas menores. Vamos do maior para o menor breakpoint.
+   responsive.css
+   ============================================================
+   Ajustes de layout por TAMANHO DE TELA. Este arquivo é carregado
+   DEPOIS de css/style.css no `<head>` do HTML (index.html e
+   en/index.html) — por isso, quando uma regra aqui tem o mesmo
+   "peso" (especificidade) que uma em style.css, esta aqui vence.
+   É assim que conseguimos, por exemplo, definir `.hero { display:
+   flex; }` uma vez em style.css (para desktop) e depois "virar" o
+   Hero para coluna única aqui dentro, só em telas pequenas.
+
+   ------------------------------------------------------------
+   CONCEITO: MEDIA QUERY (@media) E "BREAKPOINT"
+   ------------------------------------------------------------
+   `@media (max-width: 860px) { ... }` significa: "aplique este
+   bloco de regras SOMENTE quando a largura da tela for de até
+   860 pixels". O número onde o layout muda (860px, 1024px, 480px)
+   é chamado de "breakpoint". Este projeto usa 3 breakpoints
+   principais, do maior para o menor:
+     - 1024px → ajustes leves de tablet (bloco "TABLET" abaixo)
+     - 860px  → menu vira painel deslizante + layout em coluna única
+                (bloco "MENU MOBILE + LAYOUT EM COLUNA ÚNICA")
+     - 480px  → ajustes finos para celulares pequenos
+   Repare que o PRIMEIRO bloco do arquivo usa `min-width` (não
+   `max-width`) — é o único caso "ao contrário": ele mira telas
+   GRANDES (acima de 1024px), para compactar os 3 botões do Hero.
+
+   ------------------------------------------------------------
+   SE ALGO SÓ ACONTECER NO CELULAR (ou só no computador)
+   ------------------------------------------------------------
+   Ligue a ferramenta de desenvolvedor do navegador (F12 ou botão
+   direito → Inspecionar) e ative o "modo responsivo" — geralmente
+   um ícone de celular/tablet na barra de ferramentas. Vá reduzindo
+   a largura da janela simulada e observe em qual breakpoint (860px,
+   por exemplo) o layout muda — é ali, no bloco `@media` correspondente
+   abaixo, que a regra responsável está.
    ============================================================ */
 
 /* --------------------------------------------
@@ -238,3 +269,24 @@
     left: -32px;
   }
 }
+
+/* ============================================================
+   GLOSSÁRIO — TERMOS E CONCEITOS USADOS NESTE ARQUIVO
+   ============================================================
+   (Só para consulta/estudo — não afeta o funcionamento do site.
+   Termos gerais de CSS como variáveis, flexbox e grid já estão
+   explicados no glossário de css/style.css — aqui só os termos
+   específicos de responsividade.)
+
+   TERMO                    | O QUE É                                                        | ONDE APARECE / PARA QUE SERVE AQUI
+   --------------------------|------------------------------------------------------------------|--------------------------------------------------------------
+   @media                    | Aplica um bloco de CSS só quando a tela atende a uma condição   | Os 4 blocos deste arquivo (1025px, 1024px, 860px, 480px)
+   breakpoint                 | O valor de largura onde o layout muda de comportamento          | 1024px (tablet), 860px (menu mobile), 480px (celular pequeno)
+   max-width (na media query) | "No máximo X pixels de largura" — mira telas PEQUENAS           | Usado em quase todos os blocos deste arquivo
+   min-width (na media query) | "No mínimo X pixels de largura" — mira telas GRANDES            | Único caso: o bloco de 1025px, no topo do arquivo
+   flex-direction: column     | Empilha os filhos de um flex container na vertical, em vez de lado a lado | `.hero` no mobile, `.hero-buttons` no celular pequeno
+   flex-direction: column-reverse | Igual ao acima, mas na ordem invertida (o último filho no HTML aparece primeiro na tela) | `.hero` no mobile (mostra a foto antes do texto)
+   order                      | Muda a ordem VISUAL dos filhos de um flex/grid, sem mudar a ordem no HTML | `.sobre-texto` e `.code-card` no mobile
+   grid-template-columns: 1fr | Define uma grade com uma única coluna (empilhando o conteúdo)   | `.sobre-grid`, `.contato-grid` no mobile
+   width: min(75%, 320px)     | Usa o MENOR valor entre os dois — nunca passa de 320px, mas encolhe em telas menores que ~426px | Largura do painel do menu mobile (`.nav-links`)
+   ============================================================ */
