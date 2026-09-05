@@ -1,7 +1,57 @@
 /* ============================================================
-   VARIÁVEIS DE TEMA (CSS Custom Properties)
-   Aqui centralizamos todas as cores e fontes do site.
-   Trocar um valor aqui reflete em TODO o site automaticamente.
+   style.css
+   ============================================================
+   Estilos "base" do portfólio: cores, tipografia, espaçamentos e
+   o layout de cada seção, pensado primeiro para telas grandes
+   (computador). Os ajustes específicos para telas menores (tablet/
+   celular) ficam em css/responsive.css, carregado LOGO DEPOIS deste
+   arquivo no HTML — por isso, em caso de conflito de regras com o
+   mesmo "peso" (especificidade), o responsive.css "ganha" em telas
+   pequenas, exatamente como deveria.
+
+   ------------------------------------------------------------
+   MAPA GERAL DO PROJETO
+   ------------------------------------------------------------
+   index.html          → HTML da página em português
+   en/index.html        → HTML da página em inglês (mesma estrutura,
+                           textos diferentes — ver js/i18n.js)
+   css/style.css        → ESTE arquivo
+   css/responsive.css   → ajustes de layout por tamanho de tela
+   js/script.js          → interatividade (cliques, formulários, menu)
+   js/i18n.js           → troca de idioma e textos traduzíveis
+
+   ------------------------------------------------------------
+   VARIÁVEIS CSS (CSS Custom Properties) — o conceito mais
+   importante deste arquivo para entender o resto do CSS
+   ------------------------------------------------------------
+   Uma variável CSS é criada com dois traços na frente do nome, tipo
+   `--color-bg: #F7F8FA;`, e USADA em qualquer lugar com
+   `var(--color-bg)`. A vantagem: se a cor de fundo do site precisar
+   mudar um dia, basta trocar o valor AQUI UMA VEZ, em vez de
+   procurar e trocar em dezenas de regras espalhadas pelo arquivo.
+
+   `:root` é um seletor especial que representa a raiz de todo o
+   documento HTML (equivale, na prática, ao `<html>`) — variáveis
+   definidas ali ficam disponíveis para QUALQUER elemento da página,
+   por isso é o lugar padrão para declarar variáveis "globais".
+
+   O SISTEMA DE TEMA (claro/escuro) funciona assim: as variáveis são
+   declaradas duas vezes — uma vez dentro de `:root` (valores do tema
+   claro, que também servem de "padrão") e de novo dentro do bloco
+   `[data-theme="dark"] { ... }` (valores do tema escuro). Esse
+   `[data-theme="dark"]` é um "seletor de atributo": ele seleciona
+   qualquer elemento que tenha `data-theme="dark"` — no caso, o
+   `<body>` da página. Quando js/script.js troca esse atributo (ver
+   a função `aplicarTema` em js/script.js), o navegador recalcula
+   sozinho TODAS as variáveis que dependem dele, e a aparência do
+   site inteiro muda instantaneamente — nenhuma outra regra de CSS
+   precisa ser tocada, porque todas usam `var(--algo)` em vez de
+   cores "cravadas" diretamente.
+
+   SE UMA COR PARECER ERRADA em um tema específico: procure a
+   variável correspondente aqui no topo do arquivo (dentro de
+   `:root` para o tema claro, ou de `[data-theme="dark"]` para o
+   escuro) — é ali que ela está definida, não na regra que a usa.
    ============================================================ */
 :root {
   /* --- Tema claro (padrão) --- */
@@ -55,8 +105,14 @@
 /* ============================================================
    RESET BÁSICO
    Remove espaçamentos padrão do navegador para termos controle total.
+   Cada navegador aplica margens/paddings ligeiramente diferentes por
+   padrão em títulos, listas, parágrafos etc. — um "reset" no início
+   do CSS elimina essas diferenças, para o site parecer igual em
+   qualquer navegador, com espaçamentos definidos só por nós.
    ============================================================ */
 * {
+  /* O seletor `*` (asterisco) é o "seletor universal": aplica a
+     regra em TODO elemento da página, sem exceção. */
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* padding/border não somam à largura definida */
@@ -82,11 +138,11 @@ img {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: inherit; /* o link usa a cor do texto ao redor, em vez do azul/roxo padrão do navegador */
 }
 
 ul {
-  list-style: none;
+  list-style: none; /* remove as bolinhas/marcadores padrão de listas (usadas no menu, por exemplo) */
 }
 
 button {
@@ -136,6 +192,9 @@ h1, h2, h3 {
 
 /* ============================================================
    BOTÕES
+   LIGAÇÃO COM O HTML: classe `.btn` em vários lugares (botões do
+   Hero, "Enviar Mensagem", "Enviar Feedback"). `.btn-primary` é o
+   estilo "cheio" (destaque); `.btn-secondary` é o contornado.
    ============================================================ */
 .btn {
   display: inline-flex;
@@ -214,6 +273,11 @@ h1, h2, h3 {
 
 /* ============================================================
    HEADER / NAVEGAÇÃO
+   LIGAÇÃO COM O HTML: `<header id="header" class="header">`, que
+   contém `<nav class="navbar">` — a barra fixa no topo da página.
+   LIGAÇÃO COM O JS: a classe `.scrolled` (mais abaixo, dentro deste
+   mesmo bloco) é adicionada/removida por js/script.js ao rolar a
+   página.
    ============================================================ */
 .header {
   position: fixed;
@@ -317,6 +381,10 @@ h1, h2, h3 {
 
 /* ============================================================
    HERO
+   LIGAÇÃO COM O HTML: `<section class="hero" id="hero">`, a
+   primeira seção da página (nome, foto, botões). `.hero-title`,
+   `.hero-greeting` e `.hero-name` controlam a apresentação do nome;
+   `.hero-buttons` os 3 botões (Ver Projetos/Currículo).
    ============================================================ */
 .hero {
   min-height: 100vh;
@@ -412,6 +480,9 @@ h1, h2, h3 {
 
 /* ============================================================
    SOBRE MIM
+   LIGAÇÃO COM O HTML: `<section class="sobre" id="sobre">`. O
+   `.code-card` é o "cartão de código" decorativo (o objeto
+   JavaScript estilizado como se fosse um editor de código).
    ============================================================ */
 .sobre-grid {
   display: grid;
@@ -472,6 +543,9 @@ h1, h2, h3 {
 
 /* ============================================================
    SKILLS
+   LIGAÇÃO COM O HTML: `<section class="skills" id="skills">`.
+   `.skill-card` é cada card individual; `.skill-learning` (variação
+   com borda tracejada) marca as habilidades ainda em aprendizado.
    ============================================================ */
 .skills-subtitle {
   font-size: 1.1rem;
@@ -513,6 +587,11 @@ h1, h2, h3 {
 
 /* ============================================================
    PROJETOS
+   LIGAÇÃO COM O HTML: `<section class="projetos" id="projetos">`.
+   Cada card é um `<article class="project-card">`; `.project-tags`
+   são as etiquetas de tecnologia (HTML5, CSS3 etc.); `.link-disabled`
+   estiliza os links "Código em breve"/"Demo em breve" dos projetos
+   placeholder (ainda sem link real).
    ============================================================ */
 .projetos-grid {
   display: grid;
@@ -612,6 +691,11 @@ h1, h2, h3 {
 
 /* ============================================================
    CONTATO
+   LIGAÇÃO COM O HTML: `<section class="contato" id="contato">`,
+   contendo `<form id="contato-form">`. `.form-group` envolve cada
+   par label+campo; `.input-invalido` (mais abaixo) é a borda
+   vermelha aplicada via JavaScript (js/script.js) quando um campo
+   está incorreto.
    ============================================================ */
 .contato-grid {
   display: grid;
@@ -746,6 +830,8 @@ h1, h2, h3 {
 
 /* ============================================================
    FOOTER
+   LIGAÇÃO COM O HTML: `<footer class="footer">`, no final da
+   página. `.back-to-top` é o botão circular de "voltar ao topo".
    ============================================================ */
 .footer {
   border-top: 1px solid var(--color-border);
@@ -808,6 +894,10 @@ h1, h2, h3 {
 
 /* ============================================================
    EXPERIÊNCIA PROFISSIONAL (linha do tempo)
+   LIGAÇÃO COM O HTML: `<section class="experiencia" id="experiencia">`.
+   Cada item é um `.timeline-item`; a linha vertical em si é a borda
+   esquerda (`border-left`) do `.timeline` (elemento "pai" que
+   contém todos os itens).
    ============================================================ */
 .timeline {
   position: relative;
@@ -920,6 +1010,8 @@ textarea:focus-visible {
    SEÇÃO DE FEEDBACK
    Reaproveita o mesmo estilo visual do formulário de contato
    (.contato-form), para manter total consistência com o site.
+   LIGAÇÃO COM O HTML: `<section class="feedback" id="feedback">`,
+   contendo `<form id="feedback-form">`.
    ============================================================ */
 .feedback-intro {
   text-align: center;
@@ -1091,3 +1183,33 @@ textarea:focus-visible {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* ============================================================
+   GLOSSÁRIO — TERMOS E CONCEITOS USADOS NESTE ARQUIVO
+   ============================================================
+   (Só para consulta/estudo — não afeta o funcionamento do site.)
+
+   TERMO                  | O QUE É                                                     | ONDE APARECE / PARA QUE SERVE AQUI
+   ------------------------|---------------------------------------------------------------|--------------------------------------------------------------
+   variável CSS (--nome)   | Valor reutilizável, definido uma vez e usado com var(--nome)  | --color-bg, --color-primary, --font-body etc.
+   :root                   | Seletor que representa o documento HTML inteiro                | Onde as variáveis "globais" (tema claro) são declaradas
+   seletor de atributo     | `[atributo="valor"]`, seleciona elementos com esse atributo    | `[data-theme="dark"]`, `[data-lang="pt"]`
+   seletor universal (*)   | Aplica a regra em TODO elemento da página                      | Usado só no reset, no topo do arquivo
+   pseudo-classe           | `:algo`, um "estado" de um elemento (não uma classe no HTML)   | `:hover` (mouse em cima), `:focus-visible` (foco por teclado), `:first-of-type`/`:last-of-type`
+   pseudo-elemento         | `::algo`, cria/estiliza uma parte "virtual" de um elemento     | `::after` (usado no sublinhado animado do menu, `.nav-link::after`)
+   display: flex           | Organiza os filhos de um elemento em linha ou coluna, com controle de alinhamento/espaçamento | `.hero-buttons`, `.nav-actions`, `.theme-switch` etc.
+   display: grid           | Organiza os filhos em linhas E colunas (uma grade)              | `.sobre-grid`, `.skills-grid`, `.projetos-grid`
+   position: relative       | O elemento fica no fluxo normal, mas vira referência para filhos com `position: absolute` | `.theme-switch`, `.timeline`
+   position: absolute       | Tira o elemento do fluxo normal, posicionando-o em relação ao ancestral mais próximo com `position: relative` | `.theme-switch-thumb`, `.timeline-marker`, `.skip-link`
+   position: fixed          | Fixa o elemento na tela, mesmo que a página role                | `.header` (barra do topo sempre visível)
+   z-index                  | Decide qual elemento fica "por cima" quando dois se sobrepõem  | `.header` (1000), `.nav-actions` (1600) — sempre acima do painel do menu
+   media query (@media)     | Aplica um bloco de regras só quando a tela atende a uma condição | Usadas em css/responsive.css (não neste arquivo)
+   transition                | Anima suavemente a mudança de uma propriedade CSS, em vez de "pular" direto para o novo valor | `--transition` (0.25s), usada em cores, sombras, posição da bolinha
+   opacity                   | Transparência de um elemento (0 = invisível, 1 = totalmente visível) | `.reveal` (animação de entrada), `.theme-switch-thumb`
+   backdrop-filter            | Aplica um efeito (ex.: desfoque) no que está ATRÁS do elemento | Efeito "glass" da bolinha da chave de tema
+   color-mix()                | Função CSS que mistura duas cores (aqui, uma cor + transparência) | Cor semitransparente da bolinha da chave de tema
+   @supports                  | Aplica um bloco de CSS só se o navegador suportar aquele recurso | Fallback da bolinha da chave de tema, para navegadores sem `backdrop-filter`
+   clamp(mín, ideal, máx)     | Escolhe um valor entre um mínimo e um máximo, ajustando conforme a tela | Tamanhos de fonte "fluidos" (ex.: `.hero-title`)
+   aspect-ratio                | Define a proporção largura/altura de um elemento               | `.project-image` (16/10)
+   box-sizing: border-box     | Faz padding/border NÃO aumentarem o tamanho total do elemento   | Definido uma vez no reset, para todo o site
+   ============================================================ */
