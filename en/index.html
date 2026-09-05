@@ -1,5 +1,46 @@
 <!DOCTYPE html>
+<!--
+  ============================================================
+  en/index.html — PÁGINA EM INGLÊS DO PORTFÓLIO (espelho de index.html)
+  ============================================================
+  Este arquivo é o "espelho" em inglês de index.html (a versão em
+  português, na raiz do site). A ESTRUTURA HTML das duas páginas é
+  praticamente idêntica — mesmas seções, mesmos ids, mesmas classes,
+  mesmos formulários — só o TEXTO visível muda.
 
+  Por isso, toda a documentação didática detalhada (o que cada tag
+  faz, como cada seção se conecta ao CSS e ao JS, o glossário de
+  termos HTML) já está escrita nos comentários de index.html — vale
+  a pena estudar por lá primeiro, porque aqui os comentários deste
+  tipo não foram todos repetidos, para não deixar o arquivo enorme
+  com conteúdo duplicado.
+
+  ------------------------------------------------------------
+  UMA PARTICULARIDADE REAL DESTE ARQUIVO ESPECÍFICO
+  ------------------------------------------------------------
+  Diferente de index.html (escrito à mão, com indentação e atributos
+  numa ordem "natural"), este arquivo foi GERADO PROGRAMATICAMENTE, a
+  partir do index.html, para garantir que os textos em inglês
+  batessem exatamente com o dicionário já aprovado em js/i18n.js.
+  Por causa disso, você vai notar duas diferenças puramente
+  visuais no código-fonte (sem nenhum efeito funcional):
+    1) os atributos de cada tag aparecem em ORDEM ALFABÉTICA (ex.:
+       `aria-controls` antes de `class`), diferente da ordem "mais
+       natural" usada em index.html;
+    2) a indentação (espaços à esquerda) é mais enxuta.
+  Ambas as diferenças são só de ESTILO DE ESCRITA do código — o
+  HTML resultante funciona de forma idêntica nos dois arquivos.
+
+  As ÚNICAS diferenças que REALMENTE importam entre este arquivo e
+  index.html são: o idioma dos textos, o `<html lang="en">`, os
+  caminhos de CSS/JS/imagens (aqui usam "/" na frente, ex.:
+  "/css/style.css", porque este arquivo vive dentro da pasta /en/ —
+  ver explicação completa disso no comentário de rodapé abaixo), o
+  `<link rel="canonical">` apontando para "/en/", e um pequeno
+  <script> extra no fim do <body> que ajusta a variável de estado
+  do seletor de idioma (ver comentário perto dele, mais abaixo).
+  ============================================================
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -519,8 +560,39 @@
      corretamente pelos mecanismos de busca nesse idioma, com URL própria).
      Aqui só sincronizamos a variável de estado do seletor de idioma
      (declarada em i18n.js) para que, ao clicar em PT/EN a partir desta
-     página, a alternância continue funcionando corretamente. */
+     página, a alternância continue funcionando corretamente.
+     Explicação completa da variável `idiomaAtual` e de como ela se
+     relaciona com o botão PT/EN: ver o comentário logo acima da linha
+     `let idiomaAtual = "pt";` em js/i18n.js. */
   idiomaAtual = "en";
 </script>
+
+<!--
+  ============================================================
+  GLOSSÁRIO — TERMOS E CONCEITOS DESTE ARQUIVO
+  ============================================================
+  (Comentário HTML — não aparece na página, só para consulta.)
+
+  Como este arquivo é o espelho em inglês de index.html, o
+  glossário completo de tags/atributos HTML (header, section,
+  aria-*, data-*, href, src etc.) está no comentário equivalente
+  no final de index.html — vale a pena consultar por lá.
+
+  Os únicos dois termos exclusivos DESTE arquivo (não existem em
+  index.html) são:
+
+  TERMO                  | O QUE É / PARA QUE SERVE AQUI
+  ------------------------|--------------------------------------------------------------
+  caminho absoluto ("/..")| Caminhos como "/css/style.css" (começando com barra) apontam
+                          | sempre para a RAIZ do site, não para a pasta atual — necessário
+                          | aqui porque este arquivo vive dentro de /en/, então um caminho
+                          | "normal" (sem a barra), como "css/style.css", procuraria por
+                          | uma pasta /en/css/ que não existe.
+  <script> inline no fim  | O pequeno bloco de código JavaScript escrito diretamente entre
+                          | as tags <script>...</script> (sem `src`), em vez de carregado
+                          | de um arquivo externo — usado aqui só para a linha
+                          | `idiomaAtual = "en";`, explicada acima.
+  ============================================================
+-->
 </body>
 </html>
