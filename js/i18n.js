@@ -1,20 +1,57 @@
 /* ============================================================
    i18n.js
+   ============================================================
    Sistema de tradução PT/EN do portfólio — HTML/CSS/JS puro,
    sem bibliotecas externas e sem serviços de tradução (Google
    Tradutor etc.). Toda a tradução está definida aqui mesmo.
 
-   COMO FUNCIONA:
+   ------------------------------------------------------------
+   COMO FUNCIONA (visão geral)
+   ------------------------------------------------------------
    - Cada texto traduzível no HTML recebe um atributo data-i18n="chave"
-     (ou data-i18n-placeholder / data-i18n-aria-label para atributos).
+     (ou data-i18n-placeholder / data-i18n-aria-label / data-i18n-alt
+     para atributos, em vez de texto visível).
    - Este arquivo guarda duas "tabelas" de texto: traducoes.pt e
-     traducoes.en, uma chave por texto.
-   - A função aplicarIdioma(idioma) percorre todos os elementos com
-     esses atributos e troca o conteúdo pelo texto do idioma escolhido.
+     traducoes.en, uma chave por texto (ver explicação de "objeto"
+     logo abaixo).
    - script.js usa window.t("chave") para pegar mensagens de erro/
      sucesso traduzidas no momento em que valida/envia os formulários
      (porque essas mensagens são geradas dinamicamente, não são texto
      fixo no HTML).
+
+   ------------------------------------------------------------
+   ARQUITETURA REAL DO SITE: DUAS PÁGINAS, NÃO UMA TROCA "AO VIVO"
+   ------------------------------------------------------------
+   Diferente de uma versão anterior deste projeto, PT e EN hoje são
+   DUAS PÁGINAS SEPARADAS, cada uma com sua própria URL:
+     - "/"     → index.html, já carrega com o texto em português
+     - "/en/"  → en/index.html, já carrega com o texto em inglês
+   Isso existe para que o Google consiga indexar as duas versões
+   separadamente (cada uma com seu próprio `<title>`, `canonical` e
+   `hreflang` — ver o `<head>` de cada arquivo HTML).
+
+   O clique no botão PT/EN (no final deste arquivo) simplesmente
+   NAVEGA entre essas duas URLs — ele não troca mais o texto "ao
+   vivo" na mesma página.
+
+   ⚠️ POR CAUSA DISSO, a função `aplicarIdioma(idioma)` (definida
+   mais abaixo, que É a função que efetivamente troca todos os
+   textos da página) hoje NÃO é chamada em nenhum lugar deste
+   projeto — cada página HTML já nasce com o texto certo "pronto",
+   sem precisar rodar essa função. Ela continua aqui, funcional e
+   correta, só documentando isso para você não perder tempo
+   procurando onde ela é chamada: neste momento, não é.
+
+   ------------------------------------------------------------
+   CONCEITO: O QUE É UM "OBJETO" EM JAVASCRIPT
+   ------------------------------------------------------------
+   `const traducoes = { pt: {...}, en: {...} }` cria um OBJETO — uma
+   estrutura de dados que guarda pares de "chave: valor", parecido
+   com um dicionário ou uma ficha de cadastro. Aqui, `traducoes.pt`
+   é, por sua vez, OUTRO objeto, com dezenas de pares como
+   `hero_title: "..."`. Para ler um valor, usa-se `objeto.chave` ou
+   `objeto["chave"]` (as duas formas fazem a mesma coisa) — é
+   exatamente isso que a função `t()` faz logo abaixo.
    ============================================================ */
 
 const traducoes = {
@@ -350,12 +387,23 @@ const traducoes = {
   }
 };
 
-/* Idioma ativo no momento (começa sempre em português, sem persistência
-   entre visitas — comportamento explicitamente pedido). */
+/* Idioma ativo no momento. Começa sempre como "pt" aqui no arquivo —
+   mas repare que en/index.html tem um pequeno <script> embutido no
+   final do HTML (depois de carregar este arquivo) que muda essa
+   variável para "en" NAQUELA página específica, com a linha
+   `idiomaAtual = "en";`. É assim que as duas páginas "sabem" em qual
+   idioma estão, sem precisar de dois arquivos i18n.js diferentes. */
 let idiomaAtual = "pt";
 
 /* Busca uma chave de tradução no idioma atual. Usada pelo script.js
-   para montar mensagens de erro/sucesso dos formulários dinamicamente. */
+   (através de `window.t(...)`, no fim deste arquivo) para montar
+   mensagens de erro/sucesso dos formulários dinamicamente.
+
+   A linha do `return` usa um "operador ternário": a forma curta de
+   escrever um if/else que devolve um valor.
+   `condição ? valorSeVerdadeiro : valorSeFalso`
+   Aqui: "se a tradução existir no idioma atual, use-a; senão, use a
+   versão em português como alternativa de segurança (fallback)". */
 function t(chave) {
   return traducoes[idiomaAtual][chave] !== undefined
     ? traducoes[idiomaAtual][chave]
@@ -365,13 +413,30 @@ function t(chave) {
 /* Aplica o idioma escolhido a toda a página: percorre os elementos
    marcados com data-i18n (texto), data-i18n-placeholder (placeholder
    de campos) e data-i18n-aria-label (aria-label de botões/links),
-   além do <html lang>, <title> e das metatags de SEO/Open Graph. */
+   além do <html lang>, <title> e das metatags de SEO/Open Graph.
+
+   ⚠️ Como explicado no cabeçalho deste arquivo, esta função hoje
+   NÃO é chamada em nenhum lugar do projeto — cada página HTML já
+   nasce com o texto pronto no idioma certo. Ela permanece aqui,
+   completa e correta, documentando exatamente como a tradução "ao
+   vivo" funcionaria, caso seja reaproveitada no futuro.
+
+   LIGAÇÃO COM O HTML: procura, na página inteira, por QUALQUER
+   elemento com os atributos `data-i18n`, `data-i18n-placeholder`,
+   `data-i18n-aria-label` ou `data-i18n-alt` — esses atributos estão
+   espalhados por index.html e en/index.html. */
 function aplicarIdioma(idioma) {
   idiomaAtual = idioma;
 
+  // `querySelectorAll("[data-i18n]")` busca todo elemento que TENHA
+  // esse atributo, seja qual for seu valor — o `[ ]` no seletor CSS
+  // significa "que possui este atributo".
   document.querySelectorAll("[data-i18n]").forEach((elemento) => {
     const chave = elemento.getAttribute("data-i18n");
     if (traducoes[idioma][chave] !== undefined) {
+      // `innerHTML` substitui todo o conteúdo interno do elemento —
+      // usado (em vez de `textContent`) porque algumas traduções
+      // contêm tags HTML dentro (ex.: um link `<a>` dentro de uma frase).
       elemento.innerHTML = traducoes[idioma][chave];
     }
   });
@@ -430,7 +495,13 @@ function aplicarIdioma(idioma) {
 
 /* Liga o botão de idioma assim que o HTML estiver pronto. Fica em um
    listener separado do restante do script.js para manter a lógica de
-   idioma isolada e fácil de manter. */
+   idioma isolada e fácil de manter.
+
+   LIGAÇÃO COM O HTML: `<button id="lang-toggle">`, no <header> das
+   duas páginas.
+   "DOMContentLoaded" é o mesmo evento usado em script.js — dispara
+   quando o HTML terminou de ser lido pelo navegador (sem precisar
+   esperar imagens/fontes carregarem). */
 document.addEventListener("DOMContentLoaded", () => {
   const botaoIdioma = document.getElementById("lang-toggle");
   if (botaoIdioma) {
@@ -439,11 +510,46 @@ document.addEventListener("DOMContentLoaded", () => {
       // próprias, para indexação separada pelos mecanismos de busca).
       // O clique navega para a página correspondente, em vez de só
       // trocar o conteúdo na mesma URL via JavaScript.
+      // `window.location.pathname` é o "caminho" da URL atual (ex.:
+      // "/" ou "/en/", sem o domínio); `.startsWith(...)` verifica se
+      // esse texto começa com "/en". `window.location.href = ...`
+      // manda o navegador carregar essa outra página de verdade
+      // (diferente de `history.replaceState`, usado em script.js, que
+      // NÃO recarrega a página).
       const estaNaVersaoIngles = window.location.pathname.startsWith("/en");
       window.location.href = estaNaVersaoIngles ? "/" : "/en/";
     });
   }
 });
 
-// Exposto para o script.js usar nas mensagens dinâmicas dos formulários
+// Exposto para o script.js usar nas mensagens dinâmicas dos formulários.
+// `window.t = t` copia a função `t` para uma propriedade do objeto
+// global `window` — é assim que um arquivo JS consegue "compartilhar"
+// algo com outro arquivo JS carregado na mesma página (script.js usa
+// `window.t("chave")` em vários pontos das validações dos formulários).
 window.t = t;
+
+
+/* ============================================================
+   GLOSSÁRIO — TERMOS E CONCEITOS USADOS NESTE ARQUIVO
+   ============================================================
+   (Só para consulta/estudo — não afeta o funcionamento do site.)
+
+   TERMO                  | O QUE É                                                    | ONDE APARECE / PARA QUE SERVE AQUI
+   ------------------------|-------------------------------------------------------------|----------------------------------------------------------
+   objeto ({ chave: valor})| Estrutura de dados que guarda pares "chave: valor"          | `traducoes`, `traducoes.pt`, `traducoes.en`
+   const                  | Variável cujo valor não muda depois de definida             | `traducoes`
+   let                    | Variável cujo valor PODE mudar depois                       | `idiomaAtual` (muda de "pt" para "en" na página em inglês)
+   função "clássica"      | `function nome() { ... }`                                   | `t()`, `aplicarIdioma()`
+   arrow function         | `() => { ... }`, forma curta de escrever função             | Dentro dos `addEventListener` e `forEach`
+   operador ternário       | `condição ? valorSeVerdade : valorSeFalso`, um if/else curto| Dentro da função `t()`
+   document                | Objeto que representa a página HTML inteira                | `document.querySelectorAll`, `document.title`, etc.
+   window                  | Objeto que representa a janela/aba do navegador             | `window.location`, `window.t`
+   getElementById           | Busca UM elemento pelo atributo `id`                        | `lang-toggle`, `lang-toggle-label`, `meta-description` etc.
+   querySelectorAll         | Busca TODOS os elementos que batem com um seletor CSS       | `[data-i18n]`, `[data-i18n-placeholder]` etc.
+   data-* (atributo)       | Atributo HTML "personalizado" para guardar/marcar dados     | `data-i18n`, `data-i18n-placeholder`, `data-i18n-aria-label`, `data-i18n-alt`
+   setAttribute             | Define um atributo HTML via JavaScript                     | `lang`, `content`, `aria-pressed`, `placeholder`, `aria-label`, `alt`
+   innerHTML                | Substitui todo o conteúdo interno de um elemento           | Usado em vez de `textContent` para permitir tags HTML na tradução
+   window.location.pathname| O "caminho" da URL atual (sem domínio)                      | Decide se o clique no botão leva para "/" ou "/en/"
+   window.location.href    | Ler/definir a URL atual — atribuir um valor NAVEGA a página | `window.location.href = "/en/"`
+   ============================================================ */
