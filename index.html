@@ -176,32 +176,51 @@
        visualmente — é só metadado, lido apenas por máquinas.
        Só usa informações que já existem no restante do projeto. -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "name": "José Arôldo Maciel Neto",
-        "url": "https://josearoldodev.vercel.app/",
-        "jobTitle": "Estudante de Análise e Desenvolvimento de Sistemas",
-        "description": "Estudante de Análise e Desenvolvimento de Sistemas na Unifor, em transição de carreira para Tecnologia.",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "Universidade de Fortaleza (Unifor)"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/in/joséarôldomacielneto",
-          "https://github.com/JoseAroldoMacielNeto"
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "José Arôldo Maciel Neto",
+      "url": "https://josearoldodev.vercel.app/",
+      "jobTitle": "Estudante de Análise e Desenvolvimento de Sistemas",
+      "description": "Estudante de Análise e Desenvolvimento de Sistemas na Unifor, em transição de carreira para Tecnologia.",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universidade de Fortaleza (Unifor)"
       },
-      {
-        "@type": "WebSite",
-        "name": "José Arôldo Maciel Neto | Portfólio",
-        "url": "https://josearoldodev.vercel.app/",
-        "inLanguage": "pt-BR"
+      "sameAs": [
+        "https://www.linkedin.com/in/joséarôldomacielneto",
+        "https://github.com/JoseAroldoMacielNeto",
+        "https://apps.microsoft.com/detail/9P8GFNDQ6RTB"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "José Arôldo Maciel Neto | Portfólio",
+      "url": "https://josearoldodev.vercel.app/",
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "JARVIS Controle por Gestos",
+      "url": "https://apps.microsoft.com/detail/9P8GFNDQ6RTB",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows",
+      "description": "Aplicativo para Windows que controla apresentações do PowerPoint por gestos das mãos captados pela webcam, com reconhecimento processado localmente no computador.",
+      "inLanguage": "pt-BR",
+      "author": {
+        "@type": "Person",
+        "name": "José Arôldo Maciel Neto"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL"
       }
-    ]
-  }
+    }
+  ]
+}
   </script>
 </head>
 <body data-theme="dark" data-lang="pt">
@@ -504,6 +523,32 @@
 
       <div class="projetos-grid">
 
+        <!-- ============ PROJETO EM DESTAQUE: JARVIS ============
+             Card do app publicado na Microsoft Store. O link da Store e o
+             CTA principal; o codigo-fonte e privado, por isso aparece como
+             ".link-disabled" (mesmo estilo ja usado nos cards placeholder).
+             A capa e a propria pagina do app na Microsoft Store. -->
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="assets/img/jarvis.png" alt="Página do aplicativo JARVIS Controle por Gestos na Microsoft Store" width="800" height="500" loading="lazy">
+          </div>
+          <div class="project-content">
+            <h3 data-i18n="proj_jarvis_title">JARVIS — Controle por Gestos</h3>
+            <p data-i18n="proj_jarvis_desc">Aplicativo para Windows que controla apresentações do PowerPoint por gestos das mãos captados pela webcam. Reconhecimento em tempo real com processamento 100% local — nenhuma imagem sai do computador —, trava de segurança que só envia comandos quando o PowerPoint está em foco e suíte de 247 testes automatizados. Desenvolvido com apoio de IA e publicado gratuitamente na Microsoft Store.</p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>OpenCV</span>
+              <span>MediaPipe</span>
+              <span>Tkinter</span>
+            </div>
+            <div class="project-links">
+              <a href="https://apps.microsoft.com/detail/9P8GFNDQ6RTB" target="_blank" rel="noopener"><i aria-hidden="true" class="fa-brands fa-microsoft"></i> <span data-i18n="proj_jarvis_link_store">Ver na Microsoft Store</span></a>
+              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_jarvis_codigo_privado">Código privado</span></span>
+            </div>
+          </div>
+        </article>
+        <!-- ============ FIM DO CARD JARVIS ============ -->
+
         <!-- ============ INÍCIO DE UM CARD DE PROJETO (modelo reutilizável) ============ -->
         <article class="project-card reveal">
           <div class="project-image">
@@ -527,23 +572,6 @@
           </div>
         </article>
         <!-- ============ FIM DO CARD DE PROJETO ============ -->
-
-        <article class="project-card reveal">
-          <div class="project-image">
-            <img src="assets/img/projeto-placeholder.jpg" alt="" width="800" height="500" loading="lazy">
-          </div>
-          <div class="project-content">
-            <h3 data-i18n="proj_placeholder_title">Próximo Projeto</h3>
-            <p data-i18n="proj_placeholder_desc">Espaço reservado para o próximo projeto da graduação.</p>
-            <div class="project-tags">
-              <span data-i18n="proj_placeholder_tag">Em breve</span>
-            </div>
-            <div class="project-links project-links-disabled">
-              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_placeholder_codigo">Código em breve</span></span>
-              <span class="link-disabled" aria-disabled="true"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="proj_placeholder_demo">Demo em breve</span></span>
-            </div>
-          </div>
-        </article>
 
         <article class="project-card reveal">
           <div class="project-image">
