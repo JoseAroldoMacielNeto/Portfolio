@@ -661,6 +661,21 @@ h1, h2, h3 {
   gap: 20px;
 }
 
+/* Variante usada no card do JARVIS: os rótulos são longos ("Ver na Microsoft
+   Store" e "Código privado") e não cabem lado a lado na largura do card.
+   Aqui eles ficam empilhados, cada um ocupando uma linha inteira sem quebrar
+   no meio. Só afeta cards que tenham a classe .project-links-stacked. */
+.project-links-stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.project-links-stacked a,
+.project-links-stacked .link-disabled {
+  white-space: nowrap;
+}
+
 .project-links a {
   font-size: 0.88rem;
   font-weight: 600;
