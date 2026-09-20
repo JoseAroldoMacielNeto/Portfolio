@@ -112,32 +112,51 @@
        Uses only information that already exists in the rest of the
        project (same as the Portuguese version, at its own URL). -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "name": "José Arôldo Maciel Neto",
-        "url": "https://josearoldodev.vercel.app/en/",
-        "jobTitle": "Systems Analysis and Development Student",
-        "description": "Systems Analysis and Development student at Unifor, transitioning his career into Technology.",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "Universidade de Fortaleza (Unifor)"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/in/joséarôldomacielneto",
-          "https://github.com/JoseAroldoMacielNeto"
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "José Arôldo Maciel Neto",
+      "url": "https://josearoldodev.vercel.app/en/",
+      "jobTitle": "Systems Analysis and Development Student",
+      "description": "Systems Analysis and Development student at Unifor, transitioning his career into Technology.",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universidade de Fortaleza (Unifor)"
       },
-      {
-        "@type": "WebSite",
-        "name": "José Arôldo Maciel Neto | Portfolio",
-        "url": "https://josearoldodev.vercel.app/en/",
-        "inLanguage": "en"
+      "sameAs": [
+        "https://www.linkedin.com/in/joséarôldomacielneto",
+        "https://github.com/JoseAroldoMacielNeto",
+        "https://apps.microsoft.com/detail/9P8GFNDQ6RTB"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "José Arôldo Maciel Neto | Portfolio",
+      "url": "https://josearoldodev.vercel.app/en/",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "JARVIS Gesture Control",
+      "url": "https://apps.microsoft.com/detail/9P8GFNDQ6RTB",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows",
+      "description": "Windows app that controls PowerPoint presentations through hand gestures captured by the webcam, with recognition processed locally on the computer.",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "José Arôldo Maciel Neto"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       }
-    ]
-  }
+    }
+  ]
+}
   </script>
 </head>
 <body data-lang="pt" data-theme="dark">
@@ -376,6 +395,27 @@
 <h2 class="section-title" data-i18n="projetos_title">Projects</h2>
 <p class="section-subtitle" data-i18n="projetos_subtitle">This section will grow throughout my degree. Each card below follows the same pattern — adding a new project in the future is as simple as copying a "project-card" block and swapping the content.</p>
 <div class="projetos-grid">
+<!-- ============ PROJETO EM DESTAQUE: JARVIS ============ -->
+<article class="project-card reveal">
+<div class="project-image">
+<img alt="JARVIS Gesture Control app page on the Microsoft Store" height="500" loading="lazy" src="/assets/img/jarvis.png" width="800"/>
+</div>
+<div class="project-content">
+<h3 data-i18n="proj_jarvis_title">JARVIS — Gesture Control</h3>
+<p data-i18n="proj_jarvis_desc">Windows app that controls PowerPoint presentations through hand gestures captured by the webcam. Real-time recognition with fully local processing — no image ever leaves the computer —, a safety lock that only sends commands while PowerPoint is in focus, and a suite of 247 automated tests. Built with AI support and published for free on the Microsoft Store.</p>
+<div class="project-tags">
+<span>Python</span>
+<span>OpenCV</span>
+<span>MediaPipe</span>
+<span>Tkinter</span>
+</div>
+<div class="project-links">
+<a href="https://apps.microsoft.com/detail/9P8GFNDQ6RTB" rel="noopener" target="_blank"><i aria-hidden="true" class="fa-brands fa-microsoft"></i> <span data-i18n="proj_jarvis_link_store">View on Microsoft Store</span></a>
+<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_jarvis_codigo_privado">Private repository</span></span>
+</div>
+</div>
+</article>
+<!-- ============ FIM DO CARD JARVIS ============ -->
 <!-- ============ INÍCIO DE UM CARD DE PROJETO (modelo reutilizável) ============ -->
 <article class="project-card reveal">
 <div class="project-image">
@@ -399,22 +439,6 @@
 </div>
 </article>
 <!-- ============ FIM DO CARD DE PROJETO ============ -->
-<article class="project-card reveal">
-<div class="project-image">
-<img alt="" height="500" loading="lazy" src="/assets/img/projeto-placeholder.jpg" width="800"/>
-</div>
-<div class="project-content">
-<h3 data-i18n="proj_placeholder_title">Next Project</h3>
-<p data-i18n="proj_placeholder_desc">Placeholder for my next project during the degree.</p>
-<div class="project-tags">
-<span data-i18n="proj_placeholder_tag">Coming soon</span>
-</div>
-<div class="project-links project-links-disabled">
-<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-brands fa-github"></i> <span data-i18n="proj_placeholder_codigo">Code coming soon</span></span>
-<span aria-disabled="true" class="link-disabled"><i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="proj_placeholder_demo">Demo coming soon</span></span>
-</div>
-</div>
-</article>
 <article class="project-card reveal">
 <div class="project-image">
 <img alt="" height="500" loading="lazy" src="/assets/img/projeto-placeholder.jpg" width="800"/>
