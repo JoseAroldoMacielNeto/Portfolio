@@ -649,6 +649,10 @@
       </div>
 
       <form class="contato-form feedback-form reveal" id="feedback-form" action="https://formspree.io/f/mqpkzdjw" method="POST" novalidate>
+        <!-- Honeypot anti-spam (mesmo do formulario de contato): campo
+             invisivel que usuarios reais nunca preenchem; o Formspree
+             reconhece o nome "_gotcha" e descarta sozinho envios de bots. -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="_subject" value="Novo feedback sobre o portfólio">
 
         <div class="form-group">
