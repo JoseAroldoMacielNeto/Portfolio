@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/baixar-curriculo",
+      "destination": "/assets/docs/Curr%C3%ADculo%20-%20Jos%C3%A9%20Ar%C3%B4ldo%20Maciel%20Neto.pdf"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/baixar-curriculo",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Curriculo - Jose Aroldo Maciel Neto.pdf\"; filename*=UTF-8''Curr%C3%ADculo%20-%20Jos%C3%A9%20Ar%C3%B4ldo%20Maciel%20Neto.pdf"
+        }
+      ]
+    }
+  ]
+}
