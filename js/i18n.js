@@ -244,7 +244,7 @@ const traducoes = {
     // Hero
     hero_eyebrow: "&gt; Hi, welcome",
     hero_greeting: "I'm",
-    hero_subtitle: "Computer Science Student | Building a Career in Technology",
+    hero_subtitle: "Systems Analysis and Development Student | Building a Career in Technology",
     hero_description: "Transitioning from an administrative and customer service background into Technology. I'm building my programming foundation at Unifor and, alongside it, taking a Programming Logic and Algorithms course — looking for my first IT internship opportunity.",
     hero_btn_projetos: "View Projects",
     hero_btn_visualizar_curriculo: "View Resume",
